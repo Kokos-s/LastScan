@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 13573374}
   - component: {fileID: 13573373}
   m_Layer: 0
-  m_Name: faro derecho
+  m_Name: HeadlightRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,12 +146,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13573371}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1, y: -0.3, z: 0.35}
   m_LocalScale: {x: 0.03, y: 0.08, z: 0.08}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 977931117}
+  m_Father: {fileID: 1952121121}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &13573373
 SphereCollider:
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 91991767}
   - component: {fileID: 91991766}
   m_Layer: 0
-  m_Name: rueda derecha 1
+  m_Name: WheelFrontRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,12 +254,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91991764}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.65, y: -0.5, z: 0.5}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.65000004, y: -0.5, z: 0.5}
   m_LocalScale: {x: 0.4, y: 0.1, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 977931117}
+  m_Father: {fileID: 1767418801}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!136 &91991766
 CapsuleCollider:
@@ -471,7 +471,7 @@ GameObject:
   - component: {fileID: 239584068}
   - component: {fileID: 239584067}
   m_Layer: 0
-  m_Name: rueda izquierda 3
+  m_Name: WheelRearLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -485,12 +485,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239584065}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.65, y: -0.5, z: -0.5}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.65000004, y: -0.5, z: -0.5}
   m_LocalScale: {x: 0.4, y: 0.1, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 977931117}
+  m_Father: {fileID: 1767418801}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!136 &239584067
 CapsuleCollider:
@@ -581,7 +581,7 @@ GameObject:
   - component: {fileID: 399517110}
   - component: {fileID: 399517109}
   m_Layer: 0
-  m_Name: rueda derecha 3
+  m_Name: WheelRearRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -595,12 +595,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 399517107}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.65, y: -0.5, z: 0.5}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.65000004, y: -0.5, z: 0.5}
   m_LocalScale: {x: 0.4, y: 0.1, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 977931117}
+  m_Father: {fileID: 1767418801}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!136 &399517109
 CapsuleCollider:
@@ -691,7 +691,7 @@ GameObject:
   - component: {fileID: 413958794}
   - component: {fileID: 413958793}
   m_Layer: 0
-  m_Name: rueda izquierda 2
+  m_Name: WheelMiddleLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -705,12 +705,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 413958791}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0.5, z: -0.5}
   m_LocalScale: {x: 0.4, y: 0.1, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 977931117}
+  m_Father: {fileID: 1767418801}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!136 &413958793
 CapsuleCollider:
@@ -801,7 +801,7 @@ GameObject:
   - component: {fileID: 702831203}
   - component: {fileID: 702831202}
   m_Layer: 0
-  m_Name: faro  izquierda
+  m_Name: HeadlightLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -815,12 +815,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 702831200}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1, y: -0.3, z: -0.35}
   m_LocalScale: {x: 0.03, y: 0.08, z: 0.08}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 977931117}
+  m_Father: {fileID: 1952121121}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &702831202
 SphereCollider:
@@ -1064,14 +1064,8 @@ Transform:
   m_Children:
   - {fileID: 1467118508}
   - {fileID: 1730148803}
-  - {fileID: 1070267874}
-  - {fileID: 413958792}
-  - {fileID: 239584066}
-  - {fileID: 91991765}
-  - {fileID: 2099989839}
-  - {fileID: 399517108}
-  - {fileID: 702831201}
-  - {fileID: 13573372}
+  - {fileID: 1767418801}
+  - {fileID: 1952121121}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1070267873
@@ -1087,7 +1081,7 @@ GameObject:
   - component: {fileID: 1070267876}
   - component: {fileID: 1070267875}
   m_Layer: 0
-  m_Name: rueda izquierda 1
+  m_Name: WheelFrontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1101,12 +1095,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1070267873}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.65, y: -0.5, z: -0.5}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.65000004, y: -0.5, z: -0.5}
   m_LocalScale: {x: 0.4, y: 0.1, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 977931117}
+  m_Father: {fileID: 1767418801}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!136 &1070267875
 CapsuleCollider:
@@ -1197,7 +1191,7 @@ GameObject:
   - component: {fileID: 1467118510}
   - component: {fileID: 1467118509}
   m_Layer: 0
-  m_Name: cabina
+  m_Name: Cabin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1305,7 +1299,7 @@ GameObject:
   - component: {fileID: 1711462129}
   - component: {fileID: 1711462128}
   m_Layer: 0
-  m_Name: Superficie
+  m_Name: PlanetSurface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1413,7 +1407,7 @@ GameObject:
   - component: {fileID: 1730148805}
   - component: {fileID: 1730148804}
   m_Layer: 0
-  m_Name: "\u0441arcasa"
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1508,6 +1502,76 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730148802}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1767418800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1767418801}
+  m_Layer: 0
+  m_Name: WheelMeshes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1767418801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767418800}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1070267874}
+  - {fileID: 413958792}
+  - {fileID: 239584066}
+  - {fileID: 91991765}
+  - {fileID: 2099989839}
+  - {fileID: 399517108}
+  m_Father: {fileID: 977931117}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1952121120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1952121121}
+  m_Layer: 0
+  m_Name: Headlights
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1952121121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952121120}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 702831201}
+  - {fileID: 13573372}
+  m_Father: {fileID: 977931117}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2099989838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1521,7 +1585,7 @@ GameObject:
   - component: {fileID: 2099989841}
   - component: {fileID: 2099989840}
   m_Layer: 0
-  m_Name: rueda derecha 2
+  m_Name: WheelMiddleRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1535,12 +1599,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2099989838}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0.5, z: 0.5}
   m_LocalScale: {x: 0.4, y: 0.1, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 977931117}
+  m_Father: {fileID: 1767418801}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!136 &2099989840
 CapsuleCollider:

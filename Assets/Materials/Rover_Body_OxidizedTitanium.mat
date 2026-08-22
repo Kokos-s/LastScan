@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-51441614105899332
+--- !u!114 &-8446321012940289963
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: vidrio de los faros
+  m_Name: Rover_Body_OxidizedTitanium
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -128,8 +128,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.9327005, g: 0.93962264, b: 0.019501582, a: 1}
-    - _Color: {r: 0.9327005, g: 0.93962264, b: 0.019501582, a: 1}
+    - _BaseColor: {r: 0.3283019, g: 0.29451674, b: 0.21246707, a: 1}
+    - _Color: {r: 0.32830188, g: 0.2945167, b: 0.21246704, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

@@ -42,12 +42,12 @@ public class RoverMovement : MonoBehaviour
     {
         Vector2 moveInput = controls.Rover.Move.ReadValue<Vector2>();
         float motorTorque = moveInput.y * motorForce;
-        wheelFrontLeft.motorTorque = motorTorque;
-        wheelFrontRight.motorTorque = motorTorque;
-        wheelMiddleLeft.motorTorque = motorTorque;
-        wheelMiddleRight.motorTorque = motorTorque;
-        wheelRearLeft.motorTorque = motorTorque;
-        wheelRearRight.motorTorque = motorTorque;
+        ApplyMotorTorque(wheelFrontLeft, motorTorque);
+        ApplyMotorTorque(wheelMiddleLeft, motorTorque);
+        ApplyMotorTorque(wheelRearLeft, motorTorque);
+        ApplyMotorTorque(wheelFrontRight, motorTorque);
+        ApplyMotorTorque(wheelMiddleRight, motorTorque);
+        ApplyMotorTorque(wheelRearRight, motorTorque);
 
         float steerAngle = moveInput.x * maxSteerAngle;
         wheelFrontLeft.steerAngle = steerAngle;
@@ -72,6 +72,18 @@ public class RoverMovement : MonoBehaviour
 
         mesh.position = position;
         mesh.rotation = rotation * Quaternion.Euler(meshRotationOffset);
+    }
+
+        void ApplyMotorTorque(WheelCollider wheel, float torque)
+    {
+        if (wheel.isGrounded)
+        {
+            wheel.motorTorque = torque;
+        }
+        else
+        {
+            wheel.motorTorque = 0f;
+        }
     }
 }
    

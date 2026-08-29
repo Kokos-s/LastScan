@@ -63,7 +63,7 @@ public class RoverMovement : MonoBehaviour
         currentSteerAngle = Mathf.MoveTowards(currentSteerAngle, targetSteerAngle, steerSmoothSpeed);
         ApplySteerAngle(wheelFrontLeft, currentSteerAngle);
         ApplySteerAngle(wheelFrontRight, currentSteerAngle);
-        Debug.Log("Target: " + targetSteerAngle + " Current: " + currentSteerAngle);
+        //Debug.Log("Target: " + targetSteerAngle + " Current: " + currentSteerAngle);
     }
 
     void Update()

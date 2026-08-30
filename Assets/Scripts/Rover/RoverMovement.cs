@@ -19,7 +19,6 @@ public class RoverMovement : MonoBehaviour
     private float currentSteerAngle = 0f;
     [SerializeField] private float maxSteerAngle = 25f;
 
-
     [SerializeField] private Transform meshFrontLeft;
     [SerializeField] private Transform meshMiddleLeft;
     [SerializeField] private Transform meshRearLeft;

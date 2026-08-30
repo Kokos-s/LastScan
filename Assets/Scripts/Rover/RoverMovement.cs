@@ -11,6 +11,7 @@ public class RoverMovement : MonoBehaviour
 
     private RoverControls controls;
     private Rigidbody rb;
+    [SerializeField] private RoverEnergy energy;
 
     [SerializeField] private float motorForce = 2000f;
     [SerializeField] private float maxSpeed = 20f;
@@ -48,9 +49,12 @@ public class RoverMovement : MonoBehaviour
     {
         Vector2 moveInput = controls.Rover.Move.ReadValue<Vector2>();
         float currentSpeed = rb.linearVelocity.magnitude;
-        //Debug.Log(currentSpeed);
         float motorPowerReductionFactor = Mathf.Max(0f, 1f - (currentSpeed / maxSpeed));
-        float motorTorque = moveInput.y * motorForce * motorPowerReductionFactor;
+        float motorTorque = 0f;
+        if (energy.CurrentEnergy > 0f)
+        {
+            motorTorque = moveInput.y * motorForce * motorPowerReductionFactor;
+        }
 
         ApplyMotorTorque(wheelFrontLeft, motorTorque);
         ApplyMotorTorque(wheelMiddleLeft, motorTorque);
@@ -63,7 +67,11 @@ public class RoverMovement : MonoBehaviour
         currentSteerAngle = Mathf.MoveTowards(currentSteerAngle, targetSteerAngle, steerSmoothSpeed);
         ApplySteerAngle(wheelFrontLeft, currentSteerAngle);
         ApplySteerAngle(wheelFrontRight, currentSteerAngle);
-        //Debug.Log("Target: " + targetSteerAngle + " Current: " + currentSteerAngle);
+ 
+        if (Mathf.Abs(moveInput.y) > 0.1f)
+        {
+            energy.ReportPlayerMovement();
+        }
     }
 
     void Update()

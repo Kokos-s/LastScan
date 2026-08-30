@@ -100,6 +100,15 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Scan"",
+                    ""type"": ""Button"",
+                    ""id"": ""3b583256-623c-4fcc-adf0-7aaf8238441b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -157,6 +166,17 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d543dd63-8374-47d4-8593-bd65999c1c6b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -166,6 +186,7 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
         // Rover
         m_Rover = asset.FindActionMap("Rover", throwIfNotFound: true);
         m_Rover_Move = m_Rover.FindAction("Move", throwIfNotFound: true);
+        m_Rover_Scan = m_Rover.FindAction("Scan", throwIfNotFound: true);
     }
 
     ~@RoverControls()
@@ -247,6 +268,7 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Rover;
     private List<IRoverActions> m_RoverActionsCallbackInterfaces = new List<IRoverActions>();
     private readonly InputAction m_Rover_Move;
+    private readonly InputAction m_Rover_Scan;
     /// <summary>
     /// Provides access to input actions defined in input action map "Rover".
     /// </summary>
@@ -262,6 +284,10 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Rover/Move".
         /// </summary>
         public InputAction @Move => m_Wrapper.m_Rover_Move;
+        /// <summary>
+        /// Provides access to the underlying input action "Rover/Scan".
+        /// </summary>
+        public InputAction @Scan => m_Wrapper.m_Rover_Scan;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -291,6 +317,9 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Scan.started += instance.OnScan;
+            @Scan.performed += instance.OnScan;
+            @Scan.canceled += instance.OnScan;
         }
 
         /// <summary>
@@ -305,6 +334,9 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Scan.started -= instance.OnScan;
+            @Scan.performed -= instance.OnScan;
+            @Scan.canceled -= instance.OnScan;
         }
 
         /// <summary>
@@ -352,5 +384,12 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMove(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Scan" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnScan(InputAction.CallbackContext context);
     }
 }

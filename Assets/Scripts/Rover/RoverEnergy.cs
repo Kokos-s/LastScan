@@ -32,11 +32,22 @@ public class RoverEnergy : MonoBehaviour
 
         currentEnergy = Mathf.Clamp(currentEnergy, 0f, maxEnergy);
         isPlayerMoving = false;
-        Debug.Log("current energy" + currentEnergy);
+        //Debug.Log("current energy" + currentEnergy);
     }
 
     public void ReportPlayerMovement()
     {
         isPlayerMoving = true;
-    } 
+    }
+
+    public bool TryConsume(float amount)
+    {
+        if (currentEnergy >= amount)
+        {
+            currentEnergy -= amount;
+            return true;
+        }
+
+        return false;
+    }
 }

@@ -25,6 +25,12 @@ public class AnomalyMovement : MonoBehaviour
     [SerializeField] private float bobHeight = 2f;
     [SerializeField] private float bobSpeed = 1f;
 
+    private Vector3 scanPoint;
+    [SerializeField] private float alertSpeed = 30f;
+    [SerializeField] private float alertDuration = 10f;
+    [SerializeField] private float alertTurnSpeed = 1f;
+    private float alertTimer;
+
     void Start()
     {
         Vector3 terrainSize = terrain.terrainData.size;
@@ -37,8 +43,19 @@ public class AnomalyMovement : MonoBehaviour
         wanderTarget = GetRandomWanderPoint();
     }
 
-    // Update is called once per frame
     void Update()
+    {
+        if (currentState == AnomalyState.Wandering)
+        {
+            UpdateWandering();
+        }
+        else if (currentState == AnomalyState.Alerted)
+        {
+            UpdateAlerted();
+        }
+    }
+
+    void UpdateWandering()
     {
         Vector3 directionToTarget = (wanderTarget - transform.position).normalized;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, directionToTarget, turnSpeed * Time.deltaTime, 0f);
@@ -66,5 +83,35 @@ public class AnomalyMovement : MonoBehaviour
         pointZ = Mathf.Clamp(pointZ, mapMinZ, mapMaxZ);
 
         return new Vector3(pointX, transform.position.y, pointZ);
+    }
+    public void OnScanUsed(Vector3 targetPoint)
+    {
+        currentState = AnomalyState.Alerted;
+        scanPoint = targetPoint;
+        alertTimer = alertDuration;
+    }
+
+    void UpdateAlerted()
+    {
+        Vector3 directionToTarget = (scanPoint - transform.position).normalized;
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, directionToTarget, alertTurnSpeed * Time.deltaTime, 0f);
+        transform.rotation = Quaternion.LookRotation(newDirection);
+        transform.position += transform.forward * alertSpeed * Time.deltaTime;
+
+        float groundHeight = terrain.SampleHeight(transform.position);
+        float minHeight = groundHeight + hoverHeight;
+
+        if (transform.position.y < minHeight)
+        {
+            transform.position = new Vector3(transform.position.x, minHeight, transform.position.z);
+        }
+
+        alertTimer -= Time.deltaTime;
+
+        if (alertTimer <= 0f)
+        {
+            currentState = AnomalyState.Wandering;
+            wanderTarget = GetRandomWanderPoint();
+        }
     }
 }

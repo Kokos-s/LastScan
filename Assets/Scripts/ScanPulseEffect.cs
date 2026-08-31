@@ -29,8 +29,6 @@ public class ScanPulseEffect : MonoBehaviour
         material.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
 
         if (progress >= 1f)
-        {
             Destroy(gameObject);
-        }
     }
 }

@@ -46,13 +46,9 @@ public class AnomalyMovement : MonoBehaviour
     void Update()
     {
         if (currentState == AnomalyState.Wandering)
-        {
             UpdateWandering();
-        }
         else if (currentState == AnomalyState.Alerted)
-        {
             UpdateAlerted();
-        }
     }
 
     void UpdateWandering()
@@ -68,9 +64,7 @@ public class AnomalyMovement : MonoBehaviour
         transform.position = new Vector3(transform.position.x, targetHeight, transform.position.z);
 
         if (Vector3.Distance(transform.position, wanderTarget) < 1f)
-        {
             wanderTarget = GetRandomWanderPoint();
-        }
     }
 
     Vector3 GetRandomWanderPoint()
@@ -102,9 +96,7 @@ public class AnomalyMovement : MonoBehaviour
         float minHeight = groundHeight + hoverHeight;
 
         if (transform.position.y < minHeight)
-        {
             transform.position = new Vector3(transform.position.x, minHeight, transform.position.z);
-        }
 
         alertTimer -= Time.deltaTime;
 

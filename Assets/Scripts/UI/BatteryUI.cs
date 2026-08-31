@@ -17,16 +17,10 @@ public class BatteryUI : MonoBehaviour
         fillBar.fillAmount = energyPercent;
 
         if (energyPercent <= lowThreshold)
-        {
             fillBar.color = lowEnergyColor;
-        }
         else if (energyPercent <= mediumThreshold)
-        {
             fillBar.color = mediumEnergyColor;
-        }
         else
-        {
             fillBar.color = highEnergyColor;
-        }
     }
 }

@@ -26,9 +26,7 @@ public class RoverEnergy : MonoBehaviour
     void LateUpdate()
     {
         if (isPlayerMoving)
-        {
             currentEnergy -= movementDrainRate * Time.deltaTime;
-        }
 
         currentEnergy = Mathf.Clamp(currentEnergy, 0f, maxEnergy);
         isPlayerMoving = false;

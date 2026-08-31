@@ -31,18 +31,14 @@ public class RoverScanner : MonoBehaviour
     void Update()
     {
         if (controls.Rover.Scan.WasPressedThisFrame() & scanLabelTimer <= 0f)
-        {
             TryActivateScan();
-        }
 
         if (scanLabelTimer > 0f)
         {
             scanLabelTimer -= Time.deltaTime;
 
             if (scanLabelTimer <= 0f)
-            {
                 scanActiveLabel.SetActive(false);
-            }
         }
 
         if (notEnoughEnergyTimer > 0f)
@@ -50,9 +46,7 @@ public class RoverScanner : MonoBehaviour
             notEnoughEnergyTimer -= Time.deltaTime;
 
             if (notEnoughEnergyTimer <= 0f)
-            {
                 notEnoughEnergyLabel.SetActive(false);
-            }
         }
     }
 

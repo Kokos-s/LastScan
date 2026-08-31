@@ -51,9 +51,7 @@ public class RoverMovement : MonoBehaviour
         float motorPowerReductionFactor = Mathf.Max(0f, 1f - (currentSpeed / maxSpeed));
         float motorTorque = 0f;
         if (energy.CurrentEnergy > 0f)
-        {
             motorTorque = moveInput.y * motorForce * motorPowerReductionFactor;
-        }
 
         ApplyMotorTorque(wheelFrontLeft, motorTorque);
         ApplyMotorTorque(wheelMiddleLeft, motorTorque);

@@ -26,7 +26,7 @@ public class RoverMovement : MonoBehaviour
     [SerializeField] private Transform meshMiddleRight;
     [SerializeField] private Transform meshRearRight;
 
-    private Vector3 meshRotationOffset = new Vector3(90f, 90f, 0f);
+    private Vector3 meshRotationOffset = new Vector3(0f, 0f, 0f);
 
     private void Awake()
     {

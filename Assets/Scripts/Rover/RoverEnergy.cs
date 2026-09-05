@@ -48,4 +48,9 @@ public class RoverEnergy : MonoBehaviour
 
         return false;
     }
+
+    public void AddEnergy(float amount)
+    {
+        currentEnergy = Mathf.Min(currentEnergy + amount, maxEnergy);
+    }
 }

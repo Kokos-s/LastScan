@@ -46,6 +46,7 @@ public class RoverMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        //Debug.Log(GetComponent<Rigidbody>().inertiaTensor);
         Vector2 moveInput = controls.Rover.Move.ReadValue<Vector2>();
         float currentSpeed = rb.linearVelocity.magnitude;
         float motorPowerReductionFactor = Mathf.Max(0f, 1f - (currentSpeed / maxSpeed));

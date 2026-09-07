@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class Battery : MonoBehaviour
 {
-    [SerializeField] private float bobHeight = 0.3f;
-    [SerializeField] private float bobSpeed = 2f;
+    [SerializeField] private float bobHeight = 0.4f;
+    [SerializeField] private float bobSpeed = 3f;
     private Vector3 startPosition;
 
     [SerializeField] private float energyAmount = 30f;
     [SerializeField] private bool respawns = true;
-    [SerializeField] private float respawnTime = 15f;
+    [SerializeField] private float respawnTime = 30f;
 
     private bool isActive = true;
     private float respawnTimer = 0f;

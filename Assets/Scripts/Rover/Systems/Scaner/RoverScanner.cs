@@ -55,6 +55,9 @@ public class RoverScanner : MonoBehaviour
         if (energy.TryConsume(scanEnergyCost))
         {
             GameObject pulseObject = Instantiate(scanPulsePrefab, transform.position, Quaternion.identity);
+            ScanRevealDetector detector = pulseObject.GetComponent<ScanRevealDetector>();
+            if (detector != null)
+                detector.SetTargets(GetComponent<ScanTargets>().Targets);
             ScanPulseEffect pulseEffect = pulseObject.GetComponent<ScanPulseEffect>();
 
             scanActiveLabel.SetActive(true);

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7822348524577643217}
   - component: {fileID: 520285421132766197}
   - component: {fileID: 5077320904161202849}
+  - component: {fileID: 2115323705175804995}
   m_Layer: 0
   m_Name: Anomaly
   m_TagString: Untagged
@@ -67,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5d9913b28db5aeb4b8c0b7903cff93ef, type: 2}
+  - {fileID: 2100000, guid: 7c16da1b625881f4d96d34ab405748f2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,6 +131,9 @@ MonoBehaviour:
   hoverHeight: 6
   bobHeight: 2
   bobSpeed: 1
+  alertSpeed: 30
+  alertDuration: 10
+  alertTurnSpeed: 1
 --- !u!114 &5077320904161202849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +146,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d41f8d320b74a9b4bb943363ec7a5981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pulseSpeed: 1.6
-  minIntensity: 3
-  maxIntensity: 12
-  glowBaseColor: {r: 0.011764699, g: 0.096175246, b: 0.43529412, a: 1}
+  glowingMaterial: {fileID: 2100000, guid: 5d9913b28db5aeb4b8c0b7903cff93ef, type: 2}
+  pulseSpeed: 2
+  minGreen: 20
+  maxGreen: 150
+--- !u!114 &2115323705175804995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806271389017780721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3895d72899ba0f4498de0e12d75be732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetRenderer: {fileID: 7482623657961812573}
+  hiddenMaterial: {fileID: 2100000, guid: 7c16da1b625881f4d96d34ab405748f2, type: 2}
+  revealedMaterial: {fileID: 2100000, guid: 5d9913b28db5aeb4b8c0b7903cff93ef, type: 2}
+  revealDuration: 10

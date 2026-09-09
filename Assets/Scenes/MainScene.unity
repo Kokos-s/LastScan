@@ -3536,7 +3536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5077320904161202849, guid: 965deff9b20f69a4184acd7375d5de68, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5077320904161202849, guid: 965deff9b20f69a4184acd7375d5de68, type: 3}
       propertyPath: pulseSpeed

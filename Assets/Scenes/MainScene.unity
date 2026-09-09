@@ -7969,9 +7969,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1623870826083233140, guid: fb0444f3b418e384896b6fe7bb57c8d0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1623870826083233140, guid: fb0444f3b418e384896b6fe7bb57c8d0, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1623870826083233140, guid: fb0444f3b418e384896b6fe7bb57c8d0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1623870826083233140, guid: fb0444f3b418e384896b6fe7bb57c8d0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 1681663775093453467, guid: fb0444f3b418e384896b6fe7bb57c8d0, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829460617896965737, guid: fb0444f3b418e384896b6fe7bb57c8d0, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829460617896965737, guid: fb0444f3b418e384896b6fe7bb57c8d0, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829460617896965737, guid: fb0444f3b418e384896b6fe7bb57c8d0, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 3200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829460617896965737, guid: fb0444f3b418e384896b6fe7bb57c8d0, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 2400
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

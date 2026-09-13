@@ -4967,6 +4967,7 @@ GameObject:
   - component: {fileID: 977931121}
   - component: {fileID: 977931122}
   - component: {fileID: 977931123}
+  - component: {fileID: 977931124}
   m_Layer: 0
   m_Name: Rover
   m_TagString: Player
@@ -5072,7 +5073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxEnergy: 100
   currentEnergy: 0
-  movementDrainRate: 0.5
+  movementDrainRate: 0.2
   regenRate: 5
 --- !u!114 &977931121
 MonoBehaviour:
@@ -5143,6 +5144,20 @@ MonoBehaviour:
   - {fileID: 1656766694}
   - {fileID: 1555267026}
   - {fileID: 946190819}
+--- !u!114 &977931124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977931116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c627576a9e82c4fb3b20df5c8dc6f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roverEnergy: {fileID: 977931120}
+  energyDrainRate: 1
 --- !u!1 &1004406813
 GameObject:
   m_ObjectHideFlags: 0
@@ -6739,12 +6754,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6abb62e097b0e444b804d9aa6092f20d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  accelerationTime: 0.7
+  decelerationTime: 2
   row1: {fileID: 885589051}
   row2: {fileID: 801135695}
   row3: {fileID: 1409684660}
   row4: {fileID: 799851148}
-  rotationSpeed: 300
-  reverseDirection: 0
+  maxRotationSpeed: 600
+  drillEnergyUsage: {fileID: 977931124}
 --- !u!1 &1467118507
 GameObject:
   m_ObjectHideFlags: 0

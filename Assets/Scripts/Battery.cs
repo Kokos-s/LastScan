@@ -10,6 +10,8 @@ public class Battery : MonoBehaviour
     [SerializeField] private bool respawns = true;
     [SerializeField] private float respawnTime = 30f;
 
+    [SerializeField] private ScanReveal scanReveal;
+
     private bool isActive = true;
     private float respawnTimer = 0f;
 
@@ -49,11 +51,15 @@ public class Battery : MonoBehaviour
         isActive = false;
         respawnTimer = respawnTime;
         gameObject.GetComponent<Renderer>().enabled = false;
+
+        scanReveal.enabled = false;
     }
 
     void Reactivate()
     {
         isActive = true;
         gameObject.GetComponent<Renderer>().enabled = true;
+
+        scanReveal.enabled = true;
     }
 }

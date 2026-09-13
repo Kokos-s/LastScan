@@ -25,10 +25,7 @@ public class ScanRevealDetector : MonoBehaviour
         {
             if (targets[i] != null)
             {
-                float distance = Vector3.Distance(
-                    transform.position,
-                    targets[i].transform.position
-                );
+                float distance = Vector3.Distance( transform.position, targets[i].transform.position);
 
                 if (distance <= radius)
                 {

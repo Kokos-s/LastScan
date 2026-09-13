@@ -3,12 +3,12 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform target;
-    [SerializeField] private float distance = 15f;
-    [SerializeField] private float minDistance = 5f;
-    [SerializeField] private float maxDistance = 30f;
+    [SerializeField] private float distance = 40f;
+    [SerializeField] private float minDistance = 15f;
+    [SerializeField] private float maxDistance = 100f;
     [SerializeField] private float zoomSpeed = 5f;
-    [SerializeField] private float horizontalSpeed = 20f;
-    [SerializeField] private float verticalSpeed = 20f;
+    [SerializeField] private float horizontalSpeed = 15f;
+    [SerializeField] private float verticalSpeed = 15f;
     [SerializeField] private float minPitch = 10f;
     [SerializeField] private float maxPitch = 80f;
     [SerializeField] private float pitch = 30f;

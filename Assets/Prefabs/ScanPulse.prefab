@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 952bde2290a40c545ac11d9013c0514d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 2.5
-  maxScale: 500
+  duration: 3.5
+  maxScale: 800
 --- !u!114 &8153844875227976753
 MonoBehaviour:
   m_ObjectHideFlags: 0

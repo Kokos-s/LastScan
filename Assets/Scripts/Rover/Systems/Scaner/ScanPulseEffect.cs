@@ -3,7 +3,7 @@ using UnityEngine;
 public class ScanPulseEffect : MonoBehaviour
 {
     [SerializeField] private float duration = 5f;
-    [SerializeField] private float maxScale = 350f;
+    [SerializeField] private float maxScale = 800f;
     private float timer = 0f;
     private Material material;
     private Color startColor;

@@ -109,6 +109,15 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drill"",
+                    ""type"": ""Button"",
+                    ""id"": ""a08bf756-34c9-4168-9d5b-f2fefa6654d3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -177,6 +186,17 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
                     ""action"": ""Scan"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85fcbc98-fa24-4a80-887a-185d8b24a700"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -235,6 +255,7 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
         m_Rover = asset.FindActionMap("Rover", throwIfNotFound: true);
         m_Rover_Move = m_Rover.FindAction("Move", throwIfNotFound: true);
         m_Rover_Scan = m_Rover.FindAction("Scan", throwIfNotFound: true);
+        m_Rover_Drill = m_Rover.FindAction("Drill", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Look = m_Camera.FindAction("Look", throwIfNotFound: true);
@@ -322,6 +343,7 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
     private List<IRoverActions> m_RoverActionsCallbackInterfaces = new List<IRoverActions>();
     private readonly InputAction m_Rover_Move;
     private readonly InputAction m_Rover_Scan;
+    private readonly InputAction m_Rover_Drill;
     /// <summary>
     /// Provides access to input actions defined in input action map "Rover".
     /// </summary>
@@ -341,6 +363,10 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Rover/Scan".
         /// </summary>
         public InputAction @Scan => m_Wrapper.m_Rover_Scan;
+        /// <summary>
+        /// Provides access to the underlying input action "Rover/Drill".
+        /// </summary>
+        public InputAction @Drill => m_Wrapper.m_Rover_Drill;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -373,6 +399,9 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
             @Scan.started += instance.OnScan;
             @Scan.performed += instance.OnScan;
             @Scan.canceled += instance.OnScan;
+            @Drill.started += instance.OnDrill;
+            @Drill.performed += instance.OnDrill;
+            @Drill.canceled += instance.OnDrill;
         }
 
         /// <summary>
@@ -390,6 +419,9 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
             @Scan.started -= instance.OnScan;
             @Scan.performed -= instance.OnScan;
             @Scan.canceled -= instance.OnScan;
+            @Drill.started -= instance.OnDrill;
+            @Drill.performed -= instance.OnDrill;
+            @Drill.canceled -= instance.OnDrill;
         }
 
         /// <summary>
@@ -551,6 +583,13 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnScan(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Drill" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDrill(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Camera" which allows adding and removing callbacks.

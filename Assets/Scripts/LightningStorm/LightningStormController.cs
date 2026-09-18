@@ -5,38 +5,27 @@ using DigitalRuby.LightningBolt;
 
 public class LightningStormController : MonoBehaviour
 {
-    [Header("Ссылки на объекты")]
     public LightningBoltScript lightningScript;
     public Terrain targetTerrain;
 
-    [Header("Высота молнии")]
-    [Tooltip("Высота (по Y), с которой всегда будет начинаться молния")]
     public float cloudHeight = 80f;
 
-    [Header("Эффект вспышки")]
     public Image flashImage;
     public float flashDuration = 0.15f;
 
-    [Header("Звук грома")]
     public AudioSource thunderAudioSource;
     public AudioClip thunderClip;
     public float maxSoundDistance = 35f;
     public float minVolume = 0.05f;
 
-    [Header("Настройки урона и энергии")]
     public RoverHealth roverHealth;
 
-    [Tooltip("Радиус от точки удара молнии, в пределах которого ровер получит урон/заряд.")]
     public float damageRadius = 2f;
     public float damageAmount = 3f;
-    [Tooltip("Количество энергии, восполняемое роверу при ударе молнии")]
     public float energyAddAmount = 25f;
 
-    [Header("Смещение точки удара в ровер")]
-    [Tooltip("Высота над центром ровера, куда ударяет молния")]
     public Vector3 roverStrikeOffset = new Vector3(0f, 1.5f, 0f);
 
-    [Header("Настройки шторма")]
     public float minInterval = 1f;
     public float maxInterval = 2f;
     public float strikeRadius = 8f;
@@ -88,7 +77,6 @@ public class LightningStormController : MonoBehaviour
                 }
             }
 
-            // Определяем точку приземления (EndPosition)
             if (strikeCounter % 3 == 0 && isRoverUnderCloud && roverHealth != null)
             {
                 endPos = roverHealth.transform.position + roverStrikeOffset;
@@ -108,17 +96,14 @@ public class LightningStormController : MonoBehaviour
                 endPos = new Vector3(endX, endY, endZ);
             }
 
-            // Стартовая точка молнии: берутся X и Z из точки удара (или центра тучи), но Y фиксируется на высотой cloudHeight (80)
             Vector3 startPos = new Vector3(endPos.x, cloudHeight, endPos.z);
 
-            // Передаем координаты в скрипт молнии
             lightningScript.StartPosition = startPos;
             lightningScript.EndPosition = endPos;
             lightningScript.Trigger();
 
             PlayThunderSound(endPos);
 
-            // Проверяем урон роверу
             if (roverHealth != null)
             {
                 float distanceToRover = Vector3.Distance(endPos, roverHealth.transform.position + roverStrikeOffset);
@@ -130,7 +115,6 @@ public class LightningStormController : MonoBehaviour
                     if (roverEnergy != null)
                     {
                         roverEnergy.AddEnergy(energyAddAmount);
-                        Debug.Log($"⚡ Молния зарядила ровер на {energyAddAmount} ед. энергии!");
                     }
 
                     TriggerFlash();

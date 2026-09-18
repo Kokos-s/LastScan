@@ -1,28 +1,28 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Для работы с TextMeshPro
+using TMPro; 
 
 public class RoverHealth : MonoBehaviour
 {
-    [Header("Здоровье Rover")]
+    
     public float maxHealth = 10f;
     public float currentHealth;
     public Slider healthSlider;
 
-    [Header("Экран проигрыша")]
-    [Tooltip("Ссылка на объект с текстом Game Over")]
+   
+    
     public GameObject gameOverTextObject;
-    [Tooltip("Ссылка на скрипт управления/движения ровера")]
+    
     public MonoBehaviour movementScript;
 
-    [Header("Визуальные состояния (4 3D-модели)")]
-    [Tooltip("Модель при здоровье > 90%")]
+    
+    
     public GameObject modelStage1;
-    [Tooltip("Модель при здоровье 50% - 89%")]
+   
     public GameObject modelStage2;
-    [Tooltip("Модель при здоровье 1% - 49%")]
+   
     public GameObject modelStage3;
-    [Tooltip("Модель при 0% здоровья")]
+   
     public GameObject modelStage4;
 
     public bool IsDead => currentHealth <= 0;
@@ -38,7 +38,7 @@ public class RoverHealth : MonoBehaviour
         InitSlider();
         UpdateVisualState();
 
-        // Скрываем надпись Game Over в начале игры
+        
         if (gameOverTextObject != null)
         {
             gameOverTextObject.SetActive(false);
@@ -77,15 +77,15 @@ public class RoverHealth : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("💀 Rover's Health is 0. Game Over.");
+        Debug.Log("Rover's Health is 0. Game Over.");
 
-        // 1. Показываем надпись Game Over
+        
         if (gameOverTextObject != null)
         {
             gameOverTextObject.SetActive(true);
         }
 
-        // 2. Отключаем скрипт движения ровера
+        
         if (movementScript != null)
         {
             movementScript.enabled = false;

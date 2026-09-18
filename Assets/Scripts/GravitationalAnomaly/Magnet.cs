@@ -1,18 +1,19 @@
 using UnityEngine;
 
-public class Magnet : MonoBehaviour
+public class MagnetRange : MonoBehaviour
 {
     [Header("Configuración")]
-    public Transform enemyCore;
-    public float attractionForce = 4f;
+    public float attractionForce = 17f;      
+    public float maxForceDistance = 30f;    
+    public float extraDownForce = 2f;       
 
-    private Transform playerTransform;
+    private Rigidbody playerRb;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            playerTransform = other.transform;
+            playerRb = other.attachedRigidbody;
         }
     }
 
@@ -20,18 +21,34 @@ public class Magnet : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerTransform = null;
+            playerRb = null;
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (playerTransform == null) return;
+        if (playerRb == null) return;
 
+        
+        Vector3 flatDirection = transform.position - playerRb.position;
+        flatDirection.y = 0f;
+        flatDirection = flatDirection.normalized;
 
-        Vector3 direction = (enemyCore.position - playerTransform.position).normalized;
+        
+        float distance = Vector3.Distance(
+            new Vector3(transform.position.x, 0, transform.position.z),
+            new Vector3(playerRb.position.x, 0, playerRb.position.z)
+        );
 
+        if (distance <= maxForceDistance)
+        {
+            
+            playerRb.AddForce(flatDirection * attractionForce, ForceMode.Acceleration);
 
-        playerTransform.position += direction * attractionForce * Time.deltaTime;
+            
+            playerRb.AddForce(Vector3.down * extraDownForce, ForceMode.Acceleration);
+
+            Debug.DrawLine(playerRb.position, transform.position, Color.red);
+        }
     }
 }

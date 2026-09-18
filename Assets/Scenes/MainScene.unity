@@ -8132,8 +8132,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1017990561}
   - component: {fileID: 1017990560}
-  - component: {fileID: 1017990559}
   - component: {fileID: 1017990562}
+  - component: {fileID: 1017990559}
   m_Layer: 0
   m_Name: Magnet
   m_TagString: Magnet
@@ -8174,8 +8174,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d32e1b453ac47479b3dc028bee879b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCore: {fileID: 4235592659093435019, guid: 0e42f930e1fa36542bc517bd7cfef059, type: 3}
-  attractionForce: 10
+  attractionForce: 17
+  maxForceDistance: 30
+  extraDownForce: 2
 --- !u!4 &1017990561
 Transform:
   m_ObjectHideFlags: 0
@@ -10695,7 +10696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4763421311830256981, guid: 0e42f930e1fa36542bc517bd7cfef059, type: 3}
       propertyPath: m_Radius
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6087124419428249832, guid: 0e42f930e1fa36542bc517bd7cfef059, type: 3}
       propertyPath: m_Name

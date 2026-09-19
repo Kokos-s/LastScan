@@ -13,6 +13,7 @@ public class RoverMovement : MonoBehaviour
     private RoverControls controls;
     private Rigidbody rb;
     [SerializeField] private RoverEnergy energy;
+    [SerializeField] private RobotController robotController; // добавили
 
     [SerializeField] private float motorForce = 5000f;
     [SerializeField] private float maxSpeed = 17f;
@@ -48,6 +49,18 @@ public class RoverMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Блокировка движения на время анимации бурения/захвата
+        if (robotController != null && robotController.IsBusy)
+        {
+            ApplyWheelForces(wheelFrontLeft, 0f, brakeForce);
+            ApplyWheelForces(wheelMiddleLeft, 0f, brakeForce);
+            ApplyWheelForces(wheelRearLeft, 0f, brakeForce);
+            ApplyWheelForces(wheelFrontRight, 0f, brakeForce);
+            ApplyWheelForces(wheelMiddleRight, 0f, brakeForce);
+            ApplyWheelForces(wheelRearRight, 0f, brakeForce);
+            return;
+        }
+
         if (isInDanger)
         {
             ZeroWheelTorques();
@@ -67,7 +80,7 @@ public class RoverMovement : MonoBehaviour
         float currentSpeed = rb.linearVelocity.magnitude;
         bool isBraking = false;
 
-        if ((forwardSpeed > directionChangeSpeed && throttle < 0f)  ||  (forwardSpeed < -directionChangeSpeed && throttle > 0f))
+        if ((forwardSpeed > directionChangeSpeed && throttle < 0f) || (forwardSpeed < -directionChangeSpeed && throttle > 0f))
             isBraking = true;
         float motorTorque = 0f;
         float brakeTorque = 0f;
@@ -99,13 +112,13 @@ public class RoverMovement : MonoBehaviour
     }
 
     void Update()
-    {     
-            UpdateWheelVisual(wheelFrontLeft, meshFrontLeft);
-            UpdateWheelVisual(wheelMiddleLeft, meshMiddleLeft);
-            UpdateWheelVisual(wheelRearLeft, meshRearLeft);
-            UpdateWheelVisual(wheelFrontRight, meshFrontRight);
-            UpdateWheelVisual(wheelMiddleRight, meshMiddleRight);
-            UpdateWheelVisual(wheelRearRight, meshRearRight);
+    {
+        UpdateWheelVisual(wheelFrontLeft, meshFrontLeft);
+        UpdateWheelVisual(wheelMiddleLeft, meshMiddleLeft);
+        UpdateWheelVisual(wheelRearLeft, meshRearLeft);
+        UpdateWheelVisual(wheelFrontRight, meshFrontRight);
+        UpdateWheelVisual(wheelMiddleRight, meshMiddleRight);
+        UpdateWheelVisual(wheelRearRight, meshRearRight);
     }
 
     void UpdateWheelVisual(WheelCollider collider, Transform mesh)
@@ -145,7 +158,7 @@ public class RoverMovement : MonoBehaviour
     public void SetInDanger(Vector3 direction, float force)
     {
         if (!isInDanger)
-            ReduceFriction(); // solo la primera vez que entra, no en cada frame
+            ReduceFriction();
 
         isInDanger = true;
         dangerDirection = direction.normalized;

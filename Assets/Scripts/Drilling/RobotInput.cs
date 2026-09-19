@@ -18,6 +18,8 @@ public class RobotInput : MonoBehaviour
 
         if (Keyboard.current.eKey.wasPressedThisFrame && controller.GetCurrentMineral() != null)
         {
+            controller.LockMineral();
+            controller.SetBusy(true);
             animator.SetTrigger("Drill");
         }
 

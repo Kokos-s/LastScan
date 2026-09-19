@@ -2,12 +2,9 @@ using UnityEngine;
 
 public class TornadoRange : MonoBehaviour
 {
-   
-    [Header("Zona de atracción (radio exterior)")]
     [SerializeField] private float pullRadius = 35f;
     [SerializeField] private float pullForce = 4f;
 
-    [Header("Zona de peligro (radio interior)")]
     [SerializeField] private float dangerRadius = 14f;
     [SerializeField] private float knockbackForceMin = 30f;
     [SerializeField] private float knockbackForceMax = 60f;
@@ -37,7 +34,7 @@ public class TornadoRange : MonoBehaviour
             float scaledForce = Mathf.Lerp(knockbackForceMin, knockbackForceMax, proximity);
 
             if (movement != null)
-                movement.SetInDanger(dirFromTornado, scaledForce); // mantiene el knockback activo mientras esté acá
+                movement.SetInDanger(dirFromTornado, scaledForce);
 
             if (health != null && Time.time >= lastDamageTime + damageCooldown)
             {
@@ -46,11 +43,11 @@ public class TornadoRange : MonoBehaviour
             }
         }
         else if (distance <= pullRadius)
-{
-    float pullProximity = 1f - Mathf.Clamp01((distance - dangerRadius) / (pullRadius - dangerRadius));
-    float scaledPull = Mathf.Lerp(pullForce, pullForce * 4f, pullProximity); // crece hasta 4x más cerca del borde de peligro
-    rb.AddForce(-dirFromTornado * scaledPull, ForceMode.Acceleration);
-}
+        {
+            float pullProximity = 1f - Mathf.Clamp01((distance - dangerRadius) / (pullRadius - dangerRadius));
+            float scaledPull = Mathf.Lerp(pullForce, pullForce * 4f, pullProximity);
+            rb.AddForce(-dirFromTornado * scaledPull, ForceMode.Acceleration);
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -59,6 +56,6 @@ public class TornadoRange : MonoBehaviour
 
         RoverMovement movement = other.attachedRigidbody?.GetComponent<RoverMovement>();
         if (movement != null)
-            movement.ExitDanger(); 
+            movement.ExitDanger();
     }
 }

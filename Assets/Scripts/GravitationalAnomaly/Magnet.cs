@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class MagnetRange : MonoBehaviour
 {
-    [Header("Configuración")]
-    public float attractionForce = 17f;      
-    public float maxForceDistance = 30f;    
-    public float extraDownForce = 2f;       
+    public float attractionForce = 17f;
+    public float maxForceDistance = 30f;
+    public float extraDownForce = 2f;
 
     private Rigidbody playerRb;
 
@@ -29,12 +28,10 @@ public class MagnetRange : MonoBehaviour
     {
         if (playerRb == null) return;
 
-        
         Vector3 flatDirection = transform.position - playerRb.position;
         flatDirection.y = 0f;
         flatDirection = flatDirection.normalized;
 
-        
         float distance = Vector3.Distance(
             new Vector3(transform.position.x, 0, transform.position.z),
             new Vector3(playerRb.position.x, 0, playerRb.position.z)
@@ -42,13 +39,8 @@ public class MagnetRange : MonoBehaviour
 
         if (distance <= maxForceDistance)
         {
-            
             playerRb.AddForce(flatDirection * attractionForce, ForceMode.Acceleration);
-
-            
             playerRb.AddForce(Vector3.down * extraDownForce, ForceMode.Acceleration);
-
-            Debug.DrawLine(playerRb.position, transform.position, Color.red);
         }
     }
 }

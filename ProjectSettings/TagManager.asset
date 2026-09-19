@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Magnet
   - GravitationalAnomaly
+  - RoverCabin
   layers:
   - Default
   - TransparentFX

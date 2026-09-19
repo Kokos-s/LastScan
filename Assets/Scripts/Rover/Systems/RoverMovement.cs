@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class RoverMovement : MonoBehaviour
 {
@@ -47,6 +48,14 @@ public class RoverMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (isInDanger)
+        {
+            ZeroWheelTorques();
+            rb.AddForce(dangerDirection * dangerForce, ForceMode.Acceleration);
+            return;
+        }
+
+
         Vector2 moveInput = controls.Rover.Move.ReadValue<Vector2>();
 
         float throttle = 0f;
@@ -90,13 +99,13 @@ public class RoverMovement : MonoBehaviour
     }
 
     void Update()
-    {
-        UpdateWheelVisual(wheelFrontLeft, meshFrontLeft);
-        UpdateWheelVisual(wheelMiddleLeft, meshMiddleLeft);
-        UpdateWheelVisual(wheelRearLeft, meshRearLeft);
-        UpdateWheelVisual(wheelFrontRight, meshFrontRight);
-        UpdateWheelVisual(wheelMiddleRight, meshMiddleRight);
-        UpdateWheelVisual(wheelRearRight, meshRearRight);
+    {     
+            UpdateWheelVisual(wheelFrontLeft, meshFrontLeft);
+            UpdateWheelVisual(wheelMiddleLeft, meshMiddleLeft);
+            UpdateWheelVisual(wheelRearLeft, meshRearLeft);
+            UpdateWheelVisual(wheelFrontRight, meshFrontRight);
+            UpdateWheelVisual(wheelMiddleRight, meshMiddleRight);
+            UpdateWheelVisual(wheelRearRight, meshRearRight);
     }
 
     void UpdateWheelVisual(WheelCollider collider, Transform mesh)
@@ -123,5 +132,76 @@ public class RoverMovement : MonoBehaviour
     void ApplySteerAngle(WheelCollider wheel, float angle)
     {
         wheel.steerAngle = angle;
+    }
+
+
+
+    private bool isInDanger = false;
+    private Vector3 dangerDirection;
+    private float dangerForce;
+    private WheelFrictionCurve[] originalForward;
+    private WheelFrictionCurve[] originalSideways;
+
+    public void SetInDanger(Vector3 direction, float force)
+    {
+        if (!isInDanger)
+            ReduceFriction(); // solo la primera vez que entra, no en cada frame
+
+        isInDanger = true;
+        dangerDirection = direction.normalized;
+        dangerForce = force;
+    }
+
+    public void ExitDanger()
+    {
+        if (!isInDanger) return;
+
+        isInDanger = false;
+        RestoreFriction();
+    }
+
+    private void ReduceFriction()
+    {
+        WheelCollider[] wheels = AllWheels();
+        originalForward = new WheelFrictionCurve[wheels.Length];
+        originalSideways = new WheelFrictionCurve[wheels.Length];
+
+        for (int i = 0; i < wheels.Length; i++)
+        {
+            originalForward[i] = wheels[i].forwardFriction;
+            originalSideways[i] = wheels[i].sidewaysFriction;
+
+            WheelFrictionCurve reducedForward = wheels[i].forwardFriction;
+            reducedForward.stiffness = 0.05f;
+            wheels[i].forwardFriction = reducedForward;
+
+            WheelFrictionCurve reducedSideways = wheels[i].sidewaysFriction;
+            reducedSideways.stiffness = 0.05f;
+            wheels[i].sidewaysFriction = reducedSideways;
+        }
+    }
+
+    private void RestoreFriction()
+    {
+        WheelCollider[] wheels = AllWheels();
+        for (int i = 0; i < wheels.Length; i++)
+        {
+            wheels[i].forwardFriction = originalForward[i];
+            wheels[i].sidewaysFriction = originalSideways[i];
+        }
+    }
+
+    private WheelCollider[] AllWheels()
+    {
+        return new WheelCollider[] { wheelFrontLeft, wheelMiddleLeft, wheelRearLeft, wheelFrontRight, wheelMiddleRight, wheelRearRight };
+    }
+
+    private void ZeroWheelTorques()
+    {
+        foreach (WheelCollider wheel in AllWheels())
+        {
+            wheel.motorTorque = 0f;
+            wheel.brakeTorque = 0f;
+        }
     }
 }

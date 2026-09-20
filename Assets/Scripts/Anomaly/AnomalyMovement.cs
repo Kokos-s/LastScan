@@ -25,7 +25,7 @@ public class AnomalyMovement : MonoBehaviour
     [SerializeField] private float bobHeight = 2f;
     [SerializeField] private float bobSpeed = 1f;
 
-    private Vector3 scanPoint;
+    [SerializeField] private Transform rover;
     [SerializeField] private float alertSpeed = 30f;
     [SerializeField] private float alertDuration = 10f;
     [SerializeField] private float alertTurnSpeed = 1f;
@@ -81,13 +81,12 @@ public class AnomalyMovement : MonoBehaviour
     public void OnScanUsed(Vector3 targetPoint)
     {
         currentState = AnomalyState.Alerted;
-        scanPoint = targetPoint;
         alertTimer = alertDuration;
     }
 
     void UpdateAlerted()
     {
-        Vector3 directionToTarget = (scanPoint - transform.position).normalized;
+        Vector3 directionToTarget = (rover.position - transform.position).normalized;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, directionToTarget, alertTurnSpeed * Time.deltaTime, 0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
         transform.position += transform.forward * alertSpeed * Time.deltaTime;

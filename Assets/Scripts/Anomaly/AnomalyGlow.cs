@@ -3,29 +3,44 @@ using UnityEngine;
 public class AnomalyGlow : MonoBehaviour
 {
     [SerializeField] private Material glowingMaterial;
+    [SerializeField] private float flashDuration = 0.5f;
     [SerializeField] private float pulseSpeed = 1.5f;
     [SerializeField] private float minIntensity = 8f;
     [SerializeField] private float maxIntensity = 12f;
 
     private Renderer targetRenderer;
+    private Material transparentMaterial;
     private Material pulseMaterial;
     private Color initialEmission;
+    private float flashTimer;
 
-    void Start()
+    private void Awake()
     {
         targetRenderer = GetComponent<Renderer>();
+        transparentMaterial = targetRenderer.sharedMaterial;
 
         pulseMaterial = new Material(glowingMaterial);
         initialEmission = pulseMaterial.GetColor("_EmissionColor");
     }
 
-    void Update()
+    public void Flash()
     {
-        if (targetRenderer.sharedMaterial == glowingMaterial)
-            targetRenderer.sharedMaterial = pulseMaterial;
+        targetRenderer.sharedMaterial = pulseMaterial;
+        flashTimer = flashDuration;
+    }
 
-        if (targetRenderer.sharedMaterial != pulseMaterial)
+    private void Update()
+    {
+        if (flashTimer <= 0f)
             return;
+
+        flashTimer -= Time.deltaTime;
+
+        if (flashTimer <= 0f)
+        {
+            targetRenderer.sharedMaterial = transparentMaterial;
+            return;
+        }
 
         float pulse = (Mathf.Sin(Time.time * pulseSpeed) + 1f) / 2f;
         float intensity = Mathf.Lerp(minIntensity, maxIntensity, pulse);
@@ -34,16 +49,15 @@ public class AnomalyGlow : MonoBehaviour
         pulseMaterial.SetColor("_EmissionColor", initialEmission * brightness);
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
-        if (targetRenderer != null &&
-            targetRenderer.sharedMaterial == pulseMaterial)
-        {
-            targetRenderer.sharedMaterial = glowingMaterial;
-        }
+        flashTimer = 0f;
+
+        if (targetRenderer != null)
+            targetRenderer.sharedMaterial = transparentMaterial;
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         if (pulseMaterial != null)
             Destroy(pulseMaterial);

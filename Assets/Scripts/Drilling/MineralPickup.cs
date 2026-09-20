@@ -13,9 +13,12 @@ public class MineralPickup : MonoBehaviour
     private Vector3 startLocalPosition;
     private bool hasRisen = false;
 
+    private GameObject mineralRoot;
+
     private void Awake()
     {
         startLocalPosition = transform.localPosition;
+        mineralRoot = transform.parent.gameObject;
     }
 
     public void PlaySpawnEffect()
@@ -64,6 +67,7 @@ public class MineralPickup : MonoBehaviour
     private IEnumerator DespawnRoutine()
     {
         yield return new WaitForSeconds(despawnDelay);
+        Destroy(mineralRoot);
         Destroy(gameObject);
     }
 

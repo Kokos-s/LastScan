@@ -8,21 +8,14 @@ public class RoverHealth : MonoBehaviour
     public float maxHealth = 10f;
     public float currentHealth;
     public Slider healthSlider;
-
-   
-    
+        
     public GameObject gameOverTextObject;
     
     public MonoBehaviour movementScript;
-
-    
-    
+            
     public GameObject modelStage1;
-   
     public GameObject modelStage2;
-   
     public GameObject modelStage3;
-   
     public GameObject modelStage4;
 
     public bool IsDead => currentHealth <= 0;
@@ -95,27 +88,27 @@ public class RoverHealth : MonoBehaviour
     private void UpdateVisualState()
     {
         float healthPercent = currentHealth / maxHealth;
-
-        if (modelStage1 != null) modelStage1.SetActive(false);
-        if (modelStage2 != null) modelStage2.SetActive(false);
-        if (modelStage3 != null) modelStage3.SetActive(false);
-        if (modelStage4 != null) modelStage4.SetActive(false);
+        GameObject activeModel;
 
         if (healthPercent > 0.90f)
-        {
-            if (modelStage1 != null) modelStage1.SetActive(true);
-        }
+            activeModel = modelStage1;
         else if (healthPercent >= 0.50f)
-        {
-            if (modelStage2 != null) modelStage2.SetActive(true);
-        }
+            activeModel = modelStage2;
         else if (healthPercent > 0f)
-        {
-            if (modelStage3 != null) modelStage3.SetActive(true);
-        }
+            activeModel = modelStage3;
         else
-        {
-            if (modelStage4 != null) modelStage4.SetActive(true);
-        }
+            activeModel = modelStage4;
+
+        if (modelStage1 != null)
+            modelStage1.SetActive(modelStage1 == activeModel);
+
+        if (modelStage2 != null)
+            modelStage2.SetActive(modelStage2 == activeModel);
+
+        if (modelStage3 != null)
+            modelStage3.SetActive(modelStage3 == activeModel);
+
+        if (modelStage4 != null)
+            modelStage4.SetActive(modelStage4 == activeModel);
     }
 }

@@ -31,6 +31,7 @@ public class RoverMovement : MonoBehaviour
     [SerializeField] private Transform meshMiddleRight;
     [SerializeField] private Transform meshRearRight;
 
+    private float stormResistance = 0f;
     private void Awake()
     {
         controls = new RoverControls();
@@ -68,7 +69,6 @@ public class RoverMovement : MonoBehaviour
             return;
         }
 
-
         Vector2 moveInput = controls.Rover.Move.ReadValue<Vector2>();
 
         float throttle = 0f;
@@ -90,7 +90,7 @@ public class RoverMovement : MonoBehaviour
         else if (throttle != 0f && energy.CurrentEnergy > 0f)
         {
             float motorPowerReductionFactor = 1f - Mathf.InverseLerp(maxSpeed * 0.6f, maxSpeed, currentSpeed);
-            motorTorque = throttle * motorForce * motorPowerReductionFactor;
+            motorTorque = throttle * motorForce * motorPowerReductionFactor * (1f - stormResistance); 
         }
 
         ApplyWheelForces(wheelFrontLeft, motorTorque, brakeTorque);
@@ -216,5 +216,10 @@ public class RoverMovement : MonoBehaviour
             wheel.motorTorque = 0f;
             wheel.brakeTorque = 0f;
         }
+    }
+
+    public void SetStormResistance(float resistance)
+    {
+        stormResistance = Mathf.Clamp01(resistance);
     }
 }

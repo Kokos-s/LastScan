@@ -10,7 +10,7 @@ public class RoverRecovery : MonoBehaviour
     [SerializeField] private float searchDistance = 10f;
     [SerializeField] private float rayHeight = 30f;
     [SerializeField] private float maxGroundAngle = 20f;
-    [SerializeField] private float groundClearance = 1f;
+    [SerializeField] private float groundClearance = 4f;
 
     [SerializeField] private RoverHealth roverHealth;
     [SerializeField] private float holdDuration = 3f;
@@ -22,6 +22,7 @@ public class RoverRecovery : MonoBehaviour
     private float damageBlockTimer;
     private float previousHealth;
     private bool waitingForRelease;
+    private RoverControls controls;
 
     private bool hasFoundPoint;
     private Vector3 recoveryBoxCenter;
@@ -42,12 +43,27 @@ public class RoverRecovery : MonoBehaviour
         get { return roverHealth.IsDead; }
     }
 
+    private void OnEnable()
+    {
+        controls.Rover.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Rover.Disable();
+        holdTimer = 0f;
+        waitingForRelease = false;
+    }
+
+    private void OnDestroy()
+    {
+        controls.Dispose();
+    }
+
     private void Awake()
     {
         roverBody = GetComponent<Rigidbody>();
-
-        if (roverHealth == null)
-            roverHealth = GetComponent<RoverHealth>();
+        controls = new RoverControls();
     }
 
     private void Start()
@@ -57,7 +73,7 @@ public class RoverRecovery : MonoBehaviour
 
     private void LateUpdate()
     {
-        bool isHolding = Keyboard.current != null && Keyboard.current.rKey.isPressed;
+        bool isHolding = controls.Rover.Recover.IsPressed();
 
         if (damageBlockTimer > 0f)
             damageBlockTimer -= Time.deltaTime;
@@ -167,7 +183,7 @@ public class RoverRecovery : MonoBehaviour
 
         recoveryBoxCenter = groundPoint + Vector3.up * (worldSize.y / 2f + groundClearance);
 
-        Collider[] obstacles = Physics.OverlapBox( recoveryBoxCenter, worldSize / 2f, recoveryRotation, ~0, QueryTriggerInteraction.Ignore);
+        Collider[] obstacles = Physics.OverlapBox( recoveryBoxCenter, worldSize / 2f, recoveryRotation, Physics.AllLayers, QueryTriggerInteraction.Ignore);
 
         foreach (Collider obstacle in obstacles)
         {

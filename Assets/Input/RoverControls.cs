@@ -118,6 +118,15 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Recover"",
+                    ""type"": ""Button"",
+                    ""id"": ""7be998ef-9441-4774-8765-5b4bd7f7f57f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -197,6 +206,17 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
                     ""action"": ""Drill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ecdb2952-cbd3-47bb-920d-42191d424572"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Recover"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -256,6 +276,7 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
         m_Rover_Move = m_Rover.FindAction("Move", throwIfNotFound: true);
         m_Rover_Scan = m_Rover.FindAction("Scan", throwIfNotFound: true);
         m_Rover_Drill = m_Rover.FindAction("Drill", throwIfNotFound: true);
+        m_Rover_Recover = m_Rover.FindAction("Recover", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Look = m_Camera.FindAction("Look", throwIfNotFound: true);
@@ -344,6 +365,7 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Rover_Move;
     private readonly InputAction m_Rover_Scan;
     private readonly InputAction m_Rover_Drill;
+    private readonly InputAction m_Rover_Recover;
     /// <summary>
     /// Provides access to input actions defined in input action map "Rover".
     /// </summary>
@@ -367,6 +389,10 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Rover/Drill".
         /// </summary>
         public InputAction @Drill => m_Wrapper.m_Rover_Drill;
+        /// <summary>
+        /// Provides access to the underlying input action "Rover/Recover".
+        /// </summary>
+        public InputAction @Recover => m_Wrapper.m_Rover_Recover;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -402,6 +428,9 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
             @Drill.started += instance.OnDrill;
             @Drill.performed += instance.OnDrill;
             @Drill.canceled += instance.OnDrill;
+            @Recover.started += instance.OnRecover;
+            @Recover.performed += instance.OnRecover;
+            @Recover.canceled += instance.OnRecover;
         }
 
         /// <summary>
@@ -422,6 +451,9 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
             @Drill.started -= instance.OnDrill;
             @Drill.performed -= instance.OnDrill;
             @Drill.canceled -= instance.OnDrill;
+            @Recover.started -= instance.OnRecover;
+            @Recover.performed -= instance.OnRecover;
+            @Recover.canceled -= instance.OnRecover;
         }
 
         /// <summary>
@@ -590,6 +622,13 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDrill(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Recover" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRecover(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Camera" which allows adding and removing callbacks.

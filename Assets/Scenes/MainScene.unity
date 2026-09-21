@@ -9672,7 +9672,7 @@ MonoBehaviour:
   rayHeight: 30
   maxGroundAngle: 15
   groundClearance: 4
-  roverHealth: {fileID: 0}
+  roverHealth: {fileID: 977931128}
   holdDuration: 3
   damageBlockDuration: 1
 --- !u!1 &1482866949

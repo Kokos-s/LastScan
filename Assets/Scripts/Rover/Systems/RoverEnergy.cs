@@ -9,6 +9,7 @@ public class RoverEnergy : MonoBehaviour
 
     private bool isPlayerMoving = false;
 
+    private float drainMultiplier = 1f;
     public float CurrentEnergy
     {
         get { return currentEnergy; }
@@ -26,11 +27,12 @@ public class RoverEnergy : MonoBehaviour
     void LateUpdate()
     {
         if (isPlayerMoving)
-            currentEnergy -= movementDrainRate * Time.deltaTime;
+            currentEnergy -= movementDrainRate * drainMultiplier * Time.deltaTime;
 
         currentEnergy = Mathf.Clamp(currentEnergy, 0f, maxEnergy);
         isPlayerMoving = false;
         //Debug.Log("current energy" + currentEnergy);
+
     }
 
     public void ReportPlayerMovement()
@@ -52,5 +54,10 @@ public class RoverEnergy : MonoBehaviour
     public void AddEnergy(float amount)
     {
         currentEnergy = Mathf.Min(currentEnergy + amount, maxEnergy);
+    }
+
+    public void SetDrainMultiplier(float multiplier)
+    {
+        drainMultiplier = multiplier;
     }
 }

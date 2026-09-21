@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class TornadoRange : MonoBehaviour
 {
-    [SerializeField] private float pullRadius = 35f;
-    [SerializeField] private float pullForce = 4f;
+    [SerializeField] private float pullRadius = 30f;
+    [SerializeField] private float pullForce = 10f;
 
-    [SerializeField] private float dangerRadius = 14f;
-    [SerializeField] private float knockbackForceMin = 30f;
-    [SerializeField] private float knockbackForceMax = 60f;
+    [SerializeField] private float dangerRadius = 10f;
+    [SerializeField] private float knockbackForceMin = 50f;
+    [SerializeField] private float knockbackForceMax = 75f;
     [SerializeField] private float damage = 3f;
-    [SerializeField] private float damageCooldown = 1f;
+    [SerializeField] private float damageCooldown = 2f;
 
     private float lastDamageTime = -999f;
 

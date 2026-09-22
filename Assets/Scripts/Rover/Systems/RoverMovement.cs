@@ -13,11 +13,13 @@ public class RoverMovement : MonoBehaviour
     private RoverControls controls;
     private Rigidbody rb;
     [SerializeField] private RoverEnergy energy;
-    [SerializeField] private RobotController robotController; // добавили
+    [SerializeField] private RobotController robotController;
 
     [SerializeField] private float motorForce = 5000f;
-    [SerializeField] private float maxSpeed = 17f;
+    [SerializeField] private float parkingBrakeForce = 5000f;
+    [SerializeField] private float parkingBrakeSpeed = 0.5f;
     [SerializeField] private float brakeForce = 3000f;
+    [SerializeField] private float maxSpeed = 17f;
     [SerializeField] private float directionChangeSpeed = 0.2f;
 
     [SerializeField] private float steerSmoothSpeed = 1.5f;
@@ -30,6 +32,10 @@ public class RoverMovement : MonoBehaviour
     [SerializeField] private Transform meshFrontRight;
     [SerializeField] private Transform meshMiddleRight;
     [SerializeField] private Transform meshRearRight;
+
+    [SerializeField] private float startBoostMultiplier = 2f;
+    [SerializeField] private float startBoostEndSpeed = 4f;
+    
 
     private float stormResistance = 0f;
     private void Awake()
@@ -50,7 +56,6 @@ public class RoverMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Блокировка движения на время анимации бурения/захвата
         if (robotController != null && robotController.IsBusy)
         {
             ApplyWheelForces(wheelFrontLeft, 0f, brakeForce);
@@ -78,6 +83,7 @@ public class RoverMovement : MonoBehaviour
 
         float forwardSpeed = Vector3.Dot(rb.linearVelocity, transform.forward);
         float currentSpeed = rb.linearVelocity.magnitude;
+        Debug.Log(currentSpeed);
         bool isBraking = false;
 
         if ((forwardSpeed > directionChangeSpeed && throttle < 0f) || (forwardSpeed < -directionChangeSpeed && throttle > 0f))
@@ -85,12 +91,18 @@ public class RoverMovement : MonoBehaviour
         float motorTorque = 0f;
         float brakeTorque = 0f;
 
-        if (isBraking)
+        if (throttle == 0f)
+        {
+            if (currentSpeed <= parkingBrakeSpeed)
+                brakeTorque = parkingBrakeForce;
+        }
+        else if (isBraking)
             brakeTorque = Mathf.Abs(throttle) * brakeForce;
-        else if (throttle != 0f && energy.CurrentEnergy > 0f)
+        else if (energy.CurrentEnergy > 0f)
         {
             float motorPowerReductionFactor = 1f - Mathf.InverseLerp(maxSpeed * 0.6f, maxSpeed, currentSpeed);
-            motorTorque = throttle * motorForce * motorPowerReductionFactor * (1f - stormResistance); 
+            float startBoost = Mathf.Lerp(startBoostMultiplier, 1f, Mathf.InverseLerp(0f, startBoostEndSpeed, currentSpeed));
+            motorTorque = throttle * motorForce * startBoost * motorPowerReductionFactor * (1f - stormResistance);
         }
 
         ApplyWheelForces(wheelFrontLeft, motorTorque, brakeTorque);

@@ -18639,17 +18639,85 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 160036092283847561, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_Mass
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 160036092283847561, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_SuspensionDistance
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 160036092283847561, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 2.3
+      objectReference: {fileID: 0}
     - target: {fileID: 255486977758111204, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
       propertyPath: fillBar
       value: 
       objectReference: {fileID: 859195407}
     - target: {fileID: 273187248543963483, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_Mass
+      value: 2200
+      objectReference: {fileID: 0}
+    - target: {fileID: 273187248543963483, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
       propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 273187248543963483, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_CenterOfMass.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 273187248543963483, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
       propertyPath: m_CenterOfMass.y
-      value: -1
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 273187248543963483, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_CenterOfMass.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 452727722503425108, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: maxSpeed
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 452727722503425108, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: brakeForce
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 452727722503425108, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: motorForce
+      value: 6000
+      objectReference: {fileID: 0}
+    - target: {fileID: 452727722503425108, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: coastBrakeForce
+      value: -0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 452727722503425108, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: parkingBrakeForce
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 452727722503425108, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: parkingBrakeSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 452727722503425108, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: startBoostEndSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 452727722503425108, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: startBoostMultiplier
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101611810186976218, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_Mass
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101611810186976218, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_SuspensionDistance
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101611810186976218, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 2701774679494458733, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
       propertyPath: m_Name
@@ -18731,6 +18799,30 @@ PrefabInstance:
       propertyPath: m_TagString
       value: RoverCabin
       objectReference: {fileID: 0}
+    - target: {fileID: 4459396797929141745, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_Mass
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459396797929141745, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_SuspensionDistance
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459396797929141745, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5721235932283915374, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_Mass
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5721235932283915374, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_SuspensionDistance
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5721235932283915374, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 2.3
+      objectReference: {fileID: 0}
     - target: {fileID: 6888696583914346237, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
       propertyPath: m_Size.y
       value: 0.90000004
@@ -18787,6 +18879,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7890570368536009801, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_Mass
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7890570368536009801, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_SuspensionDistance
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7890570368536009801, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 2.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8343168553447302392, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -18831,6 +18935,18 @@ PrefabInstance:
       propertyPath: 'anomalies.Array.data[4]'
       value: 
       objectReference: {fileID: 1817353215}
+    - target: {fileID: 9080533402302879563, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_Mass
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 9080533402302879563, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_SuspensionDistance
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 9080533402302879563, guid: f4687b7e9765d4f449618ed38bb10850, type: 3}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 2.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

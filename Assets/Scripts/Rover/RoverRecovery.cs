@@ -134,13 +134,13 @@ public class RoverRecovery : MonoBehaviour
     {
         hasFoundPoint = false;
 
-        for (int ring = 1; ring <= 3; ring++)
+        for (int ring = 1; ring <= 1000; ring++)
         {
             float distance = searchDistance * ring;
 
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 72; i++)
             {
-                float angle = i * 30f * Mathf.Deg2Rad;
+                float angle = i * 5f * Mathf.Deg2Rad;
 
                 Vector3 direction = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle));
 

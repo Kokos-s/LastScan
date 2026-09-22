@@ -1326,6 +1326,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 705238561e89ee94283cb00851d8d0b3, type: 2}
+    - target: {fileID: 5190147079339025263, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
+      propertyPath: minimapCamera
+      value: 
+      objectReference: {fileID: 923002787}
     - target: {fileID: 5745750717599871276, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
       propertyPath: drillTipDisplay
       value: 
@@ -9946,6 +9950,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 705238561e89ee94283cb00851d8d0b3, type: 2}
+    - target: {fileID: 5190147079339025263, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
+      propertyPath: minimapCamera
+      value: 
+      objectReference: {fileID: 923002787}
     - target: {fileID: 5745750717599871276, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
       propertyPath: drillTipDisplay
       value: 
@@ -11338,6 +11346,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 705238561e89ee94283cb00851d8d0b3, type: 2}
+    - target: {fileID: 5190147079339025263, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
+      propertyPath: minimapCamera
+      value: 
+      objectReference: {fileID: 923002787}
     - target: {fileID: 5745750717599871276, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
       propertyPath: drillTipDisplay
       value: 
@@ -11715,6 +11727,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 443255101}
     m_Modifications:
+    - target: {fileID: 515540334992830272, guid: 0ec437d5d6dcab143a27cf518f5e233f, type: 3}
+      propertyPath: minimapCamera
+      value: 
+      objectReference: {fileID: 923002787}
     - target: {fileID: 4920295843044161122, guid: 0ec437d5d6dcab143a27cf518f5e233f, type: 3}
       propertyPath: m_Name
       value: Battery2
@@ -11725,7 +11741,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5505109480737993709, guid: 0ec437d5d6dcab143a27cf518f5e233f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.14
       objectReference: {fileID: 0}
     - target: {fileID: 5505109480737993709, guid: 0ec437d5d6dcab143a27cf518f5e233f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18419,6 +18435,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 705238561e89ee94283cb00851d8d0b3, type: 2}
+    - target: {fileID: 5190147079339025263, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
+      propertyPath: minimapCamera
+      value: 
+      objectReference: {fileID: 923002787}
     - target: {fileID: 5745750717599871276, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
       propertyPath: drillTipDisplay
       value: 
@@ -19153,10 +19173,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 443255101}
     m_Modifications:
-    - target: {fileID: 568617206599255378, guid: 0ec437d5d6dcab143a27cf518f5e233f, type: 3}
-      propertyPath: revealDuration
-      value: 50
-      objectReference: {fileID: 0}
+    - target: {fileID: 515540334992830272, guid: 0ec437d5d6dcab143a27cf518f5e233f, type: 3}
+      propertyPath: minimapCamera
+      value: 
+      objectReference: {fileID: 923002787}
     - target: {fileID: 4920295843044161122, guid: 0ec437d5d6dcab143a27cf518f5e233f, type: 3}
       propertyPath: m_Name
       value: Battery1
@@ -19167,7 +19187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5505109480737993709, guid: 0ec437d5d6dcab143a27cf518f5e233f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.810001
+      value: 11.92
       objectReference: {fileID: 0}
     - target: {fileID: 5505109480737993709, guid: 0ec437d5d6dcab143a27cf518f5e233f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19394,26 +19414,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 648575949}
     m_Modifications:
-    - target: {fileID: 863754813113732481, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
-      propertyPath: m_Name
-      value: Mineral0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2417081694490039901, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1006625679231885655, guid: fe5f76973b562e8439657701558de343, type: 3}
-    - target: {fileID: 2439681908682189893, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.01658486
-      objectReference: {fileID: 0}
-    - target: {fileID: 2439681908682189893, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.01658486
-      objectReference: {fileID: 0}
-    - target: {fileID: 2439681908682189893, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.01658486
-      objectReference: {fileID: 0}
     - target: {fileID: 2439681908682189893, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -115.2
@@ -19454,38 +19454,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3050593373484430836, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 30.915005
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050593373484430836, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 24.732004
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050593373484430836, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 24.732004
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050593373484430836, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.24
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050593373484430836, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.6465
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050593373484430836, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 3067142014891112191, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
       propertyPath: m_Name
       value: Stone
       objectReference: {fileID: 0}
-    - target: {fileID: 4442711893576541159, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+    - target: {fileID: 5190147079339025263, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
+      propertyPath: minimapCamera
       value: 
-      objectReference: {fileID: 2100000, guid: 705238561e89ee94283cb00851d8d0b3, type: 2}
+      objectReference: {fileID: 923002787}
     - target: {fileID: 5745750717599871276, guid: 5c6925823dccd8d4fac7969a5b1c45bf, type: 3}
       propertyPath: drillTipDisplay
       value: 

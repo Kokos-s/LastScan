@@ -4,7 +4,7 @@ using UnityEngine;
 public class DrillZone : MonoBehaviour
 {
     public MineralPickup mineral;
-    public DrillTipDisplay drillTipDisplay;
+    public DrillHintDisplay drillHintDisplay;
 
     private void Reset()
     {
@@ -20,8 +20,8 @@ public class DrillZone : MonoBehaviour
         if (controller != null)
             controller.EnterDrillZone(this);
 
-        if (drillTipDisplay != null)
-            drillTipDisplay.ShowTooltip();
+        if (drillHintDisplay != null)
+            drillHintDisplay.ShowTooltip();
     }
 
     private void OnTriggerExit(Collider other)

@@ -9,6 +9,6 @@ public class MissionDisplay : MonoBehaviour
 
     void Update()
     {
-        label.text = "COLLECTED:\n" + inventory.CollectedOre + " ore out of " + missions.TargetOreAmount;
+        label.text = "Ore on board: " + inventory.CollectedOre + "\nDelivered to Base: " + missions.DeliveredOre + " / " + missions.TargetOreAmount;
     }
 }

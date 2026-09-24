@@ -3,7 +3,7 @@ using UnityEngine;
 public class Mineral : MonoBehaviour
 {
     [SerializeField] private int remainingOre;
-    [SerializeField] private DrillTipDisplay drillTipDisplay;
+    [SerializeField] private DrillHintDisplay drillHintDisplay;
 
     public int RemainingOre
     {
@@ -20,7 +20,7 @@ public class Mineral : MonoBehaviour
         RoverEnergy rover = other.GetComponentInParent<RoverEnergy>();
 
         if (rover != null)
-            drillTipDisplay.ShowTooltip();
+            drillHintDisplay.ShowTooltip();
     }
 
     public bool TryExtractOre()

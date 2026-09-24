@@ -83,7 +83,6 @@ public class RoverMovement : MonoBehaviour
 
         float forwardSpeed = Vector3.Dot(rb.linearVelocity, transform.forward);
         float currentSpeed = rb.linearVelocity.magnitude;
-        Debug.Log(currentSpeed);
         bool isBraking = false;
 
         if ((forwardSpeed > directionChangeSpeed && throttle < 0f) || (forwardSpeed < -directionChangeSpeed && throttle > 0f))

@@ -13,4 +13,9 @@ public class RoverInventory : MonoBehaviour
     {
         collectedOre++;
     }
+
+    public void RemoveOre(int amount)
+    {
+        collectedOre -= amount;
+    }
 }

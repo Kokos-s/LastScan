@@ -85,6 +85,19 @@ public class RoverHealth : MonoBehaviour
         }
     }
 
+    public void Repair(float amount)
+    {
+        if (IsDead)
+            return;
+
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+
+        if (healthSlider != null)
+            healthSlider.value = currentHealth;
+
+        UpdateVisualState();
+    }
+
     private void UpdateVisualState()
     {
         float healthPercent = currentHealth / maxHealth;

@@ -6,10 +6,10 @@ public class RoverEnergy : MonoBehaviour
     [SerializeField] private float currentEnergy;
     [SerializeField] private float movementDrainRate = 2f;
     [SerializeField] private float regenRate = 5f;
+    [SerializeField] private float drainMultiplier = 1f;
 
     private bool isPlayerMoving = false;
 
-    private float drainMultiplier = 1f;
     public float CurrentEnergy
     {
         get { return currentEnergy; }
@@ -31,8 +31,6 @@ public class RoverEnergy : MonoBehaviour
 
         currentEnergy = Mathf.Clamp(currentEnergy, 0f, maxEnergy);
         isPlayerMoving = false;
-        //Debug.Log("current energy" + currentEnergy);
-
     }
 
     public void ReportPlayerMovement()
@@ -42,9 +40,11 @@ public class RoverEnergy : MonoBehaviour
 
     public bool TryConsume(float amount)
     {
-        if (currentEnergy >= amount)
+        float actualAmount = amount * drainMultiplier;
+
+        if (currentEnergy >= actualAmount)
         {
-            currentEnergy -= amount;
+            currentEnergy -= actualAmount;
             return true;
         }
 

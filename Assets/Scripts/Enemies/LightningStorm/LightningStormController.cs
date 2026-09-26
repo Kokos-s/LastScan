@@ -35,7 +35,7 @@ public class LightningStormController : MonoBehaviour
 
     public float ScaledStrikeRadius => strikeRadius * transform.lossyScale.x;
 
-    private void Start()
+    private void Awake()
     {
         if (lightningScript == null) lightningScript = GetComponent<LightningBoltScript>();
         if (lightningScript != null) lightningScript.ManualMode = true;
@@ -49,8 +49,28 @@ public class LightningStormController : MonoBehaviour
             c.a = 0f;
             flashImage.color = c;
         }
+    }
 
+    private void OnEnable()
+    {
+        strikeCounter = 0;
         StartCoroutine(StormRoutine());
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        flashCoroutine = null;
+
+        if (flashImage != null)
+        {
+            Color color = flashImage.color;
+            color.a = 0f;
+            flashImage.color = color;
+        }
+
+        if (thunderAudioSource != null)
+            thunderAudioSource.Stop();
     }
 
     private IEnumerator StormRoutine()

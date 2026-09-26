@@ -12,13 +12,18 @@ public class TornadoRange : MonoBehaviour
     [SerializeField] private float damageCooldown = 2f;
 
     private float lastDamageTime = -999f;
+    private Rigidbody affectedRover;
 
     private void OnTriggerStay(Collider other)
     {
+        if (!isActiveAndEnabled)
+            return;
+
         if (!other.CompareTag("Player")) return;
 
         Rigidbody rb = other.attachedRigidbody;
         if (rb == null) return;
+        affectedRover = rb;
 
         RoverMovement movement = rb.GetComponent<RoverMovement>();
         RoverHealth health = rb.GetComponent<RoverHealth>();
@@ -57,5 +62,18 @@ public class TornadoRange : MonoBehaviour
         RoverMovement movement = other.attachedRigidbody?.GetComponent<RoverMovement>();
         if (movement != null)
             movement.ExitDanger();
+    }
+
+    private void OnDisable()
+    {
+        if (affectedRover == null)
+            return;
+
+        RoverMovement movement = affectedRover.GetComponent<RoverMovement>();
+
+        if (movement != null)
+            movement.ExitDanger();
+
+        affectedRover = null;
     }
 }

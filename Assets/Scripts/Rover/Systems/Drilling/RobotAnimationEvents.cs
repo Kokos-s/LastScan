@@ -34,7 +34,7 @@ public class RobotAnimationEvents : MonoBehaviour
             roverInventory.AddOre();
         }
 
-        controller.ClearLockedMineral(); // цикл завершён — сбрасываем
+        controller.ClearLockedMineral();
     }
 
     public void DealDamage()

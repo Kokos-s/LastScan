@@ -14,9 +14,13 @@ public class RobotInput : MonoBehaviour
 
     private void Update()
     {
-        if (Keyboard.current == null) return;
+        if (Keyboard.current == null)
+            return;
 
-        if (Keyboard.current.eKey.wasPressedThisFrame && controller.GetCurrentMineral() != null)
+        if (controller.IsBusy)
+            return;
+
+        if (Keyboard.current.eKey.isPressed && controller.GetCurrentMineral() != null)
         {
             controller.LockMineral();
             controller.SetBusy(true);
@@ -24,8 +28,6 @@ public class RobotInput : MonoBehaviour
         }
 
         if (Keyboard.current.fKey.wasPressedThisFrame)
-        {
             animator.SetTrigger("Attack");
-        }
     }
 }

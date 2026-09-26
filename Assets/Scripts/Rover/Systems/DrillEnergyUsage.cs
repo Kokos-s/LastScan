@@ -6,37 +6,42 @@ public class DrillEnergyUsage : MonoBehaviour
 
     [SerializeField] private RoverEnergy roverEnergy;
     [SerializeField] private float energyDrainRate = 2f;
+    [SerializeField] private RobotController robotController;
+
     private bool canDrill = false;
+
     public bool CanDrill
     {
         get { return canDrill; }
     }
 
-    void Awake()
+    private void Awake()
     {
         controls = new RoverControls();
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         controls.Rover.Enable();
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         controls.Rover.Disable();
+        canDrill = false;
     }
 
-    void Update()
+    private void Update()
     {
+        canDrill = false;
+
+        if (robotController.IsBusy || robotController.GetCurrentMineral() != null)
+            return;
+
         if (controls.Rover.Drill.IsPressed())
         {
             float energyToUse = energyDrainRate * Time.deltaTime;
             canDrill = roverEnergy.TryConsume(energyToUse);
-        }
-        else
-        {
-            canDrill = false;
         }
     }
 }

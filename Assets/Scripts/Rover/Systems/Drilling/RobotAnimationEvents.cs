@@ -33,9 +33,7 @@ public class RobotAnimationEvents : MonoBehaviour
         {
             mineral.PlaceInContainerAndDespawn(controller.containerSlot);
             roverInventory.AddOre();
-
-            if (gameMissions != null)
-                gameMissions.AddDeliveryOre(1);
+                        
         }
 
         controller.ClearLockedMineral();

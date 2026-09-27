@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameMissions : MonoBehaviour
 {
-    [SerializeField] private int targetOreAmount = 1;
+    [SerializeField] private int targetOreAmount = 2;
     [SerializeField] private MissionCompletePanel missionCompletePanel;
 
     private int deliveredOre = 0;

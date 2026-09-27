@@ -2,22 +2,28 @@ using UnityEngine;
 
 public class GameMissions : MonoBehaviour
 {
-    [SerializeField] private int targetOreAmount = 50;
+    [SerializeField] private int targetOreAmount = 2;
+    [SerializeField] private MissionCompletePanel missionCompletePanel;
+
     private int deliveredOre = 0;
+    private bool missionCompleted = false;
 
-    public int TargetOreAmount
-    {
-        get { return targetOreAmount; }
-    }
+    public int TargetOreAmount => targetOreAmount;
+    public int DeliveredOre => deliveredOre;
 
-    public int DeliveredOre
-    { 
-        get { return deliveredOre; } 
-    }
-    
     public void AddDeliveryOre(int amount)
     {
-        deliveredOre += amount;
-    }
+        if (missionCompleted) return;
 
+        deliveredOre += amount;
+
+        if (deliveredOre >= targetOreAmount)
+        {
+            deliveredOre = targetOreAmount;
+            missionCompleted = true;
+
+            if (missionCompletePanel != null)
+                missionCompletePanel.Show();
+        }
+    }
 }

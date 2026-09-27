@@ -21,13 +21,17 @@ public class AnomalyDamage : MonoBehaviour
 
         nextDamageTime = Time.time + damageInterval;
         roverHealth.TakeDamage(damage);
+
         if (anomalyGlow != null)
             anomalyGlow.Flash();
+
+        if (LightningImpactEffect.Instance != null)
+            LightningImpactEffect.Instance.TriggerLightning(transform, roverHealth.transform);
+
         if (audioSource != null)
         {
             audioSource.time = 0.2f;
             audioSource.Play();
-        }    
-            
+        }
     }
 }

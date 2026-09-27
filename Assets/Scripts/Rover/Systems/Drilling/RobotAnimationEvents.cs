@@ -3,6 +3,7 @@ using UnityEngine;
 public class RobotAnimationEvents : MonoBehaviour
 {
     [SerializeField] private RoverInventory roverInventory;
+    [SerializeField] private GameMissions gameMissions;
 
     private RobotController controller;
 
@@ -32,6 +33,7 @@ public class RobotAnimationEvents : MonoBehaviour
         {
             mineral.PlaceInContainerAndDespawn(controller.containerSlot);
             roverInventory.AddOre();
+                        
         }
 
         controller.ClearLockedMineral();

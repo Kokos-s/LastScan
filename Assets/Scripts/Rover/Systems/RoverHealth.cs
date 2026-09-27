@@ -1,18 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; 
 
 public class RoverHealth : MonoBehaviour
 {
-    
     public float maxHealth = 10f;
     public float currentHealth;
     public Slider healthSlider;
-        
+
     public GameObject gameOverTextObject;
-    
     public MonoBehaviour movementScript;
-            
+
     public GameObject modelStage1;
     public GameObject modelStage2;
     public GameObject modelStage3;
@@ -31,7 +28,6 @@ public class RoverHealth : MonoBehaviour
         InitSlider();
         UpdateVisualState();
 
-        
         if (gameOverTextObject != null)
         {
             gameOverTextObject.SetActive(false);
@@ -60,6 +56,9 @@ public class RoverHealth : MonoBehaviour
             healthSlider.value = currentHealth;
         }
 
+        if (DamageVignette.Instance != null)
+            DamageVignette.Instance.FlashDamage();
+
         UpdateVisualState();
 
         if (IsDead)
@@ -70,15 +69,11 @@ public class RoverHealth : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("Rover's Health is 0. Game Over.");
-
-        
         if (gameOverTextObject != null)
         {
             gameOverTextObject.SetActive(true);
         }
 
-        
         if (movementScript != null)
         {
             movementScript.enabled = false;

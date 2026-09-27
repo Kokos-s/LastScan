@@ -42,6 +42,11 @@ public class Battery : MonoBehaviour
         {
             RoverEnergy roverEnergy = other.GetComponent<RoverEnergy>();
             roverEnergy.AddEnergy(energyAmount);
+
+           
+            if (BatteryFeedback.Instance != null)
+                BatteryFeedback.Instance.PlayCollectEffect(transform.position);
+
             Collect();
         }
     }

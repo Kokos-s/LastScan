@@ -11,14 +11,28 @@ public class BatteryUI : MonoBehaviour
     [SerializeField] private float mediumThreshold = 0.5f;
     [SerializeField] private float lowThreshold = 0.2f;
 
+    [SerializeField] private float fillSpeed = 3f; 
+
+    private float displayedPercent = 1f; 
+
+    void Start()
+    {
+        
+        displayedPercent = energy.CurrentEnergy / energy.MaxEnergy;
+    }
+
     void Update()
     {
-        float energyPercent = energy.CurrentEnergy / energy.MaxEnergy;
-        fillBar.fillAmount = energyPercent;
+        float targetPercent = energy.CurrentEnergy / energy.MaxEnergy;
 
-        if (energyPercent <= lowThreshold)
+        
+        displayedPercent = Mathf.MoveTowards(displayedPercent, targetPercent, fillSpeed * Time.deltaTime);
+
+        fillBar.fillAmount = displayedPercent;
+
+        if (displayedPercent <= lowThreshold)
             fillBar.color = lowEnergyColor;
-        else if (energyPercent <= mediumThreshold)
+        else if (displayedPercent <= mediumThreshold)
             fillBar.color = mediumEnergyColor;
         else
             fillBar.color = highEnergyColor;

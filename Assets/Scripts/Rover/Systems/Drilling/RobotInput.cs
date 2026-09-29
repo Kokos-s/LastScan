@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class RobotInput : MonoBehaviour
 {
+    [SerializeField] private RoverHealth roverHealth;
+
     private Animator animator;
     private RobotController controller;
 
@@ -14,6 +16,9 @@ public class RobotInput : MonoBehaviour
 
     private void Update()
     {
+        if (roverHealth.IsDead)
+            return;
+
         if (Keyboard.current == null)
             return;
 

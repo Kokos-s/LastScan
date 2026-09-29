@@ -5,6 +5,7 @@ public class DrillEnergyUsage : MonoBehaviour
     private RoverControls controls;
 
     [SerializeField] private RoverEnergy roverEnergy;
+    [SerializeField] private RoverHealth roverHealth;
     [SerializeField] private float energyDrainRate = 2f;
     [SerializeField] private RobotController robotController;
 
@@ -34,6 +35,9 @@ public class DrillEnergyUsage : MonoBehaviour
     private void Update()
     {
         canDrill = false;
+
+        if (roverHealth.IsDead)
+            return;
 
         if (robotController.IsBusy || robotController.GetCurrentMineral() != null)
             return;

@@ -2,11 +2,9 @@ using UnityEngine;
 
 public class RobotController : MonoBehaviour
 {
-    [Header("Marker points")]
     public Transform gripPoint;
     public Transform containerSlot;
 
-    [Header("State")]
     public DrillZone currentDrillZone;
     private MineralPickup lockedMineral;
 

@@ -3,6 +3,7 @@ using UnityEngine;
 public class RoverScanner : MonoBehaviour
 {
     [SerializeField] private RoverEnergy energy;
+    [SerializeField] private RoverHealth roverHealth;
     [SerializeField] private float scanEnergyCost = 10f;
     [SerializeField] private AnomalyMovement[] anomalies;
     [SerializeField] private GameObject scanPulsePrefab;
@@ -30,7 +31,7 @@ public class RoverScanner : MonoBehaviour
 
     void Update()
     {
-        if (controls.Rover.Scan.WasPressedThisFrame() & scanLabelTimer <= 0f)
+        if (controls.Rover.Scan.WasPressedThisFrame() && scanLabelTimer <= 0f)
             TryActivateScan();
 
         if (scanLabelTimer > 0f)
@@ -52,6 +53,9 @@ public class RoverScanner : MonoBehaviour
 
     void TryActivateScan()
     {
+        if (roverHealth.IsDead)
+            return;
+
         if (energy.TryConsume(scanEnergyCost))
         {
             GameObject pulseObject = Instantiate(scanPulsePrefab, transform.position, Quaternion.identity);

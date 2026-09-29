@@ -12659,6 +12659,7 @@ MonoBehaviour:
   roverEnergy: {fileID: 1482332807}
   spawnPoint: {fileID: 7748475}
   respawnDelay: 5
+  wreckPrefab: {fileID: 2518732581773138255, guid: fa56c0ffa710906479eca7a754e17f97, type: 3}
 --- !u!1 &1482866949
 GameObject:
   m_ObjectHideFlags: 0
@@ -13289,7 +13290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1592291947
 RectTransform:
   m_ObjectHideFlags: 0

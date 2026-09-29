@@ -14,6 +14,11 @@ public class RoverInventory : MonoBehaviour
         collectedOre++;
     }
 
+    public void AddOre(int amount)
+    {
+        collectedOre += amount;
+    }
+
     public void RemoveOre(int amount)
     {
         collectedOre -= amount;

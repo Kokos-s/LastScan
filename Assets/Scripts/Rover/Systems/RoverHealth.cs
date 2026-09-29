@@ -7,7 +7,6 @@ public class RoverHealth : MonoBehaviour
     public float currentHealth;
     public Slider healthSlider;
 
-    public GameObject gameOverTextObject;
     public MonoBehaviour movementScript;
 
     public GameObject modelStage1;
@@ -27,11 +26,6 @@ public class RoverHealth : MonoBehaviour
     {
         InitSlider();
         UpdateVisualState();
-
-        if (gameOverTextObject != null)
-        {
-            gameOverTextObject.SetActive(false);
-        }
     }
 
     private void InitSlider()
@@ -46,15 +40,14 @@ public class RoverHealth : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        if (IsDead) return;
+        if (IsDead) 
+            return;
 
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0f);
 
         if (healthSlider != null)
-        {
             healthSlider.value = currentHealth;
-        }
 
         if (DamageVignette.Instance != null)
             DamageVignette.Instance.FlashDamage();
@@ -62,22 +55,13 @@ public class RoverHealth : MonoBehaviour
         UpdateVisualState();
 
         if (IsDead)
-        {
             GameOver();
-        }
     }
 
     private void GameOver()
     {
-        if (gameOverTextObject != null)
-        {
-            gameOverTextObject.SetActive(true);
-        }
-
         if (movementScript != null)
-        {
             movementScript.enabled = false;
-        }
     }
 
     public void Repair(float amount)
@@ -91,6 +75,19 @@ public class RoverHealth : MonoBehaviour
             healthSlider.value = currentHealth;
 
         UpdateVisualState();
+    }
+
+    public void Revive()
+    {
+        currentHealth = maxHealth;
+
+        if (healthSlider != null)
+            healthSlider.value = currentHealth;
+
+        UpdateVisualState();
+
+        if (movementScript != null)
+            movementScript.enabled = true;
     }
 
     private void UpdateVisualState()

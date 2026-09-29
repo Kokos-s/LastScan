@@ -52,6 +52,7 @@ public class RoverMovement : MonoBehaviour
     private void OnDisable()
     {
         controls.Rover.Disable();
+        ZeroWheelTorques();
     }
 
     void FixedUpdate()
@@ -232,5 +233,18 @@ public class RoverMovement : MonoBehaviour
     public void SetStormResistance(float resistance)
     {
         stormResistance = Mathf.Clamp01(resistance);
+    }
+
+    public void ResetAfterRespawn()
+    {
+        currentSteerAngle = 0f;
+
+        foreach (WheelCollider wheel in AllWheels())
+        {
+            wheel.motorTorque = 0f;
+            wheel.rotationSpeed = 0f;
+            wheel.brakeTorque = parkingBrakeForce;
+            wheel.steerAngle = 0f;
+        }
     }
 }

@@ -5,7 +5,8 @@ public class MissionCompletePanel : MonoBehaviour
 {
     [SerializeField] private GameObject panelRoot;
     [SerializeField] private TMP_Text messageText;
-    [SerializeField] private string message = "Задание выполнено!";
+    [SerializeField] private GameObject missionPanel;
+    [SerializeField] private string message = "Mission finished!";
 
     private void Awake()
     {
@@ -15,6 +16,9 @@ public class MissionCompletePanel : MonoBehaviour
 
     public void Show()
     {
+        if (missionPanel != null)
+            missionPanel.SetActive(false);
+
         if (panelRoot != null)
             panelRoot.SetActive(true);
 

@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class RoverHealth : MonoBehaviour
 {
     public float maxHealth = 10f;
     public float currentHealth;
-    public Slider healthSlider;
+    public Image healthFill;
 
     public MonoBehaviour movementScript;
 
@@ -24,18 +25,12 @@ public class RoverHealth : MonoBehaviour
 
     private void Start()
     {
-        InitSlider();
-        UpdateVisualState();
-    }
-
-    private void InitSlider()
-    {
-        if (healthSlider != null)
+        if (healthFill != null)
         {
-            healthSlider.minValue = 0f;
-            healthSlider.maxValue = maxHealth;
-            healthSlider.value = currentHealth;
+            healthFill.fillAmount = currentHealth / maxHealth;
         }
+
+        UpdateVisualState();
     }
 
     public void TakeDamage(float amount)
@@ -46,8 +41,11 @@ public class RoverHealth : MonoBehaviour
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0f);
 
-        if (healthSlider != null)
-            healthSlider.value = currentHealth;
+        if(healthFill != null)
+        { 
+
+            healthFill.fillAmount = currentHealth / maxHealth;
+        }
 
         if (DamageVignette.Instance != null)
             DamageVignette.Instance.FlashDamage();
@@ -71,8 +69,8 @@ public class RoverHealth : MonoBehaviour
 
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
 
-        if (healthSlider != null)
-            healthSlider.value = currentHealth;
+        if (healthFill != null)
+            healthFill.fillAmount = currentHealth / maxHealth;
 
         UpdateVisualState();
     }
@@ -81,8 +79,8 @@ public class RoverHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
 
-        if (healthSlider != null)
-            healthSlider.value = currentHealth;
+        if (healthFill != null)
+            healthFill.fillAmount = currentHealth / maxHealth;
 
         UpdateVisualState();
 
@@ -116,4 +114,5 @@ public class RoverHealth : MonoBehaviour
         if (modelStage4 != null)
             modelStage4.SetActive(modelStage4 == activeModel);
     }
+
 }

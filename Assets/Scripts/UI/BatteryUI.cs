@@ -4,37 +4,25 @@ using UnityEngine.UI;
 public class BatteryUI : MonoBehaviour
 {
     [SerializeField] private RoverEnergy energy;
-    [SerializeField] private Image fillBar;
-    [SerializeField] private Color highEnergyColor;
-    [SerializeField] private Color mediumEnergyColor;
-    [SerializeField] private Color lowEnergyColor;
-    [SerializeField] private float mediumThreshold = 0.5f;
-    [SerializeField] private float lowThreshold = 0.2f;
+    [SerializeField] private Image batteryImage;
+    [SerializeField] private Sprite[] batterySprites;
 
-    [SerializeField] private float fillSpeed = 3f; 
-
-    private float displayedPercent = 1f; 
-
-    void Start()
+    private void Start()
     {
-        
-        displayedPercent = energy.CurrentEnergy / energy.MaxEnergy;
+        UpdateBatteryUI();
     }
 
-    void Update()
+    private void Update()
     {
-        float targetPercent = energy.CurrentEnergy / energy.MaxEnergy;
+        UpdateBatteryUI();
+    }
 
-        
-        displayedPercent = Mathf.MoveTowards(displayedPercent, targetPercent, fillSpeed * Time.deltaTime);
+    private void UpdateBatteryUI()
+    {
+        float percent = energy.CurrentEnergy / energy.MaxEnergy;
 
-        fillBar.fillAmount = displayedPercent;
+        int index = Mathf.RoundToInt(percent * (batterySprites.Length - 1));
 
-        if (displayedPercent <= lowThreshold)
-            fillBar.color = lowEnergyColor;
-        else if (displayedPercent <= mediumThreshold)
-            fillBar.color = mediumEnergyColor;
-        else
-            fillBar.color = highEnergyColor;
+        batteryImage.sprite = batterySprites[index];
     }
 }

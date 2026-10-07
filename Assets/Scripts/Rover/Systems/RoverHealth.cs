@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class RoverHealth : MonoBehaviour
+public class RoverHealth : MonoBehaviour, IDamageable
 {
     public float maxHealth = 10f;
     public float currentHealth;

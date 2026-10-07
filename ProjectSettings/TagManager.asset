@@ -7,6 +7,8 @@ TagManager:
   - Magnet
   - GravitationalAnomaly
   - RoverCabin
+  - Boss
+  - Rock
   layers:
   - Default
   - TransparentFX
@@ -15,12 +17,12 @@ TagManager:
   - Water
   - UI
   - Minimap
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Walls
+  - Columns
+  - Rocks
+  - Player
+  - Boss
+  - BossProjectile
   - 
   - 
   - 

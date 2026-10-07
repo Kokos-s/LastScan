@@ -18533,6 +18533,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 785573391562683427, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: maxEmission
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1192950661605593592, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1192950661605593592, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1192950661605593592, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368182807451245847, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368182807451245847, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368182807451245847, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897511640209871522, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: maxEmission
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078839742555625739, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: maxEmission
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221564960019977691, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3352658887840314456, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: spawnPoint
       value: 
@@ -18609,13 +18649,65 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4665809020062775662, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4708794417701782400, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: gameMissions
       value: 
       objectReference: {fileID: 1004406816}
+    - target: {fileID: 4754950142745007327, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754950142745007327, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754950142745007327, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4864000908395676365, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: maxEmission
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 5922683837443251111, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: maxEmission
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468738192368356733, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468738192368356733, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468738192368356733, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972595666379325348, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972595666379325348, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972595666379325348, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7046564907496529432, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: m_Name
       value: Rover
+      objectReference: {fileID: 0}
+    - target: {fileID: 7221691239928631383, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: maxEmission
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7351003947105522316, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: batteryImage
@@ -18689,6 +18781,18 @@ PrefabInstance:
       propertyPath: scanActiveLabel
       value: 
       objectReference: {fileID: 1222573483}
+    - target: {fileID: 8900935372882591915, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900935372882591915, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900935372882591915, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

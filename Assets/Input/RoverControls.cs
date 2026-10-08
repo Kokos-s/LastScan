@@ -136,6 +136,15 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Boost"",
+                    ""type"": ""Button"",
+                    ""id"": ""82801678-d390-44fc-80c7-c72b01d9bbf1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -237,6 +246,17 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
                     ""action"": ""Unload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac9f491a-eccd-4de0-970e-ab4212faf8a9"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Boost"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -298,6 +318,7 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
         m_Rover_Drill = m_Rover.FindAction("Drill", throwIfNotFound: true);
         m_Rover_Recover = m_Rover.FindAction("Recover", throwIfNotFound: true);
         m_Rover_Unload = m_Rover.FindAction("Unload", throwIfNotFound: true);
+        m_Rover_Boost = m_Rover.FindAction("Boost", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Look = m_Camera.FindAction("Look", throwIfNotFound: true);
@@ -388,6 +409,7 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Rover_Drill;
     private readonly InputAction m_Rover_Recover;
     private readonly InputAction m_Rover_Unload;
+    private readonly InputAction m_Rover_Boost;
     /// <summary>
     /// Provides access to input actions defined in input action map "Rover".
     /// </summary>
@@ -419,6 +441,10 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Rover/Unload".
         /// </summary>
         public InputAction @Unload => m_Wrapper.m_Rover_Unload;
+        /// <summary>
+        /// Provides access to the underlying input action "Rover/Boost".
+        /// </summary>
+        public InputAction @Boost => m_Wrapper.m_Rover_Boost;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -460,6 +486,9 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
             @Unload.started += instance.OnUnload;
             @Unload.performed += instance.OnUnload;
             @Unload.canceled += instance.OnUnload;
+            @Boost.started += instance.OnBoost;
+            @Boost.performed += instance.OnBoost;
+            @Boost.canceled += instance.OnBoost;
         }
 
         /// <summary>
@@ -486,6 +515,9 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
             @Unload.started -= instance.OnUnload;
             @Unload.performed -= instance.OnUnload;
             @Unload.canceled -= instance.OnUnload;
+            @Boost.started -= instance.OnBoost;
+            @Boost.performed -= instance.OnBoost;
+            @Boost.canceled -= instance.OnBoost;
         }
 
         /// <summary>
@@ -668,6 +700,13 @@ public partial class @RoverControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUnload(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Boost" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnBoost(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Camera" which allows adding and removing callbacks.

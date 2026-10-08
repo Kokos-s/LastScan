@@ -35,7 +35,20 @@ public class RoverMovement : MonoBehaviour
 
     [SerializeField] private float startBoostMultiplier = 2f;
     [SerializeField] private float startBoostEndSpeed = 4f;
-    
+
+    [SerializeField] private float boostMotorMultiplier = 2f;
+    [SerializeField] private float boostSpeedMultiplier = 1.5f;
+    private bool isBoosting;
+    public bool IsBoosting
+    {
+        get { return isBoosting; }
+    }
+
+    private bool isMotorRunning;
+    public bool IsMotorRunning
+    {
+        get { return isMotorRunning; }
+    }
 
     private float stormResistance = 0f;
     private void Awake()
@@ -51,12 +64,17 @@ public class RoverMovement : MonoBehaviour
 
     private void OnDisable()
     {
+        isBoosting = false;
+        isMotorRunning = false;
         controls.Rover.Disable();
         ZeroWheelTorques();
     }
 
     void FixedUpdate()
     {
+        isBoosting = false;
+        isMotorRunning = false;
+
         if (robotController != null && robotController.IsBusy)
         {
             ApplyWheelForces(wheelFrontLeft, 0f, brakeForce);
@@ -100,9 +118,19 @@ public class RoverMovement : MonoBehaviour
             brakeTorque = Mathf.Abs(throttle) * brakeForce;
         else if (energy.CurrentEnergy > 0f)
         {
-            float motorPowerReductionFactor = 1f - Mathf.InverseLerp(maxSpeed * 0.6f, maxSpeed, currentSpeed);
+            isMotorRunning = true;
+            float availableMotorForce = motorForce;
+            float availableMaxSpeed = maxSpeed;
+            if (controls.Rover.Boost.IsPressed())
+            {
+                isBoosting = true;
+                availableMotorForce *= boostMotorMultiplier;
+                availableMaxSpeed *= boostSpeedMultiplier;
+                energy.ReportPlayerBoost();
+            }
+            float motorPowerReductionFactor = 1f - Mathf.InverseLerp(availableMaxSpeed * 0.6f, availableMaxSpeed, currentSpeed);
             float startBoost = Mathf.Lerp(startBoostMultiplier, 1f, Mathf.InverseLerp(0f, startBoostEndSpeed, currentSpeed));
-            motorTorque = throttle * motorForce * startBoost * motorPowerReductionFactor * (1f - stormResistance);
+            motorTorque = throttle * availableMotorForce * startBoost * motorPowerReductionFactor * (1f - stormResistance);
         }
 
         ApplyWheelForces(wheelFrontLeft, motorTorque, brakeTorque);

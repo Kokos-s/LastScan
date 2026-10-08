@@ -7,6 +7,8 @@ public class RoverEnergy : MonoBehaviour
     [SerializeField] private float movementDrainRate = 2f;
     [SerializeField] private float regenRate = 5f;
     [SerializeField] private float drainMultiplier = 1f;
+    [SerializeField] private float boostDrainMultiplier = 3f;
+    private bool isPlayerBoosting;
 
     private bool isPlayerMoving = false;
 
@@ -26,11 +28,18 @@ public class RoverEnergy : MonoBehaviour
 
     void LateUpdate()
     {
+        float movementMultiplier = 1f;
+
+        if (isPlayerBoosting)
+            movementMultiplier = boostDrainMultiplier;
+
         if (isPlayerMoving)
-            currentEnergy -= movementDrainRate * drainMultiplier * Time.deltaTime;
+            currentEnergy -= movementDrainRate * movementMultiplier * drainMultiplier * Time.deltaTime;
 
         currentEnergy = Mathf.Clamp(currentEnergy, 0f, maxEnergy);
+
         isPlayerMoving = false;
+        isPlayerBoosting = false;
     }
 
     public void ReportPlayerMovement()
@@ -59,5 +68,10 @@ public class RoverEnergy : MonoBehaviour
     public void SetDrainMultiplier(float multiplier)
     {
         drainMultiplier = multiplier;
+    }
+
+    public void ReportPlayerBoost()
+    {
+        isPlayerBoosting = true;
     }
 }

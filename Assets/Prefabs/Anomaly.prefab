@@ -135,7 +135,7 @@ MonoBehaviour:
   bobHeight: 2
   bobSpeed: 1
   rover: {fileID: 0}
-  alertSpeed: 30
+  alertSpeed: 20
   alertDuration: 10
   alertTurnSpeed: 1
 --- !u!114 &5077320904161202849

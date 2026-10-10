@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class RoverAudio : MonoBehaviour
 {
     [SerializeField] private RoverHealth health;
+    [SerializeField] private WreckOrePickup wreckOrePickup;
     [SerializeField] private Rigidbody rb;
 
     [SerializeField] private AudioClip aliveClip;
@@ -78,7 +79,7 @@ public class RoverAudio : MonoBehaviour
 
         HandleScanSound(alive);
 
-        bool drilling = alive && Keyboard.current != null && Keyboard.current.eKey.isPressed;
+        bool drilling = alive && !wreckOrePickup.CanRecover && Keyboard.current != null && Keyboard.current.eKey.isPressed;
         UpdateSource(drillingSource, drilling ? drillingVolume : 0f,
             drilling ? drillingFadeInSpeed : drillingFadeOutSpeed);
 

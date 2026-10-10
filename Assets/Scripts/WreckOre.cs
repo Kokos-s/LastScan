@@ -2,25 +2,22 @@ using UnityEngine;
 
 public class WreckOre : MonoBehaviour
 {
-    private int storedOre;
+    [SerializeField] private int storedOre;
+
+    public int StoredOre
+    {
+        get { return storedOre; }
+    }
 
     public void SetOre(int amount)
     {
         storedOre = amount;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public int TakeOre()
     {
-        if (storedOre <= 0)
-            return;
-
-        RoverInventory inventory = other.GetComponentInParent<RoverInventory>();
-        RoverHealth health = other.GetComponentInParent<RoverHealth>();
-
-        if (inventory == null || health == null || health.IsDead)
-            return;
-
-        inventory.AddOre(storedOre);
+        int amount = storedOre;
         storedOre = 0;
+        return amount;
     }
 }

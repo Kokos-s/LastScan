@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class RobotInput : MonoBehaviour
 {
     [SerializeField] private RoverHealth roverHealth;
+    [SerializeField] private WreckOrePickup wreckOrePickup;
 
     private Animator animator;
     private RobotController controller;
@@ -25,7 +26,7 @@ public class RobotInput : MonoBehaviour
         if (controller.IsBusy)
             return;
 
-        if (Keyboard.current.eKey.isPressed && controller.GetCurrentMineral() != null)
+        if (Keyboard.current.eKey.isPressed && !wreckOrePickup.CanRecover && controller.GetCurrentMineral() != null)
         {
             controller.LockMineral();
             controller.SetBusy(true);

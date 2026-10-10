@@ -6,7 +6,7 @@ public class ScanPulseEffect : MonoBehaviour
     [SerializeField] private float maxScale = 800f;
     private float timer = 0f;
     private Material material;
-    //private Color startColor;
+    private Color startColor;
     public float Duration
     {
         get { return duration; }
@@ -14,7 +14,7 @@ public class ScanPulseEffect : MonoBehaviour
     void Start()
     {
         material = GetComponent<Renderer>().material;
-        //startColor = material.color;
+        startColor = material.color;
     }
 
     void Update()
@@ -25,8 +25,8 @@ public class ScanPulseEffect : MonoBehaviour
         float scale = Mathf.Lerp(0f, maxScale, progress);
         transform.localScale = new Vector3(scale, scale, scale);
 
-        //float alpha = Mathf.Lerp(startColor.a, 0f, progress);
-        //material.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
+        float alpha = Mathf.Lerp(startColor.a, 0f, progress);
+        material.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
 
         if (progress >= 1f)
             Destroy(gameObject);

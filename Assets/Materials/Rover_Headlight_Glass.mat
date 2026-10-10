@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Rover_Headlight_Glass
-  m_Shader: {fileID: 4800000, guid: 52a77c8eebffe8842b782146f3c526a2, type: 3}
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -30,7 +30,8 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -109,12 +110,8 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _EdgeSoftness: 0.17
-    - _EdgeThreshold: 0.79
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
-    - _GlossSoftness: 0.09
-    - _GlossThreshold: 0.81
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
@@ -122,24 +119,18 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _ShadeSoftness: 0.04
-    - _ShadeThreshold: 0.5
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _StrokeWidth: 0
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.99285424, g: 1, b: 0, a: 1}
+    - _BaseColor: {r: 0.9327005, g: 0.93962264, b: 0.019501582, a: 1}
     - _Color: {r: 0.9327005, g: 0.93962264, b: 0.019501582, a: 1}
-    - _EdgeColor: {r: 1, g: 0.96345687, b: 0.6650944, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GlossTint: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _StrokeColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

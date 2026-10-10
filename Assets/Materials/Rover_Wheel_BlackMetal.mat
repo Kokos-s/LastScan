@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Rover_Wheel_BlackMetal
-  m_Shader: {fileID: 4800000, guid: 52a77c8eebffe8842b782146f3c526a2, type: 3}
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -30,7 +30,8 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -109,12 +110,8 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _EdgeSoftness: 0.01
-    - _EdgeThreshold: 0.85
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
-    - _GlossSoftness: 0.4
-    - _GlossThreshold: 0.4
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
@@ -122,24 +119,18 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _ShadeSoftness: 0.5
-    - _ShadeThreshold: 0.75
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _StrokeWidth: 0.2
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
+    - _BaseColor: {r: 0.08679241, g: 0.064029865, b: 0.064029865, a: 1}
     - _Color: {r: 0.08679239, g: 0.06402984, b: 0.06402984, a: 1}
-    - _EdgeColor: {r: 0.3301887, g: 0.20091671, b: 0.20091671, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GlossTint: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _StrokeColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

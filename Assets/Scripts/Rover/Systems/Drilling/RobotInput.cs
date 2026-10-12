@@ -33,7 +33,8 @@ public class RobotInput : MonoBehaviour
             animator.SetTrigger("Drill");
         }
 
-        if (Keyboard.current.fKey.wasPressedThisFrame)
+        // Атака: левая кнопка мыши (F занята починкой на базе)
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
             animator.SetTrigger("Attack");
     }
 }

@@ -391,7 +391,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4138831794457155775}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1118,7 +1118,7 @@ GameObject:
   - component: {fileID: 6468738192368356733}
   - component: {fileID: 856053091791676080}
   - component: {fileID: 2897511640209871522}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DustRearRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6002,7 +6002,7 @@ GameObject:
   - component: {fileID: 9070052666163388735}
   - component: {fileID: 5311192314533584868}
   - component: {fileID: 3364522630224013937}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Engine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6369,7 +6369,7 @@ GameObject:
   - component: {fileID: 1368182807451245847}
   - component: {fileID: 1712522518988458099}
   - component: {fileID: 3078839742555625739}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DustFrontRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11416,7 +11416,7 @@ GameObject:
   - component: {fileID: 4754950142745007327}
   - component: {fileID: 6355996797628116393}
   - component: {fileID: 5922683837443251111}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DustMiddleLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16944,7 +16944,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8266054313548777642}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17222,7 +17222,7 @@ GameObject:
   - component: {fileID: 1192950661605593592}
   - component: {fileID: 8872321578906127785}
   - component: {fileID: 785573391562683427}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DustMiddleRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23501,7 +23501,12 @@ MonoBehaviour:
   energy: {fileID: 7298513453068515709}
   roverHealth: {fileID: 3717116855633730491}
   scanEnergyCost: 5
-  anomalies: []
+  anomalies:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   scanPulsePrefab: {fileID: 6306472413700676226, guid: 3982daccf5b29d04ca6a4ad42f3ddd78, type: 3}
   scanActiveLabel: {fileID: 0}
   notEnoughEnergyLabel: {fileID: 0}
@@ -23598,7 +23603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2081e8264efcca4abd7a3bcf687eee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 10
   currentHealth: 0
   healthFill: {fileID: 0}
   movementScript: {fileID: 5557653609740366468}
@@ -24044,7 +24049,7 @@ GameObject:
   - component: {fileID: 6972595666379325348}
   - component: {fileID: 8232279117216644395}
   - component: {fileID: 7221691239928631383}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DustFrontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29341,7 +29346,7 @@ GameObject:
   - component: {fileID: 8900935372882591915}
   - component: {fileID: 4207543108025593312}
   - component: {fileID: 4864000908395676365}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DustRearLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}

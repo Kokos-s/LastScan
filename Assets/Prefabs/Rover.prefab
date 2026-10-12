@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7471769675931217289}
   - component: {fileID: 5499523260427537636}
   - component: {fileID: 7809703606169737773}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Disposer_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 6806572035655271495}
   - component: {fileID: 5212641360436261361}
   - component: {fileID: 7359869573435082718}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mano_13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 5813069219397125299}
   - component: {fileID: 3875282155874086706}
   - component: {fileID: 2282240769199809}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SatelliteDish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,7 +321,7 @@ GameObject:
   m_Component:
   - component: {fileID: 481187824515125096}
   - component: {fileID: 2691825447466544107}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WheelColliderFrontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,7 +429,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2447171251485663182}
   - component: {fileID: 6408859780061956110}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mano2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -483,7 +483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8603417301915859819}
   - component: {fileID: 8813143561702344166}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WheelColliderRearLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +555,7 @@ GameObject:
   - component: {fileID: 1256148406566085718}
   - component: {fileID: 5265498700266402670}
   - component: {fileID: 7980451404679754271}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HeadlightLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 2457655458761006542}
   - component: {fileID: 2706026746072298748}
   - component: {fileID: 8106200883744202925}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WheelFrontRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -728,7 +728,7 @@ GameObject:
   - component: {fileID: 4165176150970609851}
   - component: {fileID: 1628984049458758091}
   - component: {fileID: 7543665139775804223}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mano_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -835,7 +835,7 @@ GameObject:
   - component: {fileID: 5371830954274053264}
   - component: {fileID: 6171878912694637003}
   - component: {fileID: 7304726163375054553}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AmortizationRearLeft2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -921,7 +921,7 @@ GameObject:
   - component: {fileID: 5976493247908074634}
   - component: {fileID: 803816984407057593}
   - component: {fileID: 612951913727754650}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WheelMiddleRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1008,7 +1008,7 @@ GameObject:
   - component: {fileID: 2151043053373232966}
   - component: {fileID: 8368230231301787492}
   - component: {fileID: 3614141799897267189}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mano_23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1029,6 +1029,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2035521885294390271}
+  - {fileID: 8266054313548777642}
   m_Father: {fileID: 8045508052550330549}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2151043053373232966
@@ -5966,7 +5967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3165306715891715850}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Manipulators
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6152,7 +6153,7 @@ GameObject:
   - component: {fileID: 1929356822931276179}
   - component: {fileID: 1797362148036909082}
   - component: {fileID: 7424283046196058227}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AmortizationFrontLeft2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6238,7 +6239,7 @@ GameObject:
   - component: {fileID: 5620856590215688089}
   - component: {fileID: 2529501814622498479}
   - component: {fileID: 6618291497820507400}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AmortizationFrontLeft1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6322,7 +6323,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6641413191431936851}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Amortization
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11220,7 +11221,7 @@ GameObject:
   - component: {fileID: 4180560132890561482}
   - component: {fileID: 215698636677753695}
   - component: {fileID: 8178551383159934087}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mano_21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11328,7 +11329,7 @@ GameObject:
   - component: {fileID: 7251481000898403795}
   - component: {fileID: 785937828462494233}
   - component: {fileID: 1055351648953187641}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WheelRearRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16266,7 +16267,7 @@ GameObject:
   - component: {fileID: 3967057771584400373}
   - component: {fileID: 6595206302457794791}
   - component: {fileID: 4012252957167814093}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mano_27
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16352,7 +16353,7 @@ GameObject:
   - component: {fileID: 8780499687015366337}
   - component: {fileID: 7947043301908263589}
   - component: {fileID: 962559044490893701}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AmortizationRearRight2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16438,7 +16439,7 @@ GameObject:
   - component: {fileID: 6141656385422516210}
   - component: {fileID: 1909688361419292294}
   - component: {fileID: 6338062998476154484}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16525,7 +16526,7 @@ GameObject:
   - component: {fileID: 9023641154411791479}
   - component: {fileID: 7095032424937058144}
   - component: {fileID: 1196521006011754459}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cabin
   m_TagString: RoverCabin
   m_Icon: {fileID: 0}
@@ -16632,7 +16633,7 @@ GameObject:
   - component: {fileID: 3921237711033163706}
   - component: {fileID: 5223536368227472190}
   - component: {fileID: 3263438248740882263}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mano_25
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16717,7 +16718,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 237658941645195604}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DrillTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16750,7 +16751,7 @@ GameObject:
   - component: {fileID: 9210456951762164473}
   - component: {fileID: 8644339966531380914}
   - component: {fileID: 3567955747122421826}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AmortizationFrontRight1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16837,7 +16838,7 @@ GameObject:
   - component: {fileID: 7657183156402484130}
   - component: {fileID: 7174567400116560775}
   - component: {fileID: 4719804791043035778}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mano_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16934,6 +16935,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.11232433, y: 0.1421627, z: 0.45090702}
   m_Center: {x: -0.00000012852252, y: 0, z: 0.15412034}
+--- !u!1 &4126882781293133416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8266054313548777642}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8266054313548777642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4126882781293133416}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.005299568, z: 0.30800033}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 412841505298678597}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4345112355315187522
 GameObject:
   m_ObjectHideFlags: 0
@@ -16945,7 +16977,7 @@ GameObject:
   - component: {fileID: 3591060461133913530}
   - component: {fileID: 5423502364519600751}
   - component: {fileID: 7127766503196410804}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mano_29
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17031,7 +17063,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6553145322245964153}
   - component: {fileID: 7587804629073493201}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WheelColliderMiddleRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17103,7 +17135,7 @@ GameObject:
   - component: {fileID: 3455131701405652310}
   - component: {fileID: 625835211966107710}
   - component: {fileID: 1067428143427330964}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WheelFrontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22042,7 +22074,7 @@ GameObject:
   - component: {fileID: 2626294921196329097}
   - component: {fileID: 4112536058176203884}
   - component: {fileID: 5628552816817253933}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Disposer_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22142,7 +22174,7 @@ GameObject:
   - component: {fileID: 6874940979059489523}
   - component: {fileID: 7564287472350407114}
   - component: {fileID: 7062584545951511528}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mano_22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22253,7 +22285,7 @@ GameObject:
   - component: {fileID: 2891203464004876719}
   - component: {fileID: 5503292519346485929}
   - component: {fileID: 3065998081507649341}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WheelMiddleLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22339,7 +22371,7 @@ GameObject:
   - component: {fileID: 7477384860649829986}
   - component: {fileID: 1045818296238253412}
   - component: {fileID: 4712778522984763632}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AmortizationMiddleLeft1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22426,7 +22458,7 @@ GameObject:
   - component: {fileID: 4726134806975280586}
   - component: {fileID: 9023436529456018572}
   - component: {fileID: 7689095917251100614}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mano_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22533,7 +22565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7468223625313958390}
   - component: {fileID: 7507836636272457065}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WheelColliderFrontRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22606,7 +22638,7 @@ GameObject:
   - component: {fileID: 6390375271598022485}
   - component: {fileID: 3825514099102744568}
   - component: {fileID: 2389449011680908464}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mano_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22713,7 +22745,7 @@ GameObject:
   - component: {fileID: 2073707320132636446}
   - component: {fileID: 3374137409294112076}
   - component: {fileID: 7996805577993380979}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AmortizationMiddleRight1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22799,7 +22831,7 @@ GameObject:
   - component: {fileID: 1023541308525555500}
   - component: {fileID: 477926000078550563}
   - component: {fileID: 2002270893469090142}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AmortizationMiddleRight2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22883,7 +22915,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1618345337013440872}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GripPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22916,7 +22948,7 @@ GameObject:
   - component: {fileID: 9175909539575281629}
   - component: {fileID: 2369058030050976056}
   - component: {fileID: 4171001801130903220}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mano_28
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23003,7 +23035,7 @@ GameObject:
   - component: {fileID: 2543261773258618138}
   - component: {fileID: 8025793273198507749}
   - component: {fileID: 6475140986912521327}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mano_26
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23089,7 +23121,7 @@ GameObject:
   - component: {fileID: 1522882870351722160}
   - component: {fileID: 3710279889320443988}
   - component: {fileID: 4860008898784044144}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AmortizationFrontRight2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23175,7 +23207,7 @@ GameObject:
   - component: {fileID: 2455445844333100877}
   - component: {fileID: 1807782533291082641}
   - component: {fileID: 8513457016606440722}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mano_16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23261,7 +23293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2396523619600922910}
   - component: {fileID: 7351003947105522316}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Battery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23325,8 +23357,6 @@ GameObject:
   - component: {fileID: 6544870709071991309}
   - component: {fileID: 7967813576069314795}
   - component: {fileID: 1468769145489964410}
-  - component: {fileID: 8213821877963622286}
-  - component: {fileID: 3481855157398565836}
   - component: {fileID: 8297833102015810595}
   - component: {fileID: 3717116855633730491}
   - component: {fileID: 4997244834700909423}
@@ -23337,7 +23367,7 @@ GameObject:
   - component: {fileID: 3352658887840314456}
   - component: {fileID: 8388093385468444750}
   - component: {fileID: 8902318492509626093}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rover
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -23471,12 +23501,7 @@ MonoBehaviour:
   energy: {fileID: 7298513453068515709}
   roverHealth: {fileID: 3717116855633730491}
   scanEnergyCost: 5
-  anomalies:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  anomalies: []
   scanPulsePrefab: {fileID: 6306472413700676226, guid: 3982daccf5b29d04ca6a4ad42f3ddd78, type: 3}
   scanActiveLabel: {fileID: 0}
   notEnoughEnergyLabel: {fileID: 0}
@@ -23500,8 +23525,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 0.90000004, z: 2.2983224}
-  m_Center: {x: 0, y: 0.08000002, z: 0.4491603}
+  m_Size: {x: 1.6, y: 1, z: 2}
+  m_Center: {x: 0, y: 0.08000002, z: 0.14}
 --- !u!114 &7967813576069314795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23548,34 +23573,6 @@ MonoBehaviour:
   energyDrainRate: 1
   robotController: {fileID: 4997244834700909423}
   wreckOrePickup: {fileID: 8902318492509626093}
---- !u!114 &8213821877963622286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7046564907496529432}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea95b0349b770e24da7747bcf1e706e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drillCollider: {fileID: 3614141799897267189}
---- !u!114 &3481855157398565836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7046564907496529432}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9355246c079bf9f429979891b209a821, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drillContact: {fileID: 8213821877963622286}
-  drillEnergyUsage: {fileID: 1468769145489964410}
-  roverInventory: {fileID: 8297833102015810595}
 --- !u!114 &8297833102015810595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23601,7 +23598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2081e8264efcca4abd7a3bcf687eee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 100
   currentHealth: 0
   healthFill: {fileID: 0}
   movementScript: {fileID: 5557653609740366468}
@@ -23638,6 +23635,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roverInventory: {fileID: 8297833102015810595}
   gameMissions: {fileID: 0}
+  attackPoint: {fileID: 8266054313548777642}
+  attackRadius: 3
+  attackDamage: 10
+  attackMask:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!95 &1196333534187049437
 Animator:
   serializedVersion: 7
@@ -23778,7 +23781,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5063673453841212925}
   - component: {fileID: 7328822081376998989}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WheelColliderMiddleLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23848,7 +23851,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 704411129241863709}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mano1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23881,7 +23884,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7899234337610749265}
   - component: {fileID: 40942529085619196}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WheelColliderRearRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23953,7 +23956,7 @@ GameObject:
   - component: {fileID: 1311413678735244716}
   - component: {fileID: 7013661112913596833}
   - component: {fileID: 4650096827860014221}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mano_292
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28890,7 +28893,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 602510073684809857}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WheelMeshes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28929,7 +28932,7 @@ GameObject:
   - component: {fileID: 6638730464552576580}
   - component: {fileID: 6821688381388310299}
   - component: {fileID: 8462150927640284096}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AmortizationRearRight1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29015,7 +29018,7 @@ GameObject:
   - component: {fileID: 5602717324503596757}
   - component: {fileID: 3880558128967414696}
   - component: {fileID: 3178833125915981986}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HeadlightRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29099,7 +29102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3177471164277925454}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ContainerSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29132,7 +29135,7 @@ GameObject:
   - component: {fileID: 8311460396846174056}
   - component: {fileID: 7097872519490801888}
   - component: {fileID: 8881834368890521667}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WheelRearLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29218,7 +29221,7 @@ GameObject:
   - component: {fileID: 1227987030407180851}
   - component: {fileID: 4036690963341121065}
   - component: {fileID: 9027845454238026091}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AmortizationMiddleLeft2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29302,7 +29305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1567530357794156689}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Headlights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34189,7 +34192,7 @@ GameObject:
   - component: {fileID: 2690716106977525019}
   - component: {fileID: 5977858868030088530}
   - component: {fileID: 8454011946397695302}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AmortizationRearLeft1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34275,7 +34278,7 @@ GameObject:
   - component: {fileID: 2035521885294390271}
   - component: {fileID: 8197176110833326732}
   - component: {fileID: 7374001670851258069}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mano_24
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34359,7 +34362,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5048119868129830987}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WheelCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34375,7 +34378,7 @@ Transform:
   m_GameObject: {fileID: 9181458148448947764}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03600006, y: 0.17299996, z: 0.2239998}
+  m_LocalPosition: {x: 0.036, y: 0.254, z: 0.228}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -6140,7 +6140,7 @@ MonoBehaviour:
   idlePitch: 0.8
   drivePitch: 1.1
   boostPitch: 1.5
-  smoothSpeed: 2
+  smoothSpeed: 0.3
 --- !u!1 &2610678646019071643
 GameObject:
   m_ObjectHideFlags: 0
@@ -23336,6 +23336,7 @@ GameObject:
   - component: {fileID: 4530795754056688899}
   - component: {fileID: 3352658887840314456}
   - component: {fileID: 8388093385468444750}
+  - component: {fileID: 8902318492509626093}
   m_Layer: 0
   m_Name: Rover
   m_TagString: Player
@@ -23546,6 +23547,7 @@ MonoBehaviour:
   roverHealth: {fileID: 3717116855633730491}
   energyDrainRate: 1
   robotController: {fileID: 4997244834700909423}
+  wreckOrePickup: {fileID: 8902318492509626093}
 --- !u!114 &8213821877963622286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23671,6 +23673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roverHealth: {fileID: 3717116855633730491}
+  wreckOrePickup: {fileID: 8902318492509626093}
 --- !u!114 &4530795754056688899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23727,6 +23730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 3717116855633730491}
+  wreckOrePickup: {fileID: 8902318492509626093}
   rb: {fileID: 304292297303748154}
   aliveClip: {fileID: 8300000, guid: 022d5182ffd8f4248a0d551c4f08001f, type: 3}
   movingClip: {fileID: 8300000, guid: 645035298f4a20c4695a68a1c655effa, type: 3}
@@ -23746,6 +23750,24 @@ MonoBehaviour:
   maxPitch: 1.3
   maxSpeed: 17
   spatialBlend: 0
+--- !u!114 &8902318492509626093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7046564907496529432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0b64f04dff6a64bbdab8492e9af9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recoveryRadius: 10
+  roverHealth: {fileID: 3717116855633730491}
+  robotController: {fileID: 4997244834700909423}
+  currentWreck: {fileID: 0}
+  roverInventory: {fileID: 8297833102015810595}
+  pickupDuration: 2
 --- !u!1 &7165381676320052066
 GameObject:
   m_ObjectHideFlags: 0

@@ -1465,6 +1465,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4415521493200945893, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
+      propertyPath: roverMovement
+      value: 
+      objectReference: {fileID: 1631134522}
     - target: {fileID: 5283917787307893441, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
       propertyPath: unloading
       value: 
@@ -1481,6 +1485,10 @@ PrefabInstance:
       propertyPath: roverRecovery
       value: 
       objectReference: {fileID: 291390294}
+    - target: {fileID: 6337313926335673051, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
+      propertyPath: wreckOrePickup
+      value: 
+      objectReference: {fileID: 1631134521}
     - target: {fileID: 6565080035859535637, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -2922,6 +2930,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b89bea97e1391e541945099c3a1e6913, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1631134521 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8902318492509626093, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+  m_PrefabInstance: {fileID: 1196162568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0b64f04dff6a64bbdab8492e9af9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1631134522 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5557653609740366468, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+  m_PrefabInstance: {fileID: 1196162568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fe7e6240c4a4fa4cb371c8b5e59cb9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1677601272

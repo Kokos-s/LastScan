@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -7,6 +8,7 @@ public class MissionCompletePanel : MonoBehaviour
     [SerializeField] private TMP_Text messageText;
     [SerializeField] private GameObject missionPanel;
     [SerializeField] private string message = "Mission finished!";
+    [SerializeField] private float autoHideDelay = 6f;
 
     private void Awake()
     {
@@ -24,11 +26,23 @@ public class MissionCompletePanel : MonoBehaviour
 
         if (messageText != null)
             messageText.text = message;
+
+        if (autoHideDelay > 0f)
+        {
+            StopAllCoroutines();
+            StartCoroutine(HideAfterDelay());
+        }
     }
 
     public void Hide()
     {
         if (panelRoot != null)
             panelRoot.SetActive(false);
+    }
+
+    private IEnumerator HideAfterDelay()
+    {
+        yield return new WaitForSeconds(autoHideDelay);
+        Hide();
     }
 }

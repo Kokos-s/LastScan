@@ -1,15 +1,17 @@
+using System;
 using UnityEngine;
 
 public class GameMissions : MonoBehaviour
 {
     [SerializeField] private int targetOreAmount = 2;
-    [SerializeField] private MissionCompletePanel missionCompletePanel;
 
     private int deliveredOre = 0;
     private bool missionCompleted = false;
 
     public int TargetOreAmount => targetOreAmount;
     public int DeliveredOre => deliveredOre;
+
+    public event Action OnMissionCompleted;
 
     public void AddDeliveryOre(int amount)
     {
@@ -21,9 +23,7 @@ public class GameMissions : MonoBehaviour
         {
             deliveredOre = targetOreAmount;
             missionCompleted = true;
-
-            if (missionCompletePanel != null)
-                missionCompletePanel.Show();
+            OnMissionCompleted?.Invoke();
         }
     }
 }

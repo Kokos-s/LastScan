@@ -11,7 +11,7 @@ public class AnomalyGlow : MonoBehaviour
     private Renderer targetRenderer;
     private Material transparentMaterial;
     private Material pulseMaterial;
-    private Color initialEmission;
+    //private Color initialEmission;
     private float flashTimer;
 
     private void Awake()
@@ -20,7 +20,7 @@ public class AnomalyGlow : MonoBehaviour
         transparentMaterial = targetRenderer.sharedMaterial;
 
         pulseMaterial = new Material(glowingMaterial);
-        initialEmission = pulseMaterial.GetColor("_EmissionColor");
+        //initialEmission = pulseMaterial.GetColor("_EmissionColor");
     }
 
     public void Flash()
@@ -46,7 +46,7 @@ public class AnomalyGlow : MonoBehaviour
         float intensity = Mathf.Lerp(minIntensity, maxIntensity, pulse);
         float brightness = Mathf.Pow(2f, intensity);
 
-        pulseMaterial.SetColor("_EmissionColor", initialEmission * brightness);
+        //pulseMaterial.SetColor("_EmissionColor", initialEmission * brightness);
     }
 
     private void OnDisable()

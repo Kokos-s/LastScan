@@ -1582,6 +1582,10 @@ PrefabInstance:
       propertyPath: minIntensity
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7482623657961812573, guid: 965deff9b20f69a4184acd7375d5de68, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9210,6 +9214,10 @@ PrefabInstance:
       propertyPath: minIntensity
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7482623657961812573, guid: 965deff9b20f69a4184acd7375d5de68, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9659,6 +9667,10 @@ PrefabInstance:
     - target: {fileID: 5077320904161202849, guid: 965deff9b20f69a4184acd7375d5de68, type: 3}
       propertyPath: minIntensity
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7482623657961812573, guid: 965deff9b20f69a4184acd7375d5de68, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13202,6 +13214,10 @@ PrefabInstance:
     - target: {fileID: 5077320904161202849, guid: 965deff9b20f69a4184acd7375d5de68, type: 3}
       propertyPath: minIntensity
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7482623657961812573, guid: 965deff9b20f69a4184acd7375d5de68, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19952,6 +19968,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7482623657961812573, guid: 965deff9b20f69a4184acd7375d5de68, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20001,6 +20021,10 @@ PrefabInstance:
       propertyPath: 'patrolPoints.Array.data[3]'
       value: 
       objectReference: {fileID: 1741287146}
+    - target: {fileID: 2062866977680244707, guid: 0e42f930e1fa36542bc517bd7cfef059, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6aae4f477fd16e74db6475785c4752b5, type: 2}
     - target: {fileID: 4235592659093435019, guid: 0e42f930e1fa36542bc517bd7cfef059, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

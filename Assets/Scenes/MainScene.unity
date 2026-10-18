@@ -9485,7 +9485,6 @@ GameObject:
   - component: {fileID: 1017990561}
   - component: {fileID: 1017990560}
   - component: {fileID: 1017990562}
-  - component: {fileID: 1017990559}
   m_Layer: 0
   m_Name: Magnet
   m_TagString: Magnet
@@ -9493,27 +9492,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!135 &1017990559
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1017990558}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 20
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1017990560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9526,9 +9504,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d32e1b453ac47479b3dc028bee879b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attractionForce: 17
-  maxForceDistance: 30
+  attractionForce: 25
+  maxForceDistance: 100
   extraDownForce: 2
+  rover: {fileID: 6968178339243233014}
+  interferenceStartDistance: 100
+  interferenceFullDistance: 10
 --- !u!4 &1017990561
 Transform:
   m_ObjectHideFlags: 0
@@ -19990,22 +19971,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 27199103}
     - target: {fileID: -8513974005964469117, guid: 0e42f930e1fa36542bc517bd7cfef059, type: 3}
-      propertyPath: bobHeight
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8513974005964469117, guid: 0e42f930e1fa36542bc517bd7cfef059, type: 3}
-      propertyPath: hoverHeight
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: -8513974005964469117, guid: 0e42f930e1fa36542bc517bd7cfef059, type: 3}
-      propertyPath: patrolSpeed
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -8513974005964469117, guid: 0e42f930e1fa36542bc517bd7cfef059, type: 3}
-      propertyPath: patrolPoints.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: -8513974005964469117, guid: 0e42f930e1fa36542bc517bd7cfef059, type: 3}
       propertyPath: 'patrolPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 1886701381}
@@ -20021,10 +19986,6 @@ PrefabInstance:
       propertyPath: 'patrolPoints.Array.data[3]'
       value: 
       objectReference: {fileID: 1741287146}
-    - target: {fileID: 2062866977680244707, guid: 0e42f930e1fa36542bc517bd7cfef059, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 6aae4f477fd16e74db6475785c4752b5, type: 2}
     - target: {fileID: 4235592659093435019, guid: 0e42f930e1fa36542bc517bd7cfef059, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -20065,16 +20026,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4763421311830256981, guid: 0e42f930e1fa36542bc517bd7cfef059, type: 3}
-      propertyPath: m_Radius
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6087124419428249832, guid: 0e42f930e1fa36542bc517bd7cfef059, type: 3}
       propertyPath: m_Name
-      value: GravitationalAnomaly
-      objectReference: {fileID: 0}
-    - target: {fileID: 6087124419428249832, guid: 0e42f930e1fa36542bc517bd7cfef059, type: 3}
-      propertyPath: m_TagString
       value: GravitationalAnomaly
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -20576,10 +20529,6 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 3505218748514618310}
-    - target: {fileID: 333274670318437069, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
-      propertyPath: message
-      value: Mission Complete! Now, find the entrance to the cave.
-      objectReference: {fileID: 0}
     - target: {fileID: 882217016687177034, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
       propertyPath: missions
       value: 
@@ -20612,22 +20561,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5529117101245168388, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6006965467777299249, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
       propertyPath: roverRecovery
       value: 
       objectReference: {fileID: 7384322035020848262}
+    - target: {fileID: 6135248650198409458, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
+      propertyPath: 'anomalies.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1017990560}
     - target: {fileID: 6337313926335673051, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
       propertyPath: wreckOrePickup
       value: 
       objectReference: {fileID: 7384322035020848271}
-    - target: {fileID: 6565080035859535637, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 7731710940184791902, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
+      propertyPath: 'anomalies.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1017990560}
     - target: {fileID: 8163801745607756937, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -20707,18 +20656,6 @@ PrefabInstance:
     - target: {fileID: 8163801745607756937, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8627809665569380171, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
-      propertyPath: m_text
-      value: "Mission Complete! \nThe next mission is to find entrance to the cave.\n"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8627809665569380171, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
-      propertyPath: m_fontSize
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8627809665569380171, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8757365271489658580, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
       propertyPath: roverRespawn

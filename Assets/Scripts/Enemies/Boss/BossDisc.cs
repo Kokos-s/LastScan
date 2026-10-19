@@ -18,6 +18,7 @@ public class BossDisc : MonoBehaviour
     private Rigidbody rb;
     private Collider col;
     private Transform homeParent;
+    private Transform worldRoot;   // корень мира пещеры (CaveWorld), null если его нет
     private Vector3 homeLocalPos;
     private Quaternion homeLocalRot;
     private int bounces;
@@ -36,6 +37,12 @@ public class BossDisc : MonoBehaviour
         homeParent = transform.parent;
         homeLocalPos = transform.localPosition;
         homeLocalRot = transform.localRotation;
+
+        // Диск вылетает не в корень сцены, а в корень мира пещеры,
+        // чтобы выключение CaveWorld останавливало и его
+        Transform r = transform.root;
+        worldRoot = (r != transform && r.GetComponent<BossController>() == null) ? r : null;
+
         SetInert();
         State = DiscState.Stored;
     }
@@ -79,7 +86,7 @@ public class BossDisc : MonoBehaviour
         if (dir.sqrMagnitude < 0.001f) dir = Vector3.forward;
         lastDir = dir.normalized;
 
-        transform.SetParent(null);
+        transform.SetParent(worldRoot);
 
         // высота полёта = центр коллайдера ровера
         var playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -109,7 +116,7 @@ public class BossDisc : MonoBehaviour
 
     public void Lie()
     {
-        transform.SetParent(null);
+        transform.SetParent(worldRoot);
         SetInert();
 
         if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out RaycastHit hit,

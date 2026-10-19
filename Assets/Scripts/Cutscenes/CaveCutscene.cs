@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
@@ -8,17 +9,27 @@ public class CaveCutscene : MonoBehaviour
     [SerializeField] private GameMissions missions;
     [SerializeField] private PlayableDirector director;
     [SerializeField] private MissionCompletePanel missionCompletePanel;
+    [SerializeField] private CaveBlockade blockade;
     [SerializeField] private CinemachineBrain brain;
+    [SerializeField] private string cameraScriptName = "CameraFollow";
     [SerializeField] private MonoBehaviour[] disableDuringCutscene;
     [SerializeField] private GameObject[] hideDuringCutscene;
 
     private bool isPlaying = false;
-    private Vector3 savedLocalPosition;
-    private Quaternion savedLocalRotation;
+    private MonoBehaviour cameraScript;
+    private Vector3 savedPosition;
+    private Quaternion savedRotation;
 
     private void Awake()
     {
         brain.enabled = false;
+
+        Type type = Type.GetType(cameraScriptName + ", Assembly-CSharp");
+        if (type != null)
+            cameraScript = FindFirstObjectByType(type) as MonoBehaviour;
+
+        if (cameraScript == null)
+            Debug.LogWarning("CaveCutscene: скрипт камеры '" + cameraScriptName + "' не найден. Проверьте имя.");
     }
 
     private void OnEnable()
@@ -43,8 +54,12 @@ public class CaveCutscene : MonoBehaviour
     {
         isPlaying = true;
 
-        savedLocalPosition = brain.transform.localPosition;
-        savedLocalRotation = brain.transform.localRotation;
+        savedPosition = brain.transform.position;
+        savedRotation = brain.transform.rotation;
+
+        if (cameraScript != null)
+            cameraScript.enabled = false;
+
         brain.enabled = true;
 
         foreach (var c in disableDuringCutscene)
@@ -61,14 +76,19 @@ public class CaveCutscene : MonoBehaviour
         isPlaying = false;
 
         brain.enabled = false;
-        brain.transform.localPosition = savedLocalPosition;
-        brain.transform.localRotation = savedLocalRotation;
+        brain.transform.SetPositionAndRotation(savedPosition, savedRotation);
+
+        if (cameraScript != null)
+            cameraScript.enabled = true;
 
         foreach (var c in disableDuringCutscene)
             c.enabled = true;
 
         foreach (var g in hideDuringCutscene)
             g.SetActive(true);
+
+        if (blockade != null)
+            blockade.Clear();
 
         if (missionCompletePanel != null)
             missionCompletePanel.Show();

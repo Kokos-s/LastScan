@@ -8,7 +8,7 @@ public class BossController : MonoBehaviour
     public enum State { Chase, DrillAttack, RockAttack, DiscAttack, Recover, Dead }
 
     [Header("References")]
-    [SerializeField] private Transform player;
+    [SerializeField] private Transform player;       // можно оставить пустым: ищется по тегу Player
     [SerializeField] private Transform drillPivot;
     [SerializeField] private Transform drillModel;
     [SerializeField] private Renderer drillRenderer;
@@ -99,16 +99,45 @@ public class BossController : MonoBehaviour
     private float nextDiscTime;
     private float nextCollectTime;
     private float defaultStopDistance;
+    private bool started = false;
+    private bool warnedNoPlayer = false;
 
     public State CurrentState => state;
 
     private Transform DiscHand => discHoldPoint != null ? discHoldPoint : holdPoint;
 
+    // Ищет ровер по тегу Player (ссылки между сценами в Inspector не сохраняются)
+    private bool ResolvePlayer()
+    {
+        if (player == null)
+        {
+            GameObject roverObject = GameObject.FindGameObjectWithTag("Player");
+            if (roverObject != null)
+                player = roverObject.transform;
+        }
+
+        if (player == null)
+        {
+            if (!warnedNoPlayer)
+            {
+                Debug.LogWarning("BossController: объект с тегом Player не найден. Босс ждёт появления ровера.");
+                warnedNoPlayer = true;
+            }
+            return false;
+        }
+
+        if (playerBody == null)
+            playerBody = player.GetComponentInParent<Rigidbody>();
+
+        warnedNoPlayer = false;
+        return true;
+    }
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         health = GetComponent<Health>();
-        playerBody = player.GetComponent<Rigidbody>();
+        ResolvePlayer();
         pivotRestPos = drillPivot.localPosition;
         holdRestPos = holdPoint.localPosition;
         armRestRot = armJoint.localRotation;
@@ -121,12 +150,25 @@ public class BossController : MonoBehaviour
         drillHitbox.gameObject.SetActive(false);
     }
 
-    private void OnEnable() { if (health) health.onDeath.AddListener(OnDeath); }
-    private void OnDisable() { if (health) health.onDeath.RemoveListener(OnDeath); }
+    private void OnEnable()
+    {
+        if (health) health.onDeath.AddListener(OnDeath);
+
+        // Если объект выключали посреди атаки (например, игрок ушёл из пещеры),
+        // корутины оборвались, а состояние осталось. Возвращаем босса в нормальное.
+        if (started && state != State.Chase && state != State.Dead)
+            ResetAfterInterrupt();
+    }
+
+    private void OnDisable()
+    {
+        if (health) health.onDeath.RemoveListener(OnDeath);
+    }
 
     private void Start()
     {
         state = State.Chase;
+        started = true;
         nextRockTime = Time.time + 2f;
         nextDiscTime = Time.time + 3f;
         nextCollectTime = Time.time + 3f;
@@ -136,7 +178,46 @@ public class BossController : MonoBehaviour
     {
         drillModel.Rotate(0f, 0f, currentSpin * Time.deltaTime, Space.Self);
 
+        if (!ResolvePlayer()) return;
+
         if (state == State.Chase) UpdateChase();
+    }
+
+    private void ResetAfterInterrupt()
+    {
+        StopAllCoroutines();
+
+        drillHitbox.gameObject.SetActive(false);
+        currentSpin = idleSpin;
+        drillRenderer.material.color = baseColor;
+        drillPivot.localPosition = pivotRestPos;
+        holdPoint.localPosition = holdRestPos;
+        armJoint.localRotation = armRestRot;
+        elbowJoint.localRotation = elbowRestRot;
+        SetThrowArm(0f, 0f);
+
+        if (heldRock != null)
+        {
+            heldRock.Release(Vector3.zero);
+            heldRock = null;
+        }
+        if (heldDisc != null)
+        {
+            heldDisc.Lie();
+            heldDisc = null;
+        }
+
+        agent.stoppingDistance = defaultStopDistance;
+        if (agent.isOnNavMesh)
+        {
+            agent.ResetPath();
+            agent.isStopped = false;
+        }
+
+        state = State.Chase;
+        nextRockTime = Time.time + 2f;
+        nextDiscTime = Time.time + 2f;
+        nextCollectTime = Time.time + 2f;
     }
 
     private void UpdateChase()
@@ -512,7 +593,10 @@ public class BossController : MonoBehaviour
     }
 
     // ---------------- ОБЩЕЕ ----------------
-    private void FaceTarget(float speed) => FacePoint(player.position, speed);
+    private void FaceTarget(float speed)
+    {
+        if (player != null) FacePoint(player.position, speed);
+    }
 
     private void FacePoint(Vector3 point, float speed)
     {

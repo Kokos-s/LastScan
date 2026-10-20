@@ -22504,6 +22504,14 @@ PrefabInstance:
       propertyPath: scanActiveLabel
       value: 
       objectReference: {fileID: 1222573483}
+    - target: {fileID: 8902318492509626093, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: piecePrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8902318492509626093, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: pieceMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: ae5a5819495af6641a319ebe190d4af7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22874,6 +22882,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3931997643562467083, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: e7abfa862710301498b4555e22d6880d, type: 2}
+    - target: {fileID: 3931997643562467083, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4415521493200945893, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
       propertyPath: roverMovement
       value: 
@@ -22905,6 +22921,14 @@ PrefabInstance:
     - target: {fileID: 6565080035859535637, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695613289901209476, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: e7abfa862710301498b4555e22d6880d, type: 2}
+    - target: {fileID: 6695613289901209476, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7731710940184791902, guid: 417139002270413498e6c4fc9ce5d311, type: 3}
       propertyPath: 'anomalies.Array.data[0]'

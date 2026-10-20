@@ -25,6 +25,19 @@ public class WorldSwitcher : MonoBehaviour
 
     public bool InCave => inCave;
 
+    // Точка появления в пещере (null, пока пещера не загружена)
+    public Transform CaveSpawn => caveSpawn;
+
+    // Корень мира, в котором сейчас находится игрок
+    public Transform CurrentWorldRoot
+    {
+        get
+        {
+            if (inCave && caveWorld != null) return caveWorld.transform;
+            return surfaceWorld != null ? surfaceWorld.transform : null;
+        }
+    }
+
     [ContextMenu("Test Enter Cave")]
     public void EnterCave()
     {
@@ -46,7 +59,6 @@ public class WorldSwitcher : MonoBehaviour
 
         Scene caveScene = USceneManager.GetSceneByName(caveSceneName);
 
-        // Первый вход: загружаем пещеру поверх основной сцены
         if (!caveScene.isLoaded)
         {
             AsyncOperation op = USceneManager.LoadSceneAsync(caveSceneName, LoadSceneMode.Additive);
@@ -68,8 +80,6 @@ public class WorldSwitcher : MonoBehaviour
             yield break;
         }
 
-        // Сначала включаем пещеру, потом выключаем поверхность и сразу телепортируем ровер,
-        // чтобы он не успел упасть
         caveWorld.SetActive(true);
         surfaceWorld.SetActive(false);
         USceneManager.SetActiveScene(caveScene);
@@ -118,7 +128,6 @@ public class WorldSwitcher : MonoBehaviour
             return;
         }
 
-        // CharacterController блокирует смену позиции, пока включён
         CharacterController cc = rover.GetComponent<CharacterController>();
         if (cc != null) cc.enabled = false;
 

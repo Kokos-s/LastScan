@@ -9,6 +9,7 @@ public class RoverRespawn : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private float respawnDelay = 5f;
     [SerializeField] private GameObject wreckPrefab;
+    [SerializeField] private WorldSwitcher worldSwitcher;   // можно оставить пустым
 
     private Rigidbody roverBody;
     private float respawnTimer;
@@ -26,6 +27,9 @@ public class RoverRespawn : MonoBehaviour
     private void Awake()
     {
         roverBody = GetComponent<Rigidbody>();
+
+        if (worldSwitcher == null)
+            worldSwitcher = FindFirstObjectByType<WorldSwitcher>();
     }
 
     private void Update()
@@ -54,14 +58,25 @@ public class RoverRespawn : MonoBehaviour
         roverBody.angularVelocity = Vector3.zero;
         roverMovement.ResetAfterRespawn();
 
-        roverBody.position = spawnPoint.position;
-        roverBody.rotation = spawnPoint.rotation;
+        // В пещере возрождаемся в пещере, на поверхности возрождаемся на базе
+        Transform point = spawnPoint;
+        Transform worldRoot = null;
+        if (worldSwitcher != null)
+        {
+            worldRoot = worldSwitcher.CurrentWorldRoot;
+            if (worldSwitcher.InCave && worldSwitcher.CaveSpawn != null)
+                point = worldSwitcher.CaveSpawn;
+        }
+
+        roverBody.position = point.position;
+        roverBody.rotation = point.rotation;
 
         respawnTimer = 0f;
         roverInventory.RemoveOre(roverInventory.CollectedOre);
         roverEnergy.AddEnergy(roverEnergy.MaxEnergy);
 
-        GameObject wreck = Instantiate(wreckPrefab, wreckPosition, wreckRotation);
+        // Остов становится дочерним к текущему миру и замирает вместе с ним
+        GameObject wreck = Instantiate(wreckPrefab, wreckPosition, wreckRotation, worldRoot);
         WreckOre wreckOre = wreck.GetComponentInChildren<WreckOre>();
         wreckOre.SetOre(lostOre);
         Rigidbody[] pieces = wreck.GetComponentsInChildren<Rigidbody>();

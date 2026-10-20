@@ -21,6 +21,13 @@ public class BossHealthBar : MonoBehaviour
         SetBar(trail, trailValue);
     }
 
+    private void OnEnable()
+    {
+        // Если босс умер, пока мир пещеры был выключен, Invoke мог не сработать
+        if (boss != null && boss.Current <= 0f)
+            gameObject.SetActive(false);
+    }
+
     private void OnDestroy()
     {
         if (boss == null) return;

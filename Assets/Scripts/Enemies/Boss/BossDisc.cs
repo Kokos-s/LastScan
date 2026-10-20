@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -5,7 +6,11 @@ public class BossDisc : MonoBehaviour
 {
     public enum DiscState { Stored, Held, Flying, Lying }
 
-    [SerializeField] private float damage = 1.5f;
+    public static readonly List<BossDisc> All = new List<BossDisc>();
+
+    [SerializeField] private int maxThrows = 2;            // сколько раз диск можно бросить
+    [SerializeField] private float damage = 1f;            // урон ровера от диска босса
+    [SerializeField] private float playerThrowDamage = 4f; // урон боссу от диска, брошенного ровером
     [SerializeField] private float speed = 18f;
     [SerializeField] private int maxBounces = 6;
     [SerializeField] private float lifetime = 10f;
@@ -20,9 +25,12 @@ public class BossDisc : MonoBehaviour
     private Transform homeParent;
     private Vector3 homeLocalPos;
     private Quaternion homeLocalRot;
+    private int homeLayer;
     private int bounces;
+    private int throwCount;
     private float dieTime;
     private float nextHitTime;
+    private bool thrownByPlayer;
     private Vector3 lastDir = Vector3.forward;
 
     public DiscState State { get; private set; } = DiscState.Stored;
@@ -36,9 +44,13 @@ public class BossDisc : MonoBehaviour
         homeParent = transform.parent;
         homeLocalPos = transform.localPosition;
         homeLocalRot = transform.localRotation;
+        homeLayer = gameObject.layer;
         SetInert();
         State = DiscState.Stored;
     }
+
+    private void OnEnable() => All.Add(this);
+    private void OnDisable() => All.Remove(this);
 
     private void Start()
     {
@@ -73,23 +85,30 @@ public class BossDisc : MonoBehaviour
         State = DiscState.Stored;
     }
 
-    public void Launch(Vector3 dir)
+    public void Launch(Vector3 dir) => LaunchInternal(dir, false);
+
+    public void LaunchByPlayer(Vector3 dir) => LaunchInternal(dir, true);
+
+    private void LaunchInternal(Vector3 dir, bool byPlayer)
     {
+        thrownByPlayer = byPlayer;
+        throwCount++;
+
         dir.y = 0f;
         if (dir.sqrMagnitude < 0.001f) dir = Vector3.forward;
         lastDir = dir.normalized;
 
         transform.SetParent(null);
+        gameObject.layer = byPlayer ? LayerMask.NameToLayer("PlayerProjectile") : homeLayer;
 
-        // высота полёта = центр коллайдера ровера
-        var playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
+        var targetObj = GameObject.FindGameObjectWithTag(byPlayer ? "Boss" : "Player");
+        if (targetObj != null)
         {
-            var pc = playerObj.GetComponent<Collider>();
-            if (pc != null)
+            var tc = targetObj.GetComponent<Collider>();
+            if (tc != null)
             {
                 Vector3 p = transform.position;
-                p.y = pc.bounds.center.y;
+                p.y = tc.bounds.center.y;
                 transform.position = p;
             }
         }
@@ -109,8 +128,17 @@ public class BossDisc : MonoBehaviour
 
     public void Lie()
     {
+        // последний бросок использован: диск исчезает
+        if (throwCount >= maxThrows)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         transform.SetParent(null);
         SetInert();
+        gameObject.layer = homeLayer;
+        thrownByPlayer = false;
 
         if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out RaycastHit hit,
                             100f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore))
@@ -154,17 +182,36 @@ public class BossDisc : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (State != DiscState.Flying) return;
-        if (collision.collider.GetComponentInParent<BossController>() != null) return;
 
-        var target = collision.collider.GetComponentInParent<IDamageable>();
-        if (target != null)
+        bool hitBoss = collision.collider.GetComponentInParent<BossController>() != null;
+
+        if (thrownByPlayer)
         {
-            if (Time.time >= nextHitTime)
+            if (hitBoss)
             {
-                target.TakeDamage(damage);
-                nextHitTime = Time.time + 0.5f;
+                var boss = collision.collider.GetComponentInParent<IDamageable>();
+                if (boss != null && Time.time >= nextHitTime)
+                {
+                    boss.TakeDamage(playerThrowDamage);
+                    nextHitTime = Time.time + 0.5f;
+                }
+                return;
             }
-            return;
+        }
+        else
+        {
+            if (hitBoss) return;
+
+            var target = collision.collider.GetComponentInParent<IDamageable>();
+            if (target != null)
+            {
+                if (Time.time >= nextHitTime)
+                {
+                    target.TakeDamage(damage);
+                    nextHitTime = Time.time + 0.5f;
+                }
+                return;
+            }
         }
 
         bounces++;

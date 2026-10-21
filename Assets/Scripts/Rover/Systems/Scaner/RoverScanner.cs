@@ -10,6 +10,7 @@ public class RoverScanner : MonoBehaviour
     [SerializeField] private GameObject scanActiveLabel;
     [SerializeField] private GameObject notEnoughEnergyLabel;
     [SerializeField] private float notEnoughEnergyLabelDuration = 2f;
+
     private RoverControls controls;
     private float scanLabelTimer = 0f;
     private float notEnoughEnergyTimer = 0f;
@@ -29,7 +30,7 @@ public class RoverScanner : MonoBehaviour
         controls.Rover.Disable();
     }
 
-    void Update()
+    private void Update()
     {
         if (controls.Rover.Scan.WasPressedThisFrame() && scanLabelTimer <= 0f)
             TryActivateScan();
@@ -38,7 +39,7 @@ public class RoverScanner : MonoBehaviour
         {
             scanLabelTimer -= Time.deltaTime;
 
-            if (scanLabelTimer <= 0f)
+            if (scanLabelTimer <= 0f && scanActiveLabel != null)
                 scanActiveLabel.SetActive(false);
         }
 
@@ -46,12 +47,12 @@ public class RoverScanner : MonoBehaviour
         {
             notEnoughEnergyTimer -= Time.deltaTime;
 
-            if (notEnoughEnergyTimer <= 0f)
+            if (notEnoughEnergyTimer <= 0f && notEnoughEnergyLabel != null)
                 notEnoughEnergyLabel.SetActive(false);
         }
     }
 
-    void TryActivateScan()
+    private void TryActivateScan()
     {
         if (roverHealth.IsDead)
             return;
@@ -59,22 +60,28 @@ public class RoverScanner : MonoBehaviour
         if (energy.TryConsume(scanEnergyCost))
         {
             GameObject pulseObject = Instantiate(scanPulsePrefab, transform.position, Quaternion.identity);
+
             ScanRevealDetector detector = pulseObject.GetComponent<ScanRevealDetector>();
+
             if (detector != null)
                 detector.SetTargets(GetComponent<ScanTargets>().Targets);
+
             ScanPulseEffect pulseEffect = pulseObject.GetComponent<ScanPulseEffect>();
 
-            scanActiveLabel.SetActive(true);
+            if (scanActiveLabel != null)
+                scanActiveLabel.SetActive(true);
+
             scanLabelTimer = pulseEffect.Duration;
 
             foreach (AnomalyMovement anomaly in anomalies)
-            {
-                anomaly.OnScanUsed(transform.position);
-            }
+                if (anomaly != null)
+                    anomaly.OnScanUsed(transform.position);
         }
         else
         {
-            notEnoughEnergyLabel.SetActive(true);
+            if (notEnoughEnergyLabel != null)
+                notEnoughEnergyLabel.SetActive(true);
+
             notEnoughEnergyTimer = notEnoughEnergyLabelDuration;
         }
     }

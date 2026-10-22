@@ -55,7 +55,7 @@ public class CaveBlockade : MonoBehaviour
         float t = 0f;
         while (t < shakeDuration)
         {
-            t += Time.deltaTime;
+            t += Time.unscaledDeltaTime;
             float strength = shakeAmount * (t / shakeDuration);
 
             for (int i = 0; i < rocks.Length; i++)
@@ -68,7 +68,11 @@ public class CaveBlockade : MonoBehaviour
 
         // Фаза 2: взрыв
         if (dustEffect != null)
+        {
+            var main = dustEffect.main;
+            main.useUnscaledTime = true;
             dustEffect.Play();
+        }
 
         for (int i = 0; i < rocks.Length; i++)
         {
@@ -85,7 +89,7 @@ public class CaveBlockade : MonoBehaviour
             StartCoroutine(FlyAway(rocks[i], startPositions[i]));
         }
 
-        yield return new WaitForSeconds(flyDuration);
+        yield return new WaitForSecondsRealtime(flyDuration);
 
         if (entranceTrigger != null)
             entranceTrigger.enabled = true;
@@ -100,7 +104,7 @@ public class CaveBlockade : MonoBehaviour
         float t = 0f;
         while (t < flashDuration)
         {
-            t += Time.deltaTime;
+            t += Time.unscaledDeltaTime;
             impactFlash.localScale = Vector3.Lerp(start, end, t / flashDuration);
             yield return null;
         }
@@ -135,12 +139,13 @@ public class CaveBlockade : MonoBehaviour
         float t = 0f;
         while (t < flyDuration)
         {
-            t += Time.deltaTime;
+            float dt = Time.unscaledDeltaTime;
+            t += dt;
             float progress = t / flyDuration;
 
-            velocity.y -= gravity * Time.deltaTime;
-            tr.position += velocity * Time.deltaTime;
-            tr.Rotate(spinAxis, spin * Time.deltaTime, Space.World);
+            velocity.y -= gravity * dt;
+            tr.position += velocity * dt;
+            tr.Rotate(spinAxis, spin * dt, Space.World);
 
             float shrink = Mathf.Clamp01((progress - 0.5f) / 0.5f);
             tr.localScale = Vector3.Lerp(startScale, Vector3.zero, shrink);

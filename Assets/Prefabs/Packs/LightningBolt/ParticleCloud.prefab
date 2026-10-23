@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7737848724573703684}
   - component: {fileID: 2570234445711972688}
+  - component: {fileID: 2596381891529678119}
   - component: {fileID: 3448093733074592234}
   - component: {fileID: 4147561121364438693}
   - component: {fileID: 339813915038467513}
   - component: {fileID: 5661848710789096150}
-  - component: {fileID: 2596381891529678119}
   - component: {fileID: 2324471663374854309}
   m_Layer: 0
   m_Name: ParticleCloud
@@ -4762,6 +4762,29 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &2596381891529678119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6291427839795306390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 946c0a34555a28e438f5da3cf715cd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartObject: {fileID: 0}
+  StartPosition: {x: 0, y: 0, z: 0}
+  EndObject: {fileID: 0}
+  EndPosition: {x: 0, y: 0, z: 0}
+  Generations: 6
+  Duration: 0.05
+  ChaosFactor: 0.15
+  ManualMode: 0
+  Rows: 1
+  Columns: 1
+  AnimationMode: 3
 --- !u!199 &3448093733074592234
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -4869,6 +4892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightningScript: {fileID: 0}
   targetTerrain: {fileID: 0}
+  cloudHeight: 80
   flashImage: {fileID: 0}
   flashDuration: 0.15
   thunderAudioSource: {fileID: 6400513771437328082}
@@ -4879,6 +4903,7 @@ MonoBehaviour:
   damageRadius: 3
   damageAmount: 3
   energyAddAmount: 25
+  roverStrikeOffset: {x: 0, y: 1.5, z: 0}
   minInterval: 1
   maxInterval: 5
   strikeRadius: 2
@@ -4989,29 +5014,6 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &2596381891529678119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6291427839795306390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 946c0a34555a28e438f5da3cf715cd1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StartObject: {fileID: 0}
-  StartPosition: {x: 0, y: 0, z: 0}
-  EndObject: {fileID: 0}
-  EndPosition: {x: 0, y: 0, z: 0}
-  Generations: 6
-  Duration: 0.05
-  ChaosFactor: 0.15
-  ManualMode: 0
-  Rows: 1
-  Columns: 1
-  AnimationMode: 3
 --- !u!82 &2324471663374854309
 AudioSource:
   m_ObjectHideFlags: 0

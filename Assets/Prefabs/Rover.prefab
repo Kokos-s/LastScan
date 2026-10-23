@@ -16545,7 +16545,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.04, z: 0.837}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1567530357794156689}
   m_Father: {fileID: 3941054554982472305}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9023641154411791479
@@ -23392,7 +23393,6 @@ Transform:
   - {fileID: 6141656385422516210}
   - {fileID: 602510073684809857}
   - {fileID: 5048119868129830987}
-  - {fileID: 1567530357794156689}
   - {fileID: 6641413191431936851}
   - {fileID: 3246870041238037260}
   - {fileID: 5524833997438280513}
@@ -23682,6 +23682,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roverHealth: {fileID: 3717116855633730491}
   wreckOrePickup: {fileID: 8902318492509626093}
+  attackHitTime: 0.35
+  inputBuffer: 0.4
 --- !u!114 &4530795754056688899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23725,6 +23727,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 0}
   respawnDelay: 5
   wreckPrefab: {fileID: 2518732581773138255, guid: fa56c0ffa710906479eca7a754e17f97, type: 3}
+  worldSwitcher: {fileID: 0}
 --- !u!114 &8388093385468444750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23776,6 +23779,12 @@ MonoBehaviour:
   currentWreck: {fileID: 0}
   roverInventory: {fileID: 8297833102015810595}
   pickupDuration: 2
+  sparkMaterial: {fileID: 0}
+  maxPieces: 8
+  sparkScale: 0.5
+  flightTime: 0.9
+  arcHeight: 4
+  spreadRadius: 1.5
 --- !u!1 &7165381676320052066
 GameObject:
   m_ObjectHideFlags: 0
@@ -29325,14 +29334,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8568970749764873006}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03600006, y: 0.17299996, z: 0.337}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.10285478, y: 0.37999988, z: -1.4285738}
+  m_LocalScale: {x: 2.857143, y: 2.8571427, z: 2.857143}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1256148406566085718}
   - {fileID: 5602717324503596757}
-  m_Father: {fileID: 3941054554982472305}
+  m_Father: {fileID: 4501672110457122783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8596989572461909650
 GameObject:

@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 6496107577929476448}
   - component: {fileID: 7482623657961812573}
   - component: {fileID: 7822348524577643217}
+  - component: {fileID: 7712734301200504208}
   - component: {fileID: 520285421132766197}
   - component: {fileID: 5077320904161202849}
   - component: {fileID: 2115323705175804995}
-  - component: {fileID: 7712734301200504208}
   - component: {fileID: 7295255616206704998}
   m_Layer: 0
   m_Name: Anomaly
@@ -114,6 +114,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7712734301200504208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806271389017780721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca4000cdae6c55249ba8830a52874866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0.1
+  damageInterval: 2.5
+  anomalyGlow: {fileID: 5077320904161202849}
+  audioSource: {fileID: 7295255616206704998}
 --- !u!114 &520285421132766197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,22 +185,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radarMarker: {fileID: 4413914999948628899}
   revealDuration: 15
---- !u!114 &7712734301200504208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1806271389017780721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca4000cdae6c55249ba8830a52874866, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0.1
-  damageInterval: 2.5
-  anomalyGlow: {fileID: 5077320904161202849}
-  audioSource: {fileID: 7295255616206704998}
 --- !u!82 &7295255616206704998
 AudioSource:
   m_ObjectHideFlags: 0

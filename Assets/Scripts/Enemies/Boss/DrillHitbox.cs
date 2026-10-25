@@ -18,6 +18,6 @@ public class DrillHitbox : MonoBehaviour
         if (target == null) return;
 
         if (alreadyHit.Add(target))
-            target.TakeDamage(damage);
+            target.TakeImpactDamage(damage);
     }
 }

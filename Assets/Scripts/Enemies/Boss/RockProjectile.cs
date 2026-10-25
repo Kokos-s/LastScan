@@ -6,11 +6,10 @@ public class RockProjectile : MonoBehaviour
 {
     public static readonly List<RockProjectile> All = new List<RockProjectile>();
 
-    [SerializeField] private float damage = 15f;
+    [SerializeField] private float damage = 2f;
 
     private Rigidbody rb;
     private Collider col;
-    private Transform worldRoot;   // корень мира пещеры (CaveWorld)
     private bool armed;
     private bool held;
 
@@ -20,10 +19,6 @@ public class RockProjectile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
-
-        // После броска камень возвращается в корень мира пещеры, а не в корень сцены
-        Transform r = transform.root;
-        worldRoot = (r != transform && r.GetComponent<BossController>() == null) ? r : null;
     }
 
     private void OnEnable() => All.Add(this);
@@ -53,7 +48,7 @@ public class RockProjectile : MonoBehaviour
     public void Release(Vector3 velocity)
     {
         held = false;
-        transform.SetParent(worldRoot);
+        transform.SetParent(null);
         col.enabled = true;
         rb.isKinematic = false;
         rb.linearVelocity = velocity;
@@ -67,7 +62,7 @@ public class RockProjectile : MonoBehaviour
         if (collision.collider.GetComponentInParent<BossController>() != null) return;
 
         var target = collision.collider.GetComponentInParent<IDamageable>();
-        if (target != null) target.TakeDamage(damage);
+        if (target != null) target.TakeImpactDamage(damage);
 
         armed = false;
     }

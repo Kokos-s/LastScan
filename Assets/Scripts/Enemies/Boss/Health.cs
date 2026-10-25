@@ -4,6 +4,9 @@ using UnityEngine.Events;
 public interface IDamageable
 {
     void TakeDamage(float amount);
+
+    // Удар (бур, камень, диск). По умолчанию то же самое, что обычный урон
+    void TakeImpactDamage(float amount) => TakeDamage(amount);
 }
 
 public class Health : MonoBehaviour, IDamageable

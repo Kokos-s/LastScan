@@ -22681,6 +22681,10 @@ PrefabInstance:
       propertyPath: shakeAmplitude
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4708794417701782400, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: attackMask.m_Bits
+      value: 2304
+      objectReference: {fileID: 0}
     - target: {fileID: 4864000908395676365, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: roverMovement
       value: 

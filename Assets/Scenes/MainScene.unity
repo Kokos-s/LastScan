@@ -6702,6 +6702,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3895d72899ba0f4498de0e12d75be732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &298519166 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2013213412657734685, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+  m_PrefabInstance: {fileID: 2822888041639991212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &298519170
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298519166}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 2.6, z: 1.6}
+  m_Center: {x: -0.004557792, y: 0.07704738, z: 0.25020888}
 --- !u!1 &300852488
 GameObject:
   m_ObjectHideFlags: 0
@@ -22545,14 +22571,454 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 27738784768670241, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 27738784768670241, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 371797920816230327, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 371797920816230327, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 400252318613555749, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 400252318613555749, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 408828706151737671, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 408828706151737671, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 450216506564302400, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 450216506564302400, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 602309405872374107, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 602309405872374107, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 606009854538837871, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 606009854538837871, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 824484447757516164, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 824484447757516164, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 860919425352063942, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 860919425352063942, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 876104784635406355, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 876104784635406355, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 900073188027605829, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 900073188027605829, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020432426152352280, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020432426152352280, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101354061408110164, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101354061408110164, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491649657842276100, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491649657842276100, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563608082107353595, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563608082107353595, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 1619862860430060083, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1619862860430060083, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645915097289203414, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645915097289203414, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719998109448472293, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719998109448472293, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 1811145363518560020, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1811145363518560020, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 1936376902129117870, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1936376902129117870, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954451644686831206, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954451644686831206, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973030831464019851, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973030831464019851, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 1975587412449869658, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1975587412449869658, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013213412657734685, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013213412657734685, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047196099125136293, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047196099125136293, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064575237744056931, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064575237744056931, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2065241307960004070, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2065241307960004070, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2136239571737740682, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2136239571737740682, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2213902571293356674, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2213902571293356674, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2221552970100072460, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2221552970100072460, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2346790714669311887, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2346790714669311887, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2352330954403713568, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2352330954403713568, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2378902228281495830, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2378902228281495830, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2406049599389421396, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2406049599389421396, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2470114804440269789, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2470114804440269789, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576796938771917086, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576796938771917086, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643893646651173159, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643893646651173159, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2656972665797090608, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2656972665797090608, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768823426228652667, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768823426228652667, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829295397194546009, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829295397194546009, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2891290190210222233, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2891290190210222233, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897393221713185568, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897393221713185568, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989508450943679563, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989508450943679563, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178141383042115081, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178141383042115081, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 3250358685003277251, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3250358685003277251, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 3292731243680477422, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3292731243680477422, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334996061993469029, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334996061993469029, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 3341328562271268850, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3341328562271268850, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
     - target: {fileID: 3352658887840314456, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 7748475}
+    - target: {fileID: 3395377964066792746, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395377964066792746, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 3435172308567112940, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3435172308567112940, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553281315397827926, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553281315397827926, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 3582994748597240925, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3582994748597240925, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 3602251627090443945, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3602251627090443945, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
     - target: {fileID: 3717116855633730491, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: healthFill
       value: 
       objectReference: {fileID: 741922164}
+    - target: {fileID: 3787832487877243794, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3787832487877243794, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 3839144143111150982, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3839144143111150982, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
     - target: {fileID: 3846385208988165901, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: scanActiveLabel
       value: 
@@ -22621,18 +23087,306 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4060635007515912847, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060635007515912847, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083638692135095348, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083638692135095348, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133232578497498540, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133232578497498540, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172417044920013588, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172417044920013588, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 4243698155388685017, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4243698155388685017, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305802360550235997, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305802360550235997, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376790174393436859, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376790174393436859, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708668572790206923, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708668572790206923, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
     - target: {fileID: 4708794417701782400, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: gameMissions
       value: 
       objectReference: {fileID: 1004406816}
+    - target: {fileID: 4791857384142649935, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791857384142649935, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5046299087643359425, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5046299087643359425, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5057477770238519767, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5057477770238519767, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211898348807884400, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211898348807884400, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546560002788320014, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546560002788320014, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5683784684145551562, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5683784684145551562, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5913164011538502247, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5913164011538502247, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932117035077284611, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932117035077284611, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038826435803290287, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038826435803290287, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071249162739553912, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071249162739553912, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118216785121801144, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6118216785121801144, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6246017601573551998, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6246017601573551998, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6571073121990376446, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6571073121990376446, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581031592151549761, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581031592151549761, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6717518032080843739, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6717518032080843739, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6758228411299332999, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6758228411299332999, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6773537857100994967, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6773537857100994967, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6848375098544220362, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6848375098544220362, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
     - target: {fileID: 7046564907496529432, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: m_Name
       value: Rover
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200180425058185847, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200180425058185847, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
       objectReference: {fileID: 0}
     - target: {fileID: 7351003947105522316, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: batteryImage
       value: 
       objectReference: {fileID: 1033711456}
+    - target: {fileID: 7466529216121505924, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466529216121505924, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467435064127157923, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467435064127157923, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478609175559677519, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7478609175559677519, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492195407226503220, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492195407226503220, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535648566566834497, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535648566566834497, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555118588135623011, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555118588135623011, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7722696657204662084, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7722696657204662084, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7836037366701422523, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7836037366701422523, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7935627796715456695, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7935627796715456695, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
     - target: {fileID: 7967813576069314795, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: 'targets.Array.data[0]'
       value: 
@@ -22701,14 +23455,101 @@ PrefabInstance:
       propertyPath: 'targets.Array.data[16]'
       value: 
       objectReference: {fileID: 974596311}
+    - target: {fileID: 8034742670404093148, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8034742670404093148, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077517797497729954, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077517797497729954, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329377025180585742, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329377025180585742, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
     - target: {fileID: 8388093385468444750, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: scanActiveLabel
       value: 
       objectReference: {fileID: 1222573483}
+    - target: {fileID: 8420371161127531335, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420371161127531335, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 8568970749764873006, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582746080843106809, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582746080843106809, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 8897251418458231069, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8897251418458231069, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912169153973911988, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912169153973911988, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 8999223094707396122, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8999223094707396122, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 9120933159304856822, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9120933159304856822, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144649830510957979, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144649830510957979, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_TagString
+      value: RoverCabin
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2013213412657734685, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 298519170}
   m_SourcePrefab: {fileID: 100100000, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
 --- !u!114 &3505218748514618310 stripped
 MonoBehaviour:

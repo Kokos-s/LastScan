@@ -11,13 +11,21 @@ public class RockProjectile : MonoBehaviour
     [SerializeField] private float playerThrowDamage = 3f;   // урон боссу от камня ровера
     [SerializeField] private float ignoreOwnerTime = 0.5f;   // сколько после вылета камень не задевает бросающего
 
+    [Header("Одноразовый камень")]
+    [SerializeField] private float breakDelay = 0.05f;       // пауза перед исчезновением после удара
+    [SerializeField] private ParticleSystem breakFx;         // обломки/пыль, необязательно
+    [SerializeField] private float breakFxScale = 4f;
+    [SerializeField] private float maxFlightTime = 8f;       // страховка: камень, который так и не во что не попал
+
     private Rigidbody rb;
     private Collider col;
     private bool armed;
     private bool held;
     private bool thrownByPlayer;
+    private bool consumed;
+    private float launchTime;
 
-    public bool IsAvailable => !held && !armed && !rb.isKinematic;
+    public bool IsAvailable => !held && !armed && !consumed && !rb.isKinematic;
 
     private void Awake()
     {
@@ -27,6 +35,13 @@ public class RockProjectile : MonoBehaviour
 
     private void OnEnable() => All.Add(this);
     private void OnDisable() => All.Remove(this);
+
+    private void Update()
+    {
+        // страховка на случай, если камень застрял в полёте и не сталкивается
+        if (armed && !consumed && Time.time - launchTime > maxFlightTime)
+            Consume();
+    }
 
     public static RockProjectile FindNearest(Vector3 from)
     {
@@ -70,6 +85,7 @@ public class RockProjectile : MonoBehaviour
         rb.linearVelocity = velocity;
         rb.angularVelocity = Random.insideUnitSphere * 3f;
         armed = true;
+        launchTime = Time.time;
 
         if (ignored.Count > 0) StartCoroutine(RestoreCollision(ignored));
     }
@@ -115,14 +131,17 @@ public class RockProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!armed) return;
+        if (!armed || consumed) return;
 
         bool hitBoss = collision.collider.GetComponentInParent<BossController>() != null;
 
-        // колонны камнем не разрушаются
+        // игнорируем контакт с бросающим в первые мгновения полёта
+        if (!thrownByPlayer && hitBoss) return;
+
+        // колонны камнем не разрушаются, камень просто разбивается о них
         if (collision.collider.GetComponentInParent<DestructibleColumn>() != null)
         {
-            armed = false;
+            Consume();
             return;
         }
 
@@ -140,16 +159,31 @@ public class RockProjectile : MonoBehaviour
                     fb.Play(c.point, c.normal);
                 }
             }
-            armed = false;
-            thrownByPlayer = false;
-            return;
+        }
+        else
+        {
+            var target = collision.collider.GetComponentInParent<IDamageable>();
+            if (target != null) target.TakeImpactDamage(impactDamage);
         }
 
-        if (hitBoss) return;
+        Consume();
+    }
 
-        var target = collision.collider.GetComponentInParent<IDamageable>();
-        if (target != null) target.TakeImpactDamage(impactDamage);
-
+    // Камень разбился: убираем из списка снарядов и удаляем
+    private void Consume()
+    {
+        if (consumed) return;
+        consumed = true;
         armed = false;
+
+        if (breakFx != null)
+        {
+            var fx = Instantiate(breakFx, transform.position, Quaternion.identity);
+            fx.transform.localScale *= breakFxScale;
+            fx.Play();
+            Destroy(fx.gameObject, 3f);
+        }
+
+        Destroy(gameObject, breakDelay);
     }
 }

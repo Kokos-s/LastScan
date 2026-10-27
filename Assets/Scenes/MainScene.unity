@@ -23176,6 +23176,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5057477770238519767, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5057477770238519767, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: m_TagString
       value: RoverCabin
       objectReference: {fileID: 0}

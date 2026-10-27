@@ -30,18 +30,53 @@ public class LightningStormController : MonoBehaviour
     public float maxInterval = 2f;
     public float strikeRadius = 8f;
 
+    [SerializeField] private float interferenceStrength = 0.75f;
+
+    [SerializeField, Min(0f)] private float interferenceOutsideDistance = 10f;
+
+    [SerializeField, Min(0f)] private float interferencePeakDepth = 5f;
+
     private int strikeCounter = 0;
     private Coroutine flashCoroutine;
 
     public float ScaledStrikeRadius => strikeRadius * transform.lossyScale.x;
 
+    public float GetInterferenceStrength(Vector3 roverPosition)
+    {
+        if (!isActiveAndEnabled)
+            return 0f;
+
+        Vector3 offset = roverPosition - transform.position;
+        offset.y = 0f;
+
+        float radius = Mathf.Abs(ScaledStrikeRadius);
+
+        float startDistance = radius + Mathf.Max(0f, interferenceOutsideDistance);
+
+        float peakDistance = Mathf.Max(0f, radius - Mathf.Max(0f, interferencePeakDepth));
+
+        float distance = offset.magnitude;
+
+        float transitionWidth = Mathf.Max(0.001f, startDistance - peakDistance);
+
+        float t = Mathf.Clamp01((startDistance - distance) / transitionWidth);
+
+        return Mathf.SmoothStep(0f, 1f, t) * interferenceStrength;
+    }
+
     private void Awake()
     {
-        if (lightningScript == null) lightningScript = GetComponent<LightningBoltScript>();
-        if (lightningScript != null) lightningScript.ManualMode = true;
+        if (lightningScript == null)
+            lightningScript = GetComponent<LightningBoltScript>();
 
-        if (thunderAudioSource == null) thunderAudioSource = GetComponent<AudioSource>();
-        if (targetTerrain == null) targetTerrain = Terrain.activeTerrain;
+        if (lightningScript != null)
+            lightningScript.ManualMode = true;
+
+        if (thunderAudioSource == null)
+            thunderAudioSource = GetComponent<AudioSource>();
+
+        if (targetTerrain == null)
+            targetTerrain = Terrain.activeTerrain;
 
         if (flashImage != null)
         {
@@ -53,12 +88,16 @@ public class LightningStormController : MonoBehaviour
 
     private void OnEnable()
     {
+        MinimapInterferenceController.Register(this);
+
         strikeCounter = 0;
         StartCoroutine(StormRoutine());
     }
 
     private void OnDisable()
     {
+        MinimapInterferenceController.Unregister(this);
+
         StopAllCoroutines();
         flashCoroutine = null;
 
@@ -80,38 +119,37 @@ public class LightningStormController : MonoBehaviour
             float waitTime = Random.Range(minInterval, maxInterval);
             yield return new WaitForSeconds(waitTime);
 
+            if (lightningScript == null)
+                continue;
+
             strikeCounter++;
 
             Vector3 endPos;
             float currentRadius = ScaledStrikeRadius;
 
             bool isRoverUnderCloud = false;
+
             if (roverHealth != null)
             {
                 Vector2 cloudPosFlat = new Vector2(transform.position.x, transform.position.z);
-                Vector2 roverPosFlat = new Vector2(roverHealth.transform.position.x, roverHealth.transform.position.z);
-
+                Vector2 roverPosFlat = new Vector2( roverHealth.transform.position.x, roverHealth.transform.position.z);
                 if (Vector2.Distance(cloudPosFlat, roverPosFlat) <= currentRadius)
-                {
                     isRoverUnderCloud = true;
-                }
             }
 
             if (strikeCounter % 3 == 0 && isRoverUnderCloud && roverHealth != null)
-            {
                 endPos = roverHealth.transform.position + roverStrikeOffset;
-            }
             else
             {
                 Vector2 randomCircle = Random.insideUnitCircle * currentRadius;
+
                 float endX = transform.position.x + randomCircle.x;
                 float endZ = transform.position.z + randomCircle.y;
 
                 float endY = 0f;
+
                 if (targetTerrain != null)
-                {
-                    endY = targetTerrain.SampleHeight(new Vector3(endX, 0, endZ)) + targetTerrain.transform.position.y;
-                }
+                    endY = targetTerrain.SampleHeight(new Vector3(endX, 0f, endZ)) + targetTerrain.transform.position.y;
 
                 endPos = new Vector3(endX, endY, endZ);
             }
@@ -127,15 +165,15 @@ public class LightningStormController : MonoBehaviour
             if (roverHealth != null)
             {
                 float distanceToRover = Vector3.Distance(endPos, roverHealth.transform.position + roverStrikeOffset);
+
                 if (distanceToRover <= damageRadius)
                 {
                     roverHealth.TakeDamage(damageAmount);
 
                     RoverEnergy roverEnergy = roverHealth.GetComponent<RoverEnergy>();
+
                     if (roverEnergy != null)
-                    {
                         roverEnergy.AddEnergy(energyAddAmount);
-                    }
 
                     TriggerFlash();
                 }
@@ -145,8 +183,12 @@ public class LightningStormController : MonoBehaviour
 
     private void TriggerFlash()
     {
-        if (flashImage == null) return;
-        if (flashCoroutine != null) StopCoroutine(flashCoroutine);
+        if (flashImage == null)
+            return;
+
+        if (flashCoroutine != null)
+            StopCoroutine(flashCoroutine);
+
         flashCoroutine = StartCoroutine(FlashRoutine());
     }
 
@@ -157,11 +199,13 @@ public class LightningStormController : MonoBehaviour
         flashImage.color = c;
 
         float elapsed = 0f;
+
         while (elapsed < flashDuration)
         {
             elapsed += Time.deltaTime;
             c.a = Mathf.Lerp(0.85f, 0f, elapsed / flashDuration);
             flashImage.color = c;
+
             yield return null;
         }
 
@@ -171,7 +215,9 @@ public class LightningStormController : MonoBehaviour
 
     private void PlayThunderSound(Vector3 strikePosition)
     {
-        if (thunderAudioSource == null) return;
+        if (thunderAudioSource == null)
+            return;
+
         float volume = 1.0f;
 
         if (roverHealth != null)
@@ -181,7 +227,8 @@ public class LightningStormController : MonoBehaviour
             volume = Mathf.Lerp(1.0f, minVolume, t);
         }
 
-        if (thunderClip != null) thunderAudioSource.PlayOneShot(thunderClip, volume);
+        if (thunderClip != null)
+            thunderAudioSource.PlayOneShot(thunderClip, volume);
         else
         {
             thunderAudioSource.volume = volume;

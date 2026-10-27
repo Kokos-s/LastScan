@@ -8,9 +8,9 @@ public class BossDisc : MonoBehaviour
 
     public static readonly List<BossDisc> All = new List<BossDisc>();
 
-    [SerializeField] private int maxThrows = 2;            // сколько раз диск можно бросить
-    [SerializeField] private float damage = 1f;            // урон ровера от диска босса
-    [SerializeField] private float playerThrowDamage = 4f; // урон боссу от диска, брошенного ровером
+    [SerializeField] private int maxThrows = 2;
+    [SerializeField] private float damage = 1f;
+    [SerializeField] private float playerThrowDamage = 4f;
     [SerializeField] private float speed = 18f;
     [SerializeField] private int maxBounces = 6;
     [SerializeField] private float lifetime = 10f;
@@ -128,7 +128,6 @@ public class BossDisc : MonoBehaviour
 
     public void Lie()
     {
-        // последний бросок использован: диск исчезает
         if (throwCount >= maxThrows)
         {
             Destroy(gameObject);
@@ -194,6 +193,14 @@ public class BossDisc : MonoBehaviour
                 {
                     boss.TakeDamage(playerThrowDamage);
                     nextHitTime = Time.time + 0.5f;
+
+                    // фидбек попадания: вспышка, звук, искры
+                    var fb = collision.collider.GetComponentInParent<BossHitFeedback>();
+                    if (fb != null)
+                    {
+                        ContactPoint c = collision.GetContact(0);
+                        fb.Play(c.point, c.normal);
+                    }
                 }
                 return;
             }
@@ -207,7 +214,7 @@ public class BossDisc : MonoBehaviour
             {
                 if (Time.time >= nextHitTime)
                 {
-                    target.TakeDamage(damage);
+                    target.TakeImpactDamage(damage);
                     nextHitTime = Time.time + 0.5f;
                 }
                 return;

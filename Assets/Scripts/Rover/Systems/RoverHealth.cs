@@ -15,12 +15,15 @@ public class RoverHealth : MonoBehaviour, IDamageable
     public GameObject modelStage3;
     public GameObject modelStage4;
 
+    private RoverHitFeedback hitFeedback;
+
     public bool IsDead => currentHealth <= 0;
 
     private void Awake()
     {
         if (maxHealth <= 0) maxHealth = 10f;
         currentHealth = maxHealth;
+        hitFeedback = GetComponent<RoverHitFeedback>();
     }
 
     private void Start()
@@ -33,22 +36,30 @@ public class RoverHealth : MonoBehaviour, IDamageable
         UpdateVisualState();
     }
 
-    public void TakeDamage(float amount)
+    // Обычный урон: молнии, аномалии. Без звука и искр
+    public void TakeDamage(float amount) => ApplyDamage(amount, false);
+
+    // Удар: бур, камни, диски босса. Со звуком, вспышкой, искрами
+    public void TakeImpactDamage(float amount) => ApplyDamage(amount, true);
+
+    private void ApplyDamage(float amount, bool impact)
     {
-        if (IsDead) 
+        if (IsDead)
             return;
 
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0f);
 
-        if(healthFill != null)
-        { 
-
+        if (healthFill != null)
+        {
             healthFill.fillAmount = currentHealth / maxHealth;
         }
 
         if (DamageVignette.Instance != null)
             DamageVignette.Instance.FlashDamage();
+
+        if (impact && hitFeedback != null)
+            hitFeedback.Play(amount);
 
         UpdateVisualState();
 
@@ -114,5 +125,4 @@ public class RoverHealth : MonoBehaviour, IDamageable
         if (modelStage4 != null)
             modelStage4.SetActive(modelStage4 == activeModel);
     }
-
 }

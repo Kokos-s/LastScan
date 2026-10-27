@@ -6,11 +6,16 @@ public class RobotAnimationEvents : MonoBehaviour
     [SerializeField] private RoverInventory roverInventory;
     [SerializeField] private GameMissions gameMissions;
 
-    [Header("Attack (атака на F)")]
-    [SerializeField] private Transform attackPoint;      // точка перед щипцами
+    [Header("Attack (атака на ЛКМ)")]
+    [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRadius = 3f;
-    [SerializeField] private float attackDamage = 10f;
-    [SerializeField] private LayerMask attackMask;       // слой Boss
+    [SerializeField] private float attackDamage = 4f;
+    [SerializeField] private LayerMask attackMask;
+
+    [Header("Hit Feedback (удар по боссу)")]
+    [SerializeField] private float hitStopTime = 0.06f;
+    [SerializeField] private float shakeAmplitude = 0.3f;
+    [SerializeField] private float shakeDuration = 0.15f;
 
     private RobotController controller;
     private readonly HashSet<IDamageable> hitThisSwing = new HashSet<IDamageable>();
@@ -50,6 +55,7 @@ public class RobotAnimationEvents : MonoBehaviour
     {
         Transform p = attackPoint != null ? attackPoint : transform;
         hitThisSwing.Clear();
+        bool hitSomething = false;
 
         Collider[] hits = Physics.OverlapSphere(p.position, attackRadius, attackMask,
                                                 QueryTriggerInteraction.Ignore);
@@ -59,7 +65,24 @@ public class RobotAnimationEvents : MonoBehaviour
             if (target == null || ReferenceEquals(target, GetComponent<RoverHealth>())) continue;
 
             if (hitThisSwing.Add(target))
+            {
                 target.TakeDamage(attackDamage);
+                hitSomething = true;
+
+                var fb = h.GetComponentInParent<BossHitFeedback>();
+                if (fb != null)
+                {
+                    Vector3 point = h.bounds.ClosestPoint(p.position);
+                    Vector3 normal = (p.position - point);
+                    fb.Play(point, normal);
+                }
+            }
+        }
+
+        if (hitSomething && HitFeedbackFX.Instance != null)
+        {
+            HitFeedbackFX.Instance.Shake(shakeAmplitude, shakeDuration);
+            HitFeedbackFX.Instance.HitStop(hitStopTime);
         }
     }
 

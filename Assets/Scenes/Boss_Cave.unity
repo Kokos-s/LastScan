@@ -4568,6 +4568,7 @@ GameObject:
   - component: {fileID: 1150318956}
   - component: {fileID: 1150318958}
   - component: {fileID: 1150318957}
+  - component: {fileID: 1150318959}
   m_Layer: 11
   m_Name: Boss
   m_TagString: Boss
@@ -4919,6 +4920,43 @@ MonoBehaviour:
   sparksPrefab: {fileID: 8193441106507369440, guid: 2b6213a53ea2f114694131110d580959, type: 3}
   sparkScale: 1
   sparkOffset: 1.5
+--- !u!114 &1150318959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150318948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab26d8a5c31381f4a91199ce8846dbda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brokenPrefab: {fileID: 2112067280184708213, guid: 5141e1215cdc08d45b7da535516874c8, type: 3}
+  chargeTime: 3.5
+  shakeMax: 0.6
+  glowColor: {r: 1, g: 0.55, b: 0.15, a: 1}
+  glowMaxIntensity: 6
+  strobeSpeed: 25
+  lightColor: {r: 1, g: 0.7, b: 0.35, a: 1}
+  lightMaxIntensity: 40
+  lightMaxRange: 60
+  flashLightIntensity: 400
+  lightHeight: 3
+  flashRiseTime: 0.3
+  flashHoldTime: 0.15
+  flashFadeTime: 1
+  flashSphereRadius: 40
+  flashSphereMaterial: {fileID: 2100000, guid: d40285051fe236146bfe9c7cd05a940e, type: 2}
+  explosionFx: {fileID: 0}
+  explosionFxScale: 4
+  cameraShakeMax: 0.8
+  explosionCameraShake: 2.5
+  humClip: {fileID: 8300000, guid: 01f49c197ba68a548b5d8ae7203369d1, type: 3}
+  explosionClip: {fileID: 8300000, guid: 647b9286aa2e847499e952b55818a6aa, type: 3}
+  humMaxVolume: 1
+  humMinPitch: 0.5
+  humMaxPitch: 1.8
 --- !u!4 &1166332987 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1154223074477058189, guid: 6ccb24f2b11e0be4eb3bd41c8c834d72, type: 3}

@@ -14,8 +14,11 @@ public class BossHitFeedback : MonoBehaviour
 
     [Header("Sparks")]
     [SerializeField] private ParticleSystem sparksPrefab;
-    [SerializeField] private float sparkScale = 4f;     // общий множитель размера искр
-    [SerializeField] private float sparkOffset = 1.5f;  // насколько вынести искры наружу от точки удара
+    [SerializeField] private float sparkScale = 4f;
+    [SerializeField] private float sparkOffset = 1.5f;
+
+    // true во время смерти босса: фидбек ударов отключён
+    public bool Muted { get; set; }
 
     private Renderer[] renderers;
     private Material[][] originals;
@@ -34,6 +37,8 @@ public class BossHitFeedback : MonoBehaviour
 
     public void Play(Vector3 point, Vector3 normal)
     {
+        if (Muted) return;
+
         Flash();
         PlaySound();
         SpawnSparks(point, normal);
@@ -82,7 +87,6 @@ public class BossHitFeedback : MonoBehaviour
             return;
         }
 
-        // если направление удара неизвестно (точка внутри коллайдера), разворачиваем искры к камере
         if (normal.sqrMagnitude < 0.01f)
         {
             Camera cam = Camera.main;

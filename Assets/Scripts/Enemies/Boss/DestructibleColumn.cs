@@ -14,14 +14,26 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
     [SerializeField] private float maxHealth = 12f;
     [SerializeField] private float hitShakeAmount = 0.15f;
 
+    [Header("Hit Feedback (удар по колонне)")]
+    [SerializeField] private Material flashMaterial;            // M_HitFlash
+    [SerializeField] private float flashTime = 0.08f;
+    [SerializeField] private AudioClip[] hitClips;              // 3-4 звука удара по камню
+    [SerializeField] private AudioClip crackClip;               // звук последнего удара (необязательно)
+    [SerializeField] private Vector2 pitchRange = new Vector2(0.9f, 1.1f);
+    [SerializeField] private float soundVolume = 1f;
+    [SerializeField] private ParticleSystem chipsPrefab;        // маленькие камни, разлетающиеся в стороны
+    [SerializeField] private float chipsScale = 4f;
+    [SerializeField] private float chipsOffset = 0.5f;          // насколько вынести частицы наружу от поверхности
+    [SerializeField] private float lastHitChipsMultiplier = 2f; // во сколько раз крупнее эффект на последнем ударе
+
     [Header("Fall")]
     [SerializeField] private float telegraphTime = 1f;
     [SerializeField] private float fallTime = 1.2f;
     [SerializeField] private float fallDamage = 15f;
     [SerializeField] private LayerMask damageMask;
     [SerializeField] private float hitHeight = 6f;
-    [SerializeField] private float hitWidthMultiplier = 1.8f;   // ширина зоны урона (было 1.5)
-    [SerializeField] private float zoneLengthMultiplier = 1.5f; // длина зоны урона относительно высоты колонны
+    [SerializeField] private float hitWidthMultiplier = 1.8f;
+    [SerializeField] private float zoneLengthMultiplier = 1.5f;
     [SerializeField] private float shakeAmplitude = 0.8f;
     [SerializeField] private float shakeDuration = 0.4f;
     [SerializeField] private float hitStopTime = 0.1f;
@@ -56,6 +68,12 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
     private Collider modelCollider;
     private NavMeshObstacle modelObstacle;
 
+    private Renderer[] modelRenderers;
+    private Material[][] originalMaterials;
+    private Coroutine shakeRoutine;
+    private Coroutine flashRoutine;
+    private float flashUntil;
+
     private Transform zoneBase;
     private Transform zoneFill;
     private Material zoneMatBase;
@@ -81,6 +99,12 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
             height = b.size.y;
             radius = Mathf.Max(b.size.x, b.size.z) * 0.5f;
         }
+
+        var list = new List<Renderer>();
+        foreach (var r in model.GetComponentsInChildren<Renderer>(true))
+            if (r is MeshRenderer || r is SkinnedMeshRenderer) list.Add(r);
+        modelRenderers = list.ToArray();
+
         if (stump != null) stump.SetActive(false);
     }
 
@@ -89,17 +113,125 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
         if (falling) return;
 
         health -= amount;
-        StopAllCoroutines();
+        bool lethal = health <= 0f;
 
-        if (health <= 0f)
+        PlayHitFeedback(lethal);
+
+        if (shakeRoutine != null)
+        {
+            StopCoroutine(shakeRoutine);
+            shakeRoutine = null;
+        }
+
+        if (lethal)
         {
             falling = true;
             StartCoroutine(FallRoutine());
         }
         else
         {
-            StartCoroutine(ShakeModel(0.2f, hitShakeAmount));
+            shakeRoutine = StartCoroutine(ShakeModel(0.2f, hitShakeAmount));
         }
+    }
+
+    // ---------------- ФИДБЕК УДАРА ----------------
+    private void PlayHitFeedback(bool lethal)
+    {
+        Flash();
+
+        // точка удара: на поверхности колонны со стороны ровера, на высоте ровера
+        Vector3 center = modelCollider != null ? modelCollider.bounds.center : model.position;
+        Vector3 normal = -transform.forward;
+        float y = center.y;
+
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            Vector3 toPlayer = player.transform.position - center;
+            toPlayer.y = 0f;
+            if (toPlayer.sqrMagnitude > 0.01f) normal = toPlayer.normalized;
+
+            if (modelCollider != null)
+            {
+                Bounds b = modelCollider.bounds;
+                y = Mathf.Clamp(player.transform.position.y, b.min.y, b.max.y);
+            }
+        }
+
+        Vector3 point = center + normal * radius;
+        point.y = y;
+
+        PlaySound(lethal && crackClip != null ? crackClip : PickHitClip(), point);
+        SpawnChips(point, normal, lethal ? lastHitChipsMultiplier : 1f);
+    }
+
+    private AudioClip PickHitClip()
+    {
+        if (hitClips == null || hitClips.Length == 0) return null;
+        return hitClips[Random.Range(0, hitClips.Length)];
+    }
+
+    private void PlaySound(AudioClip clip, Vector3 pos)
+    {
+        if (clip == null) return;
+
+        var go = new GameObject("ColumnHitSound");
+        go.transform.position = pos;
+        var src = go.AddComponent<AudioSource>();
+        src.clip = clip;
+        src.spatialBlend = 0.7f;
+        src.pitch = Random.Range(pitchRange.x, pitchRange.y);
+        src.volume = soundVolume;
+        src.minDistance = 10f;
+        src.maxDistance = 200f;
+        src.Play();
+        Destroy(go, clip.length / Mathf.Max(0.1f, src.pitch) + 0.2f);
+    }
+
+    private void SpawnChips(Vector3 point, Vector3 normal, float multiplier)
+    {
+        if (chipsPrefab == null) return;
+
+        var fx = Instantiate(chipsPrefab, point + normal * chipsOffset, Quaternion.LookRotation(normal));
+        fx.transform.localScale *= chipsScale * multiplier;
+        fx.Play();
+        Destroy(fx.gameObject, 4f);
+    }
+
+    private void Flash()
+    {
+        if (flashMaterial == null || modelRenderers.Length == 0) return;
+
+        flashUntil = Time.unscaledTime + flashTime;
+        if (flashRoutine == null) flashRoutine = StartCoroutine(FlashRoutine());
+    }
+
+    private IEnumerator FlashRoutine()
+    {
+        originalMaterials = new Material[modelRenderers.Length][];
+        for (int i = 0; i < modelRenderers.Length; i++)
+        {
+            if (modelRenderers[i] == null) continue;
+            originalMaterials[i] = modelRenderers[i].sharedMaterials;
+
+            var white = new Material[originalMaterials[i].Length];
+            for (int m = 0; m < white.Length; m++) white[m] = flashMaterial;
+            modelRenderers[i].sharedMaterials = white;
+        }
+
+        // unscaled: вспышка не зависает во время замирания игры
+        while (Time.unscaledTime < flashUntil) yield return null;
+
+        RestoreMaterials();
+        flashRoutine = null;
+    }
+
+    private void RestoreMaterials()
+    {
+        if (originalMaterials == null) return;
+        for (int i = 0; i < modelRenderers.Length; i++)
+            if (modelRenderers[i] != null && originalMaterials[i] != null)
+                modelRenderers[i].sharedMaterials = originalMaterials[i];
     }
 
     private IEnumerator ShakeModel(float time, float amount)
@@ -113,8 +245,10 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
             yield return null;
         }
         model.localPosition = modelRestPos;
+        shakeRoutine = null;
     }
 
+    // ---------------- ПАДЕНИЕ ----------------
     private IEnumerator FallRoutine()
     {
         Vector3 basePos = fallingPivot.position;
@@ -178,6 +312,7 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
         }
 
         // 4. Пенёк и обломки
+        RestoreMaterials();
         fallingPivot.gameObject.SetActive(false);
         if (stump != null) stump.SetActive(true);
         SpawnRocks(basePos, dir);
@@ -186,8 +321,8 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
     // ---------------- ЗОНА ПОРАЖЕНИЯ ----------------
     private void CreateZone(Vector3 basePos, Vector3 dir)
     {
-        zoneWidth = radius * hitWidthMultiplier * 2f;   // та же ширина, что у OverlapBox
-        zoneLength = ZoneLen;                           // та же длина
+        zoneWidth = radius * hitWidthMultiplier * 2f;
+        zoneLength = ZoneLen;
         zoneDir = dir;
         zoneFloor = OnGround(basePos, basePos.y) + Vector3.up * zoneHeightAboveFloor;
 
@@ -363,7 +498,6 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
         }
     }
 
-    // обломки остаются там, где колонна реально упала (в пределах высоты), а не по всей длинной зоне
     private Vector3 RandomSpot(Vector3 basePos, Vector3 dir, Vector3 side)
     {
         return basePos + dir * Random.Range(height * 0.45f, height)

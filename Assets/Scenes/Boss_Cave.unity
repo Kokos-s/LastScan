@@ -207,6 +207,18 @@ MonoBehaviour:
   stump: {fileID: 684648564}
   maxHealth: 12
   hitShakeAmount: 0.15
+  flashMaterial: {fileID: 2100000, guid: c73a0ba02b20094418e60639148890ac, type: 2}
+  flashTime: 0.08
+  hitClips:
+  - {fileID: 8300000, guid: e94e8498dde4cd741969a7ab10c2cecd, type: 3}
+  - {fileID: 8300000, guid: 0c7e228e34b68394491f26afe57b5a77, type: 3}
+  crackClip: {fileID: 8300000, guid: 444e96ea4f9382e4ca290727d5f0e4ac, type: 3}
+  pitchRange: {x: 0.9, y: 1.1}
+  soundVolume: 1
+  chipsPrefab: {fileID: 4263729189149683102, guid: 97fe2524230b2d74388993e5a52885ca, type: 3}
+  chipsScale: 1
+  chipsOffset: 1
+  lastHitChipsMultiplier: 2
   telegraphTime: 1
   fallTime: 1.2
   fallDamage: 15
@@ -576,6 +588,18 @@ MonoBehaviour:
   stump: {fileID: 760913842}
   maxHealth: 12
   hitShakeAmount: 0.15
+  flashMaterial: {fileID: 2100000, guid: c73a0ba02b20094418e60639148890ac, type: 2}
+  flashTime: 0.08
+  hitClips:
+  - {fileID: 8300000, guid: e94e8498dde4cd741969a7ab10c2cecd, type: 3}
+  - {fileID: 8300000, guid: 0c7e228e34b68394491f26afe57b5a77, type: 3}
+  crackClip: {fileID: 8300000, guid: 444e96ea4f9382e4ca290727d5f0e4ac, type: 3}
+  pitchRange: {x: 0.9, y: 1.1}
+  soundVolume: 1
+  chipsPrefab: {fileID: 4263729189149683102, guid: 97fe2524230b2d74388993e5a52885ca, type: 3}
+  chipsScale: 1
+  chipsOffset: 0.5
+  lastHitChipsMultiplier: 2
   telegraphTime: 1
   fallTime: 1.2
   fallDamage: 15
@@ -6026,6 +6050,18 @@ MonoBehaviour:
   stump: {fileID: 1575473323}
   maxHealth: 12
   hitShakeAmount: 0.15
+  flashMaterial: {fileID: 2100000, guid: c73a0ba02b20094418e60639148890ac, type: 2}
+  flashTime: 0.08
+  hitClips:
+  - {fileID: 8300000, guid: e94e8498dde4cd741969a7ab10c2cecd, type: 3}
+  - {fileID: 8300000, guid: 0c7e228e34b68394491f26afe57b5a77, type: 3}
+  crackClip: {fileID: 8300000, guid: 444e96ea4f9382e4ca290727d5f0e4ac, type: 3}
+  pitchRange: {x: 0.9, y: 1.1}
+  soundVolume: 1
+  chipsPrefab: {fileID: 4263729189149683102, guid: 97fe2524230b2d74388993e5a52885ca, type: 3}
+  chipsScale: 1
+  chipsOffset: 4
+  lastHitChipsMultiplier: 2
   telegraphTime: 1
   fallTime: 1.2
   fallDamage: 15
@@ -7255,6 +7291,18 @@ MonoBehaviour:
   stump: {fileID: 1448721910}
   maxHealth: 12
   hitShakeAmount: 0.15
+  flashMaterial: {fileID: 2100000, guid: c73a0ba02b20094418e60639148890ac, type: 2}
+  flashTime: 0.08
+  hitClips:
+  - {fileID: 8300000, guid: e94e8498dde4cd741969a7ab10c2cecd, type: 3}
+  - {fileID: 8300000, guid: 0c7e228e34b68394491f26afe57b5a77, type: 3}
+  crackClip: {fileID: 8300000, guid: 444e96ea4f9382e4ca290727d5f0e4ac, type: 3}
+  pitchRange: {x: 0.9, y: 1.1}
+  soundVolume: 1
+  chipsPrefab: {fileID: 4263729189149683102, guid: 97fe2524230b2d74388993e5a52885ca, type: 3}
+  chipsScale: 1
+  chipsOffset: 2
+  lastHitChipsMultiplier: 2
   telegraphTime: 1
   fallTime: 1.2
   fallDamage: 15

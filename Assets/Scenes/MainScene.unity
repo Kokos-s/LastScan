@@ -22626,6 +22626,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: RoverCabin
       objectReference: {fileID: 0}
+    - target: {fileID: 564460773605682752, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: highlightIntensity
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 564460773605682752, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: highlightPulseSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 602309405872374107, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: m_Layer
       value: 10

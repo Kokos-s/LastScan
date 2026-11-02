@@ -26,6 +26,8 @@ public class RockProjectile : MonoBehaviour
     private float launchTime;
 
     public bool IsAvailable => !held && !armed && !consumed && !rb.isKinematic;
+    // true с момента броска (боссом или ровером) до удара
+    public bool IsThrown => armed && !consumed;
 
     private void Awake()
     {

@@ -249,6 +249,8 @@ public class BossDeathSequence : MonoBehaviour
         Destroy(audioGo, 6f);
         foreach (var m in mats) if (m != null) Destroy(m);
 
+        VictoryManager.Instance.ShowVictoryScreen();
+
         // целого босса на сцене больше нет: остаётся только сломанный
         gameObject.SetActive(false);
     }

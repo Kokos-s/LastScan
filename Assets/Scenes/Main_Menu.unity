@@ -374,6 +374,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ramo mineral
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fe5f76973b562e8439657701558de343, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6902844718518036148, guid: fe5f76973b562e8439657701558de343, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -975,6 +979,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_004 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 44e446e2fcdb10a4fb5318245ff8bb33, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: 44e446e2fcdb10a4fb5318245ff8bb33, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: cf49629a0a1f87948b50f25ed5d292c7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1044,6 +1056,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_004 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: 44e446e2fcdb10a4fb5318245ff8bb33, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: cf49629a0a1f87948b50f25ed5d292c7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2311,7 +2327,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 0.8396226, g: 0.72741836, b: 0.48713955, a: 1}
+  m_Color: {r: 0.6320754, g: 0.46779546, b: 0.372686, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -2668,6 +2684,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_003
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 442517dbba9ec004e8e5bb11ca560f9b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: 442517dbba9ec004e8e5bb11ca560f9b, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: cf49629a0a1f87948b50f25ed5d292c7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3140,7 +3164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 079053c9dacd61e4a9a4c24fb42df1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFXSource: {fileID: 1965177800}
+  musicSource: {fileID: 1965177800}
+  music: {fileID: 8300000, guid: f37f9be1f1d74c64f8de54d2fb8548a3, type: 3}
 --- !u!4 &1352731076
 Transform:
   m_ObjectHideFlags: 0
@@ -3221,6 +3246,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_004 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: 44e446e2fcdb10a4fb5318245ff8bb33, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: cf49629a0a1f87948b50f25ed5d292c7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3427,6 +3456,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_006
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d05855eaf899aa744877aa045e7517b3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: d05855eaf899aa744877aa045e7517b3, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: cf49629a0a1f87948b50f25ed5d292c7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3685,6 +3722,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_004
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 44e446e2fcdb10a4fb5318245ff8bb33, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: 44e446e2fcdb10a4fb5318245ff8bb33, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: cf49629a0a1f87948b50f25ed5d292c7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3906,7 +3951,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64423011}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: cf49629a0a1f87948b50f25ed5d292c7, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -3932,7 +3977,7 @@ GameObject:
   - component: {fileID: 1965177799}
   - component: {fileID: 1965177800}
   m_Layer: 0
-  m_Name: SFX_Source
+  m_Name: Music_Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3966,9 +4011,9 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4329,6 +4374,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_006 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d05855eaf899aa744877aa045e7517b3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: d05855eaf899aa744877aa045e7517b3, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: cf49629a0a1f87948b50f25ed5d292c7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

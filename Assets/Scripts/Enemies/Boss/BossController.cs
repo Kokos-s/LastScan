@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class BossController : MonoBehaviour
 {
-    public enum State { Chase, DrillAttack, RockAttack, DiscAttack, Recover, Dead }
+    public enum State { Chase, DrillAttack, RockAttack, DiscAttack, ChargeAttack, Stunned, Recover, Dead }
 
     [Header("References")]
     [SerializeField] private Transform player;       // можно оставить пустым: ищется по тегу Player
@@ -14,16 +14,47 @@ public class BossController : MonoBehaviour
     [SerializeField] private Transform drillModel;
     [SerializeField] private Renderer drillRenderer;
     [SerializeField] private DrillHitbox drillHitbox;
-    [SerializeField] private Transform holdPoint;
+    [SerializeField] private Transform holdPoint;    // точка между пальцами пинцета
     [SerializeField] private Transform armJoint;     // плечо руки с буром
     [SerializeField] private Transform elbowJoint;   // локоть руки с буром
 
     [Header("Phases (фазы по здоровью)")]
-    [SerializeField, Range(0.05f, 0.95f)] private float rangedPhaseThreshold = 0.5f; // ниже этого здоровья босс предпочитает дальние атаки
-    [SerializeField] private float phase1RangedChance = 0.2f;       // шанс дальней атаки в фазе 1 (проверка раз в 3 с)
-    [SerializeField] private float phase1CooldownMultiplier = 2f;   // кулдауны дальних атак в фазе 1
-    [SerializeField] private float phase2CooldownMultiplier = 0.6f; // кулдауны дальних атак в фазе 2
-    [SerializeField] private float phase2KeepDistance = 20f;        // на каком расстоянии босс останавливается в фазе 2
+    [SerializeField, Range(0.05f, 0.95f)] private float rangedPhaseThreshold = 0.5f;
+    [SerializeField] private float phase1RangedChance = 0.2f;
+    [SerializeField] private float phase1CooldownMultiplier = 2f;
+    [SerializeField] private float phase2CooldownMultiplier = 0.6f;
+    [SerializeField] private float phase2KeepDistance = 20f;
+
+    [Header("Charge Attack (разгон, фаза 3)")]
+    [SerializeField, Range(0.01f, 0.9f)] private float chargePhaseThreshold = 0.2f;
+    [SerializeField] private float chargeWindupTime = 0.9f;
+    [SerializeField, Range(0.1f, 1f)] private float chargeAimUntil = 0.85f;   // до какой доли замаха босс наводится на ровер
+    [SerializeField] private float chargeAimTurnSpeed = 14f;                  // скорость наведения в замахе
+    [SerializeField] private float chargeSteerRate = 0f;                      // градусов/с подруливания к роверу во время разгона (0 = строго по стрелке)
+    [SerializeField] private float chargeTopSpeed = 70f;
+    [SerializeField] private float chargeAcceleration = 250f;
+    [SerializeField] private float chargeRange = 1000f;                       // страховка: максимум дистанции
+    [SerializeField] private float chargeTimeLimit = 10f;                     // страховка: максимум времени
+    [SerializeField] private float chargeStartMaxDistance = 150f;             // с какого расстояния босс начинает разгон
+    [SerializeField] private LayerMask chargeObstacleMask;                    // что останавливает босса (пусто = Walls, Columns, Rocks)
+    [SerializeField] private float chargeIgnoreHeight = 3f;                   // препятствия ниже этой высоты над корнем босса игнорируются (пеньки)
+    [SerializeField] private float chargeSkin = 0.3f;
+    [SerializeField] private float chargeDamage = 4f;
+    [SerializeField] private float chargeKnockback = 15f;
+    [SerializeField] private float chargeWidthMultiplier = 1.7f;              // ширина зоны урона относительно корпуса
+    [SerializeField] private float chargeHitForward = 2f;
+    [SerializeField] private bool chargeStopsOnPlayer = true;
+    [SerializeField] private float chargeStunTime = 3f;
+    [SerializeField] private float chargeSlideBackTime = 0.6f;                // возврат на NavMesh в конце оглушения
+    [SerializeField] private float chargeCooldownAfterStun = 1.5f;
+    [SerializeField] private float chargeHitShake = 1.2f;
+    [SerializeField] private float chargeCrashShake = 2f;
+    [SerializeField] private bool showChargeArrow = true;
+    [SerializeField, Range(0.3f, 1f)] private float chargeArrowShaft = 0.75f; // ширина древка относительно наконечника
+    [SerializeField] private float chargeArrowHeight = 0.3f;                  // высота над полом
+    [SerializeField] private Color chargeArrowColor = new Color(1f, 0.1f, 0.1f, 1f);
+    [SerializeField] private AudioClip chargeWindupClip;
+    [SerializeField] private AudioClip crashClip;
 
     [Header("Drill Attack")]
     [SerializeField] private float drillRange = 7f;
@@ -51,22 +82,32 @@ public class BossController : MonoBehaviour
     [SerializeField] private Color telegraphColor = Color.red;
 
     [Header("Rock Attack")]
-    [SerializeField] private float rockMinRange = 12f;        // только в фазе 1
+    [SerializeField] private float rockMinRange = 12f;
     [SerializeField] private float rockCooldown = 4f;
     [SerializeField] private float pickupDistance = 12f;
     [SerializeField] private float rockStopDistance = 8f;
     [SerializeField] private float rockApproachTimeout = 20f;
     [SerializeField] private float pickupTime = 0.5f;
     [SerializeField] private float throwWindup = 1.0f;
+    [SerializeField] private float rockSwingTime = 0.25f;
     [SerializeField] private float throwSpeed = 14f;
     [SerializeField] private float leadFactor = 0.7f;
     [SerializeField] private float rockRecover = 1.0f;
-    [SerializeField] private float raiseHeight = 0.6f;
     [SerializeField] private float rockMinFlightTime = 1.2f;
     [SerializeField] private float rockMaxFlightTime = 2.5f;
     [SerializeField] private float stuckCheckTime = 1.5f;
     [SerializeField] private float stuckMinMove = 0.5f;
     [SerializeField] private float rockBlacklistTime = 15f;
+
+    [Header("Gripper (пальцы пинцета)")]
+    [SerializeField] private Transform fingerA;
+    [SerializeField] private Transform fingerB;
+    [SerializeField] private Vector3 fingerAAxis = Vector3.up;
+    [SerializeField] private Vector3 fingerBAxis = Vector3.up;
+    [SerializeField] private float fingerAClosedAngle = 20f;
+    [SerializeField] private float fingerBClosedAngle = -20f;
+    [SerializeField] private float fingerCloseTime = 0.25f;
+    [SerializeField] private float fingerOpenTime = 0.12f;
 
     [Header("Disc Attack (диски)")]
     [SerializeField] private BossDisc[] discs;
@@ -81,7 +122,7 @@ public class BossController : MonoBehaviour
     [SerializeField] private float discRecover = 1.2f;
     [SerializeField] private float discCooldown = 5f;
 
-    [Header("Throw Arm (рука, бросающая диски)")]
+    [Header("Throw Arm (рука с пинцетом: диски и камни)")]
     [SerializeField] private Transform throwShoulder;
     [SerializeField] private Transform throwElbow;
     [SerializeField] private Vector3 throwShoulderAxis = Vector3.up;
@@ -95,15 +136,19 @@ public class BossController : MonoBehaviour
     [SerializeField] private float throwReturnTime = 0.3f;
 
     private NavMeshAgent agent;
+    private BoxCollider bossBox;
+    private DizzyStars dizzy;
     private State state;
     private float currentSpin;
     private Color baseColor;
     private Vector3 pivotRestPos;
-    private Vector3 holdRestPos;
     private Quaternion armRestRot;
     private Quaternion elbowRestRot;
     private Quaternion throwShoulderRest;
     private Quaternion throwElbowRest;
+    private Quaternion fingerARest;
+    private Quaternion fingerBRest;
+    private float fingerK;
     private Health health;
     private Rigidbody playerBody;
     private RockProjectile heldRock;
@@ -113,23 +158,32 @@ public class BossController : MonoBehaviour
     private float nextCollectTime;
     private float nextPhase1Roll;
     private float nextRockSearch;
+    private float nextChargeTime;
     private RockProjectile cachedRock;
     private float defaultStopDistance;
     private bool started = false;
     private bool warnedNoPlayer = false;
     private bool wasRangedPhase = false;
+    private bool wasChargePhase = false;
+    private float chargeFloorY;
+    private GameObject arrowGo;
+    private Mesh arrowMesh;
+    private Material arrowMat;
+    private readonly HashSet<IDamageable> chargeHit = new HashSet<IDamageable>();
     private readonly Dictionary<RockProjectile, float> rockBlacklist = new Dictionary<RockProjectile, float>();
 
     public State CurrentState => state;
 
     private Transform DiscHand => discHoldPoint != null ? discHoldPoint : holdPoint;
 
-    // Фаза 2: здоровье ниже порога
     private bool IsRangedPhase => health != null && health.Normalized <= rangedPhaseThreshold;
+    private bool IsChargePhase => health != null && health.Normalized <= chargePhaseThreshold;
     private float CooldownMul => IsRangedPhase ? phase2CooldownMultiplier : phase1CooldownMultiplier;
-
-    // Прервать дальнюю атаку ради бура можно только в фазе 1
     private bool ShouldAbortForDrill(float dist) => !IsRangedPhase && dist <= drillRange;
+
+    private int ObstacleMask => chargeObstacleMask.value != 0
+        ? chargeObstacleMask.value
+        : LayerMask.GetMask("Walls", "Columns", "Rocks");
 
     private bool ResolvePlayer()
     {
@@ -161,13 +215,18 @@ public class BossController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         health = GetComponent<Health>();
+        bossBox = GetComponent<BoxCollider>();
+        dizzy = GetComponent<DizzyStars>();
+        if (dizzy == null) dizzy = gameObject.AddComponent<DizzyStars>();
+
         ResolvePlayer();
         pivotRestPos = drillPivot.localPosition;
-        holdRestPos = holdPoint.localPosition;
         armRestRot = armJoint.localRotation;
         elbowRestRot = elbowJoint.localRotation;
         if (throwShoulder != null) throwShoulderRest = throwShoulder.localRotation;
         if (throwElbow != null) throwElbowRest = throwElbow.localRotation;
+        if (fingerA != null) fingerARest = fingerA.localRotation;
+        if (fingerB != null) fingerBRest = fingerB.localRotation;
         baseColor = drillRenderer.material.color;
         defaultStopDistance = agent.stoppingDistance;
         currentSpin = idleSpin;
@@ -185,6 +244,7 @@ public class BossController : MonoBehaviour
     private void OnDisable()
     {
         if (health) health.onDeath.RemoveListener(OnDeath);
+        CleanupCharge(false);
     }
 
     private void Start()
@@ -195,6 +255,7 @@ public class BossController : MonoBehaviour
         nextDiscTime = Time.time + 3f;
         nextCollectTime = Time.time + 3f;
         nextPhase1Roll = Time.time + 3f;
+        nextChargeTime = Time.time + 2f;
     }
 
     private void Update()
@@ -203,7 +264,6 @@ public class BossController : MonoBehaviour
 
         if (!ResolvePlayer()) return;
 
-        // смена фазы: сбрасываем кулдауны, чтобы босс сразу перешёл на дальние атаки
         bool ranged = IsRangedPhase;
         if (ranged != wasRangedPhase)
         {
@@ -217,21 +277,29 @@ public class BossController : MonoBehaviour
             }
         }
 
+        bool charge = IsChargePhase;
+        if (charge != wasChargePhase)
+        {
+            wasChargePhase = charge;
+            if (charge) nextChargeTime = Time.time + 1f;
+        }
+
         if (state == State.Chase) UpdateChase();
     }
 
     private void ResetAfterInterrupt()
     {
         StopAllCoroutines();
+        CleanupCharge(true);
 
         drillHitbox.gameObject.SetActive(false);
         currentSpin = idleSpin;
         drillRenderer.material.color = baseColor;
         drillPivot.localPosition = pivotRestPos;
-        holdPoint.localPosition = holdRestPos;
         armJoint.localRotation = armRestRot;
         elbowJoint.localRotation = elbowRestRot;
         SetThrowArm(0f, 0f);
+        SetFingers(0f);
 
         if (heldRock != null)
         {
@@ -255,9 +323,28 @@ public class BossController : MonoBehaviour
         nextRockTime = Time.time + 2f;
         nextDiscTime = Time.time + 2f;
         nextCollectTime = Time.time + 2f;
+        nextChargeTime = Time.time + 2f;
     }
 
-    // Раз в 0.5 с ищем достижимый камень, между поисками используем результат
+    // restoreAgent = true: вернуть навигацию, если разгон отключил её
+    private void CleanupCharge(bool restoreAgent)
+    {
+        DestroyArrow();
+        if (dizzy != null) dizzy.Hide(true);
+        if (agent != null) agent.updateRotation = true;
+        if (restoreAgent) RestoreAgent();
+    }
+
+    private void RestoreAgent()
+    {
+        if (agent == null || agent.enabled) return;
+
+        bool found = NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 300f, NavMesh.AllAreas);
+        if (found) transform.position = hit.position;
+        agent.enabled = true;
+        if (found && agent.isOnNavMesh) agent.Warp(hit.position);
+    }
+
     private void RefreshRockCache(float dist)
     {
         float minRange = IsRangedPhase ? 0f : rockMinRange;
@@ -279,21 +366,38 @@ public class BossController : MonoBehaviour
 
     private void UpdateChase()
     {
+        if (!agent.isOnNavMesh) return;
+
         float dist = Vector3.Distance(transform.position, player.position);
+
+        // фаза 3: разгон главная атака, бур запасная, дальние атаки не используются
+        if (IsChargePhase)
+        {
+            agent.stoppingDistance = defaultStopDistance;
+            agent.SetDestination(player.position);
+
+            if (Time.time >= nextChargeTime && dist <= chargeStartMaxDistance)
+            {
+                StartCoroutine(ChargeRoutine());
+                return;
+            }
+
+            if (dist <= drillRange)
+                StartCoroutine(DrillAttackRoutine());
+            return;
+        }
+
         bool phase2 = IsRangedPhase;
 
-        // что есть из дальних атак (без учёта кулдаунов)
         bool discReady = StoredDiscCount() > 0 && discStorage != null && dist <= discMaxRange;
         bool discToCollect = StoredDiscCount() == 0 && FindNearestLyingDisc() != null;
         RefreshRockCache(dist);
         bool rockReady = cachedRock != null;
         bool hasRangedAccess = discReady || discToCollect || rockReady;
 
-        // ---------- движение ----------
         agent.stoppingDistance = (phase2 && hasRangedAccess) ? phase2KeepDistance : defaultStopDistance;
         agent.SetDestination(player.position);
 
-        // ---------- бур ----------
         bool drillAllowed = !phase2 || !hasRangedAccess;
         if (drillAllowed && dist <= drillRange)
         {
@@ -302,7 +406,6 @@ public class BossController : MonoBehaviour
             return;
         }
 
-        // ---------- допуск к дальним атакам ----------
         bool tryRanged = phase2;
         if (!phase2 && Time.time >= nextPhase1Roll)
         {
@@ -343,6 +446,338 @@ public class BossController : MonoBehaviour
             throwShoulder.localRotation = throwShoulderRest * Quaternion.AngleAxis(shoulderAngle, throwShoulderAxis);
         if (throwElbow != null)
             throwElbow.localRotation = throwElbowRest * Quaternion.AngleAxis(elbowAngle, throwElbowAxis);
+    }
+
+    private void SetFingers(float k)
+    {
+        fingerK = k;
+        if (fingerA != null)
+            fingerA.localRotation = fingerARest * Quaternion.AngleAxis(fingerAClosedAngle * k, fingerAAxis);
+        if (fingerB != null)
+            fingerB.localRotation = fingerBRest * Quaternion.AngleAxis(fingerBClosedAngle * k, fingerBAxis);
+    }
+
+    private IEnumerator AnimateFingers(float target, float time)
+    {
+        float from = fingerK;
+        float t = 0f;
+        while (t < time)
+        {
+            t += Time.deltaTime;
+            SetFingers(Mathf.Lerp(from, target, Mathf.SmoothStep(0f, 1f, t / time)));
+            yield return null;
+        }
+        SetFingers(target);
+    }
+
+    // ---------------- РАЗГОН ----------------
+    private Vector3 FlatForward()
+    {
+        Vector3 f = transform.forward;
+        f.y = 0f;
+        return f.sqrMagnitude < 0.001f ? Vector3.forward : f.normalized;
+    }
+
+    private void GetBodyBox(out Vector3 center, out Vector3 half, out Quaternion rot)
+    {
+        if (bossBox != null)
+        {
+            Transform tr = bossBox.transform;
+            center = tr.TransformPoint(bossBox.center);
+            Vector3 s = tr.lossyScale;
+            half = new Vector3(Mathf.Abs(bossBox.size.x * s.x), Mathf.Abs(bossBox.size.y * s.y),
+                               Mathf.Abs(bossBox.size.z * s.z)) * 0.5f;
+            rot = tr.rotation;
+        }
+        else
+        {
+            center = transform.position + Vector3.up * 2f;
+            half = Vector3.one * 3f;
+            rot = transform.rotation;
+        }
+    }
+
+    // Препятствие ли это для разгона (низкие пеньки, камни-снаряды, диски и сам босс не считаются)
+    private bool IsBlocking(Collider c)
+    {
+        if (c == null || c.isTrigger) return false;
+        if (c.GetComponentInParent<BossController>() != null) return false;
+        if (c.GetComponentInParent<RockProjectile>() != null) return false;
+        if (c.GetComponentInParent<BossDisc>() != null) return false;
+        if (c.bounds.max.y < transform.position.y + chargeIgnoreHeight) return false;
+        return true;
+    }
+
+    // Проходит ли корпус босса distance вперёд; если нет, hitDist = сколько можно проехать центром
+    private bool CastObstacle(Vector3 dir, float distance, out float hitDist)
+    {
+        hitDist = distance;
+        GetBodyBox(out Vector3 c, out Vector3 half, out Quaternion rot);
+
+        // уже внутри препятствия
+        var inside = Physics.OverlapBox(c, half * 0.9f, rot, ObstacleMask, QueryTriggerInteraction.Ignore);
+        foreach (var col in inside)
+        {
+            if (!IsBlocking(col)) continue;
+            hitDist = 0f;
+            return true;
+        }
+
+        var hits = Physics.BoxCastAll(c, half, dir, rot, distance, ObstacleMask, QueryTriggerInteraction.Ignore);
+        bool found = false;
+        float best = distance;
+        foreach (var h in hits)
+        {
+            if (!IsBlocking(h.collider)) continue;
+            if (h.distance < best) { best = h.distance; found = true; }
+        }
+        hitDist = best;
+        return found;
+    }
+
+    private IEnumerator ChargeRoutine()
+    {
+        if (!agent.isOnNavMesh) yield break;
+
+        state = State.ChargeAttack;
+        agent.ResetPath();
+        agent.isStopped = true;
+        agent.updateRotation = false;
+        chargeFloorY = transform.position.y - agent.baseOffset;
+
+        PlayClip(chargeWindupClip);
+        CreateArrow();
+
+        // 1. Замах: наведение, потом блокировка направления
+        float t = 0f;
+        while (t < chargeWindupTime)
+        {
+            t += Time.deltaTime;
+            float k = Mathf.Clamp01(t / chargeWindupTime);
+
+            if (k < chargeAimUntil) FaceTarget(chargeAimTurnSpeed);
+
+            currentSpin = Mathf.Lerp(idleSpin, windupSpin, k);
+            drillRenderer.material.color = Color.Lerp(baseColor, telegraphColor, k);
+            drillPivot.localPosition = pivotRestPos + Vector3.back * (pullBackOffset * k)
+                                       + Random.insideUnitSphere * (0.15f * k);
+            SetArm(armWindupAngle * k, elbowWindupAngle * k);
+
+            float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * Mathf.Lerp(8f, 30f, k));
+            UpdateArrow(FlatForward(), 0.35f + 0.5f * pulse);
+            yield return null;
+        }
+
+        Vector3 dir = FlatForward();
+        DestroyArrow();
+
+        // 2. Разгон по прямой до первого препятствия (навигация выключена)
+        agent.enabled = false;
+        currentSpin = strikeSpin;
+        SetArm(armStrikeAngle, elbowStrikeAngle);
+        drillPivot.localPosition = pivotRestPos + Vector3.forward * 0.3f;
+
+        chargeHit.Clear();
+        float speed = 0f, traveled = 0f, time = 0f;
+        bool crashed = false;
+
+        while (time < chargeTimeLimit && traveled < chargeRange)
+        {
+            float dt = Time.deltaTime;
+            time += dt;
+
+            if (chargeSteerRate > 0f && player != null)
+            {
+                Vector3 to = player.position - transform.position;
+                to.y = 0f;
+                if (to.sqrMagnitude > 0.01f)
+                {
+                    dir = Vector3.RotateTowards(dir, to.normalized, chargeSteerRate * Mathf.Deg2Rad * dt, 0f);
+                    dir.y = 0f;
+                    dir.Normalize();
+                    transform.rotation = Quaternion.LookRotation(dir);
+                }
+            }
+
+            speed = Mathf.Min(chargeTopSpeed, speed + chargeAcceleration * dt);
+            float step = speed * dt;
+
+            bool blocked = CastObstacle(dir, step + chargeSkin, out float d);
+            float move = blocked ? Mathf.Max(0f, d - chargeSkin) : step;
+            transform.position += dir * move;
+            traveled += move;
+
+            bool hitPlayer = CheckChargeHits(dir);
+
+            if (blocked || (hitPlayer && chargeStopsOnPlayer))
+            {
+                crashed = true;
+                break;
+            }
+
+            yield return null;
+        }
+
+        // 3. Оглушение
+        state = State.Stunned;
+        currentSpin = 0f;
+        drillRenderer.material.color = baseColor;
+        drillPivot.localPosition = pivotRestPos;
+
+        if (crashed)
+        {
+            PlayClip(crashClip);
+            if (HitFeedbackFX.Instance != null)
+            {
+                HitFeedbackFX.Instance.Shake(chargeCrashShake, 0.5f);
+                HitFeedbackFX.Instance.HitStop(0.08f);
+            }
+        }
+
+        dizzy.Show();
+
+        Quaternion armFrom = armJoint.localRotation;
+        Quaternion elbowFrom = elbowJoint.localRotation;
+        float back = 0.5f;
+        t = 0f;
+        while (t < back)
+        {
+            t += Time.deltaTime;
+            float k = t / back;
+            armJoint.localRotation = Quaternion.Slerp(armFrom, armRestRot, k);
+            elbowJoint.localRotation = Quaternion.Slerp(elbowFrom, elbowRestRot, k);
+            yield return null;
+        }
+
+        float slide = Mathf.Min(chargeSlideBackTime, Mathf.Max(0f, chargeStunTime - back));
+        yield return new WaitForSeconds(Mathf.Max(0f, chargeStunTime - back - slide));
+
+        // плавно возвращаемся на ближайшую точку NavMesh
+        if (NavMesh.SamplePosition(transform.position, out NavMeshHit nav, 300f, NavMesh.AllAreas))
+        {
+            Vector3 from = transform.position;
+            Vector3 to = new Vector3(nav.position.x, from.y, nav.position.z);
+            t = 0f;
+            while (t < slide)
+            {
+                t += Time.deltaTime;
+                transform.position = Vector3.Lerp(from, to, Mathf.SmoothStep(0f, 1f, t / slide));
+                yield return null;
+            }
+            transform.position = to;
+        }
+
+        dizzy.Hide();
+        RestoreAgent();
+        agent.updateRotation = true;
+        currentSpin = idleSpin;
+        nextChargeTime = Time.time + chargeCooldownAfterStun;
+        if (agent.isOnNavMesh) agent.isStopped = false;
+        state = State.Chase;
+    }
+
+    // Возвращает true, если задели ровер
+    private bool CheckChargeHits(Vector3 dir)
+    {
+        GetBodyBox(out Vector3 center, out Vector3 half, out Quaternion rot);
+
+        half.x *= chargeWidthMultiplier;
+        center += dir * chargeHitForward;
+
+        bool hitPlayer = false;
+        var hits = Physics.OverlapBox(center, half, rot, ~0, QueryTriggerInteraction.Ignore);
+        foreach (var h in hits)
+        {
+            if (h.GetComponentInParent<BossController>() != null) continue;
+            if (h.GetComponentInParent<DestructibleColumn>() != null) continue;
+
+            var target = h.GetComponentInParent<IDamageable>();
+            if (target == null) continue;
+
+            if (target is RoverHealth) hitPlayer = true;
+            if (!chargeHit.Add(target)) continue;
+
+            target.TakeImpactDamage(chargeDamage);
+
+            if (target is RoverHealth && playerBody != null)
+                playerBody.AddForce((dir + Vector3.up * 0.2f).normalized * chargeKnockback, ForceMode.VelocityChange);
+
+            if (HitFeedbackFX.Instance != null)
+                HitFeedbackFX.Instance.Shake(chargeHitShake, 0.3f);
+        }
+        return hitPlayer;
+    }
+
+    // ---------------- СТРЕЛКА ----------------
+    private void CreateArrow()
+    {
+        if (!showChargeArrow || arrowGo != null) return;
+
+        arrowGo = new GameObject("ChargeArrow");
+        arrowMesh = new Mesh { name = "ChargeArrow" };
+        arrowMesh.MarkDynamic();
+        arrowMesh.vertices = new Vector3[7];
+        arrowMesh.triangles = new[] { 0, 2, 1, 0, 3, 2, 4, 6, 5 };
+
+        arrowGo.AddComponent<MeshFilter>().sharedMesh = arrowMesh;
+        var r = arrowGo.AddComponent<MeshRenderer>();
+        arrowMat = new Material(Shader.Find("Sprites/Default"));
+        r.sharedMaterial = arrowMat;
+        r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        r.receiveShadows = false;
+    }
+
+    private void UpdateArrow(Vector3 dir, float alpha)
+    {
+        if (arrowGo == null) return;
+
+        GetBodyBox(out Vector3 center, out Vector3 half, out Quaternion rot);
+
+        // длина: до ближайшей стены или колонны по ходу движения
+        float maxLen = Mathf.Min(chargeRange, 2000f);
+        bool found = CastObstacle(dir, maxLen, out float travel);
+        float length = found ? travel + half.z : maxLen;
+        length = Mathf.Max(1f, length);
+
+        float width = half.x * 2f * chargeWidthMultiplier;   // ширина зоны урона
+        float shaft = width * chargeArrowShaft * 0.5f;
+        float headLen = Mathf.Min(width * 0.9f, length * 0.4f);
+        float bodyLen = length - headLen;
+
+        arrowMesh.vertices = new[]
+        {
+            new Vector3(-shaft, 0f, 0f),
+            new Vector3( shaft, 0f, 0f),
+            new Vector3( shaft, 0f, bodyLen),
+            new Vector3(-shaft, 0f, bodyLen),
+            new Vector3(-width * 0.5f, 0f, bodyLen),
+            new Vector3( width * 0.5f, 0f, bodyLen),
+            new Vector3(0f, 0f, length)
+        };
+        arrowMesh.RecalculateBounds();
+
+        arrowGo.transform.SetPositionAndRotation(
+            new Vector3(center.x, chargeFloorY + chargeArrowHeight, center.z),
+            Quaternion.LookRotation(dir, Vector3.up));
+
+        Color c = chargeArrowColor;
+        c.a = Mathf.Clamp01(alpha);
+        arrowMat.color = c;
+    }
+
+    private void DestroyArrow()
+    {
+        if (arrowGo != null) Destroy(arrowGo);
+        if (arrowMat != null) Destroy(arrowMat);
+        if (arrowMesh != null) Destroy(arrowMesh);
+        arrowGo = null;
+        arrowMat = null;
+        arrowMesh = null;
+    }
+
+    private void PlayClip(AudioClip clip)
+    {
+        if (clip != null) AudioSource.PlayClipAtPoint(clip, transform.position, 1f);
     }
 
     // ---------------- БУР ----------------
@@ -506,21 +941,65 @@ public class BossController : MonoBehaviour
         {
             t += Time.deltaTime;
             FacePoint(startPos, turnSpeed);
-            rock.transform.position = Vector3.Lerp(startPos, holdPoint.position, t / pickupTime);
+            float k = Mathf.SmoothStep(0f, 1f, t / pickupTime);
+            rock.transform.position = Vector3.Lerp(startPos, holdPoint.position, k);
             yield return null;
         }
         rock.transform.SetParent(holdPoint);
         rock.transform.localPosition = Vector3.zero;
 
+        yield return StartCoroutine(AnimateFingers(1f, fingerCloseTime));
+
         t = 0f;
         while (t < throwWindup)
         {
             t += Time.deltaTime;
+            float k = Mathf.SmoothStep(0f, 1f, t / throwWindup);
             FaceTarget(turnSpeed);
-            holdPoint.localPosition = holdRestPos + Vector3.up * (raiseHeight * (t / throwWindup));
+            SetThrowArm(throwShoulderBack * k, throwElbowBack * k);
             yield return null;
         }
 
+        bool released = false;
+        t = 0f;
+        while (t < rockSwingTime)
+        {
+            t += Time.deltaTime;
+            float k = Mathf.Clamp01(t / rockSwingTime);
+            FaceTarget(turnSpeed);
+            SetThrowArm(Mathf.Lerp(throwShoulderBack, throwShoulderForward, k),
+                        Mathf.Lerp(throwElbowBack, throwElbowForward, k));
+
+            if (!released && k >= releasePoint)
+            {
+                ReleaseRock(rock);
+                released = true;
+            }
+            yield return null;
+        }
+        if (!released) ReleaseRock(rock);
+
+        t = 0f;
+        while (t < throwReturnTime)
+        {
+            t += Time.deltaTime;
+            float k = Mathf.SmoothStep(0f, 1f, t / throwReturnTime);
+            SetThrowArm(Mathf.Lerp(throwShoulderForward, 0f, k),
+                        Mathf.Lerp(throwElbowForward, 0f, k));
+            yield return null;
+        }
+        SetThrowArm(0f, 0f);
+
+        state = State.Recover;
+        yield return new WaitForSeconds(rockRecover);
+
+        nextRockTime = Time.time + rockCooldown * CooldownMul;
+        agent.isStopped = false;
+        state = State.Chase;
+    }
+
+    private void ReleaseRock(RockProjectile rock)
+    {
         Vector3 start = rock.transform.position;
         Vector3 aimPoint = player.position;
         var pc = player.GetComponentInChildren<Collider>();
@@ -536,14 +1015,8 @@ public class BossController : MonoBehaviour
         rock.Release(velocity);
         heldRock = null;
         cachedRock = null;
-        holdPoint.localPosition = holdRestPos;
 
-        state = State.Recover;
-        yield return new WaitForSeconds(rockRecover);
-
-        nextRockTime = Time.time + rockCooldown * CooldownMul;
-        agent.isStopped = false;
-        state = State.Chase;
+        StartCoroutine(AnimateFingers(0f, fingerOpenTime));
     }
 
     // ---------------- ДИСКИ ----------------
@@ -755,12 +1228,14 @@ public class BossController : MonoBehaviour
     private void OnDeath()
     {
         StopAllCoroutines();
+        CleanupCharge(false);
         state = State.Dead;
         drillHitbox.gameObject.SetActive(false);
         agent.stoppingDistance = defaultStopDistance;
         if (agent.isOnNavMesh) agent.isStopped = true;
         currentSpin = 0f;
         SetThrowArm(0f, 0f);
+        SetFingers(0f);
 
         if (heldRock != null)
         {

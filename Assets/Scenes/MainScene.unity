@@ -24584,6 +24584,10 @@ PrefabInstance:
       value: RoverCabin
       objectReference: {fileID: 0}
     - target: {fileID: 4708794417701782400, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: attackDamage
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4708794417701782400, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: gameMissions
       value: 
       objectReference: {fileID: 1004406816}
@@ -24738,6 +24742,18 @@ PrefabInstance:
     - target: {fileID: 7046564907496529432, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: m_Name
       value: Rover
+      objectReference: {fileID: 0}
+    - target: {fileID: 7196714610708617779, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: sparkOffset
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7196714610708617779, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: shakeDuration
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7196714610708617779, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
+      propertyPath: shakeAmplitude
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 7200180425058185847, guid: 69a93a8b41025914cbb62e37ca8da8a9, type: 3}
       propertyPath: m_Layer

@@ -4352,7 +4352,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 2.6666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: b2cefd892cdb99b4fb36711d2bb7a98e, type: 2}
   m_BuildHeightMesh: 0
 --- !u!65 &1037644175
 BoxCollider:
@@ -4876,6 +4876,7 @@ GameObject:
   - component: {fileID: 1150318958}
   - component: {fileID: 1150318957}
   - component: {fileID: 1150318959}
+  - component: {fileID: 1150318960}
   m_Layer: 11
   m_Name: Boss
   m_TagString: Boss
@@ -4987,11 +4988,42 @@ MonoBehaviour:
   holdPoint: {fileID: 284641679}
   armJoint: {fileID: 1231121634}
   elbowJoint: {fileID: 188646659}
-  rangedPhaseThreshold: 0.5
-  phase1RangedChance: 0
+  rangedPhaseThreshold: 0.6
+  phase1RangedChance: 0.1
   phase1CooldownMultiplier: 2
   phase2CooldownMultiplier: 0.6
   phase2KeepDistance: 20
+  chargePhaseThreshold: 0.3
+  chargeWindupTime: 0.9
+  chargeAimUntil: 0.85
+  chargeAimTurnSpeed: 14
+  chargeSteerRate: 0
+  chargeTopSpeed: 70
+  chargeAcceleration: 250
+  chargeRange: 1000
+  chargeTimeLimit: 10
+  chargeStartMaxDistance: 150
+  chargeObstacleMask:
+    serializedVersion: 2
+    m_Bits: 896
+  chargeIgnoreHeight: 3
+  chargeSkin: 0.3
+  chargeDamage: 4
+  chargeKnockback: 15
+  chargeWidthMultiplier: 2.5
+  chargeHitForward: 2
+  chargeStopsOnPlayer: 1
+  chargeStunTime: 3
+  chargeSlideBackTime: 0.6
+  chargeCooldownAfterStun: 1.5
+  chargeHitShake: 1.2
+  chargeCrashShake: 2
+  showChargeArrow: 1
+  chargeArrowShaft: 0.75
+  chargeArrowHeight: 0.3
+  chargeArrowColor: {r: 1, g: 0.1, b: 0.1, a: 1}
+  chargeWindupClip: {fileID: 0}
+  crashClip: {fileID: 0}
   drillRange: 16.5
   windupTime: 0.8
   strikeTime: 0.35
@@ -5016,15 +5048,23 @@ MonoBehaviour:
   rockApproachTimeout: 20
   pickupTime: 0.5
   throwWindup: 1
+  rockSwingTime: 0.25
   throwSpeed: 14
   leadFactor: 0.7
   rockRecover: 1
-  raiseHeight: 0.6
   rockMinFlightTime: 1.2
   rockMaxFlightTime: 2.5
   stuckCheckTime: 1.5
   stuckMinMove: 0.5
   rockBlacklistTime: 15
+  fingerA: {fileID: 0}
+  fingerB: {fileID: 0}
+  fingerAAxis: {x: 0, y: 1, z: 0}
+  fingerBAxis: {x: 0, y: 1, z: 0}
+  fingerAClosedAngle: 20
+  fingerBClosedAngle: -20
+  fingerCloseTime: 0.25
+  fingerOpenTime: 0.12
   discs:
   - {fileID: 3746335922231584578}
   - {fileID: 5372166189200590093}
@@ -5063,7 +5103,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 5
-  m_Speed: 10
+  m_Speed: 20
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 180
@@ -5264,6 +5304,28 @@ MonoBehaviour:
   humMaxVolume: 1
   humMinPitch: 0.5
   humMaxPitch: 1.8
+--- !u!114 &1150318960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150318948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 452e9c682e3b142488b47b9103f92680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 5
+  orbitRadius: 5
+  heightAboveTop: 2
+  orbitSpeed: 160
+  starSize: 1.8
+  bobAmount: 0.4
+  selfSpinSpeed: 240
+  starColor: {r: 1, g: 0.9, b: 0.2, a: 1}
+  starMaterial: {fileID: 0}
+  fadeTime: 0.25
 --- !u!4 &1166332987 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1154223074477058189, guid: 6ccb24f2b11e0be4eb3bd41c8c834d72, type: 3}

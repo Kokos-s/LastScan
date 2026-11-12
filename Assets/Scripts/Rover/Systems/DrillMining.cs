@@ -13,7 +13,7 @@ public class DrillMining : MonoBehaviour
         if (drillContact.Mineral != null && drillEnergyUsage.CanDrill) 
         { 
             timeForNextExtraction -= Time.deltaTime;
-            //Debug.Log(timeForNextExtraction);
+            
             if (timeForNextExtraction <= 0f) 
             { 
                 if(drillContact.Mineral.TryExtractOre())

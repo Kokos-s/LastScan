@@ -29,7 +29,7 @@ public class HitFeedbackFX : MonoBehaviour
         }
     }
 
-    // Update идёт раньше всех LateUpdate: убираем прошлый сдвиг до того, как Camera Follow посчитает позицию
+    
     private void Update()
     {
         transform.position -= appliedOffset;
@@ -50,7 +50,7 @@ public class HitFeedbackFX : MonoBehaviour
 
     public void Shake(float amplitude, float duration)
     {
-        // более сильная тряска не заменяется слабой
+        
         if (shakeTimer > 0f && amplitude < shakeAmplitude * (shakeTimer / shakeDuration)) return;
 
         shakeAmplitude = amplitude;
@@ -60,7 +60,7 @@ public class HitFeedbackFX : MonoBehaviour
 
     public void HitStop(float duration)
     {
-        if (frozen || Time.timeScale < 0.01f) return; // не трогаем паузу меню
+        if (frozen || Time.timeScale < 0.01f) return; 
         StartCoroutine(HitStopRoutine(duration));
     }
 

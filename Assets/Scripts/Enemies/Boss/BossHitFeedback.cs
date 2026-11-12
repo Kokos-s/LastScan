@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class BossHitFeedback : MonoBehaviour
 {
-    [Header("Flash")]
+    
     [SerializeField] private Material flashMaterial;
     [SerializeField] private float flashTime = 0.08f;
 
-    [Header("Sound")]
+    
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip[] hitClips;
     [SerializeField] private Vector2 pitchRange = new Vector2(0.9f, 1.1f);
 
-    [Header("Sparks")]
+    
     [SerializeField] private ParticleSystem sparksPrefab;
     [SerializeField] private float sparkScale = 4f;
     [SerializeField] private float sparkOffset = 1.5f;
 
-    // true во время смерти босса: фидбек ударов отключён
+    
     public bool Muted { get; set; }
 
     private Renderer[] renderers;

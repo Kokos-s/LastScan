@@ -3,8 +3,8 @@ using UnityEngine;
 public class BossHealthBar : MonoBehaviour
 {
     [SerializeField] private Health boss;
-    [SerializeField] private RectTransform fill;    // красная полоса
-    [SerializeField] private RectTransform trail;   // светлый «хвост» (можно оставить пустым)
+    [SerializeField] private RectTransform fill;
+    [SerializeField] private RectTransform trail;
     [SerializeField] private float trailDelay = 0.5f;
     [SerializeField] private float trailSpeed = 0.8f;
     [SerializeField] private float hideDelay = 1.5f;
@@ -23,7 +23,6 @@ public class BossHealthBar : MonoBehaviour
 
     private void OnEnable()
     {
-        // Если босс умер, пока мир пещеры был выключен, Invoke мог не сработать
         if (boss != null && boss.Current <= 0f)
             gameObject.SetActive(false);
     }

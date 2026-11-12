@@ -46,7 +46,7 @@ public class FlightTrail : MonoBehaviour
         }
     }
 
-    // камень исчезает при ударе: оставляем след догорать на месте
+    
     private void OnDestroy()
     {
         if (!gameObject.scene.isLoaded) return;

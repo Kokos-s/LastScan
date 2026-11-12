@@ -6,24 +6,20 @@ using UnityEngine.UI;
 
 public class BossDeathSequence : MonoBehaviour
 {
-    [Header("Сломанный босс")]
     [SerializeField] private GameObject brokenPrefab;
 
-    [Header("Нарастание")]
     [SerializeField] private float chargeTime = 3.5f;
     [SerializeField] private float shakeMax = 0.6f;
     [SerializeField] private Color glowColor = new Color(1f, 0.55f, 0.15f);
     [SerializeField] private float glowMaxIntensity = 6f;
     [SerializeField] private float strobeSpeed = 25f;
 
-    [Header("Свет")]
     [SerializeField] private Color lightColor = new Color(1f, 0.7f, 0.35f);
     [SerializeField] private float lightMaxIntensity = 40f;
     [SerializeField] private float lightMaxRange = 60f;
     [SerializeField] private float flashLightIntensity = 400f;
     [SerializeField] private float lightHeight = 3f;
 
-    [Header("Вспышка")]
     [SerializeField] private float flashRiseTime = 0.3f;
     [SerializeField] private float flashHoldTime = 0.15f;
     [SerializeField] private float flashFadeTime = 1.0f;
@@ -32,11 +28,9 @@ public class BossDeathSequence : MonoBehaviour
     [SerializeField] private ParticleSystem explosionFx;
     [SerializeField] private float explosionFxScale = 4f;
 
-    [Header("Камера")]
     [SerializeField] private float cameraShakeMax = 0.8f;
     [SerializeField] private float explosionCameraShake = 2.5f;
 
-    [Header("Звук")]
     [SerializeField] private AudioClip humClip;
     [SerializeField] private AudioClip explosionClip;
     [SerializeField] private float humMaxVolume = 1f;
@@ -67,7 +61,6 @@ public class BossDeathSequence : MonoBehaviour
 
     private IEnumerator Sequence()
     {
-        // ---------- останавливаем поведение босса ----------
         var controller = GetComponent<BossController>();
         if (controller != null)
         {
@@ -75,7 +68,6 @@ public class BossDeathSequence : MonoBehaviour
             controller.enabled = false;
         }
 
-        // хитбокс бура не должен бить умирающим боссом
         foreach (var h in GetComponentsInChildren<DrillHitbox>(true))
             h.gameObject.SetActive(false);
 
@@ -85,15 +77,10 @@ public class BossDeathSequence : MonoBehaviour
         var wheels = GetComponent<WheelSpinner>();
         if (wheels != null) wheels.enabled = false;
 
-        // фидбек ударов глушим; ждём, пока закончится вспышка от последнего удара,
-        // иначе материалы для свечения скопируются с белого материала вспышки
         var fb = GetComponent<BossHitFeedback>();
         if (fb != null) fb.Muted = true;
         yield return new WaitForSecondsRealtime(0.15f);
 
-        // коллайдеры пока оставляем: ровер не должен проезжать сквозь светящегося босса
-
-        // рендереры и материалы для свечения
         var renderers = new List<Renderer>();
         foreach (var r in GetComponentsInChildren<Renderer>())
             if (r is MeshRenderer || r is SkinnedMeshRenderer) renderers.Add(r);
@@ -114,7 +101,6 @@ public class BossDeathSequence : MonoBehaviour
         foreach (var r in renderers) bounds.Encapsulate(r.bounds);
         Vector3 center = bounds.center;
 
-        // свет
         var lightGo = new GameObject("DeathLight");
         lightGo.transform.position = center + Vector3.up * lightHeight;
         var light = lightGo.AddComponent<Light>();
@@ -124,7 +110,6 @@ public class BossDeathSequence : MonoBehaviour
         light.range = 1f;
         light.shadows = LightShadows.None;
 
-        // звук
         var audioGo = new GameObject("DeathAudio");
         audioGo.transform.position = center;
         var audio = audioGo.AddComponent<AudioSource>();
@@ -134,7 +119,6 @@ public class BossDeathSequence : MonoBehaviour
         audio.pitch = humMinPitch;
         if (humClip != null) { audio.clip = humClip; audio.Play(); }
 
-        // экран и сфера вспышки
         Image overlay = CreateOverlay(out GameObject overlayGo);
         Transform sphere = CreateFlashSphere(center);
         Material sphereMat = sphere.GetComponent<MeshRenderer>().material;
@@ -143,7 +127,6 @@ public class BossDeathSequence : MonoBehaviour
         Vector3 basePos = transform.position;
         float camTimer = 0f;
 
-        // ---------- 1. нарастание ----------
         float t = 0f;
         while (t < chargeTime)
         {
@@ -183,7 +166,6 @@ public class BossDeathSequence : MonoBehaviour
             yield return null;
         }
 
-        // ---------- 2. вспышка ----------
         t = 0f;
         while (t < flashRiseTime)
         {
@@ -202,7 +184,6 @@ public class BossDeathSequence : MonoBehaviour
             yield return null;
         }
 
-        // пик: экран белый, подменяем босса, только теперь выключаем коллайдеры
         transform.position = basePos;
         audio.Stop();
         if (explosionClip != null) audio.PlayOneShot(explosionClip);
@@ -227,7 +208,6 @@ public class BossDeathSequence : MonoBehaviour
         SetOverlay(overlay, 1f);
         yield return new WaitForSeconds(flashHoldTime);
 
-        // ---------- 3. затухание ----------
         t = 0f;
         while (t < flashFadeTime)
         {
@@ -242,7 +222,6 @@ public class BossDeathSequence : MonoBehaviour
             yield return null;
         }
 
-        // ---------- уборка ----------
         Destroy(overlayGo);
         Destroy(sphere.gameObject);
         Destroy(lightGo);
@@ -251,7 +230,6 @@ public class BossDeathSequence : MonoBehaviour
 
         VictoryManager.Instance.ShowVictoryScreen();
 
-        // целого босса на сцене больше нет: остаётся только сломанный
         gameObject.SetActive(false);
     }
 

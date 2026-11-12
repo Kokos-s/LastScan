@@ -5,16 +5,16 @@ using USceneManager = UnityEngine.SceneManagement.SceneManager;
 
 public class WorldSwitcher : MonoBehaviour
 {
-    [Header("Основная сцена")]
+    
     [SerializeField] private GameObject surfaceWorld;
-    [SerializeField] private Transform returnPoint;       // CaveReturnPoint
+    [SerializeField] private Transform returnPoint;       
 
-    [Header("Пещера")]
+    
     [SerializeField] private string caveSceneName = "Boss_Cave";
     [SerializeField] private string caveRootName = "CaveWorld";
     [SerializeField] private string caveSpawnName = "CaveSpawnPoint";
 
-    [Header("Затемнение (необязательно)")]
+    
     [SerializeField] private CanvasGroup fadeGroup;
     [SerializeField] private float fadeTime = 0.4f;
 
@@ -25,10 +25,10 @@ public class WorldSwitcher : MonoBehaviour
 
     public bool InCave => inCave;
 
-    // Точка появления в пещере (null, пока пещера не загружена)
+    
     public Transform CaveSpawn => caveSpawn;
 
-    // Корень мира, в котором сейчас находится игрок
+    
     public Transform CurrentWorldRoot
     {
         get

@@ -4,9 +4,9 @@ public class WreckOre : MonoBehaviour
 {
     [SerializeField] private int storedOre;
 
-    [Header("Свечение")]
+    
     [SerializeField] private Color glowColor = new Color(0.4f, 0.95f, 1f);
-    [SerializeField] private Vector3 glowSize = new Vector3(3f, 1.2f, 4.5f);  // область, где летят частицы (локальные оси остова)
+    [SerializeField] private Vector3 glowSize = new Vector3(3f, 1.2f, 4.5f);  
     [SerializeField] private float glowHeight = 1f;
     [SerializeField] private float lightRange = 16f;
     [SerializeField] private float idleLight = 3f;
@@ -68,7 +68,7 @@ public class WreckOre : MonoBehaviour
         shape.shapeType = ParticleSystemShapeType.Box;
         shape.scale = glowSize;
 
-        // Частицы медленно поднимаются вверх (все три оси в одном режиме: Two Constants)
+        
         var vel = motes.velocityOverLifetime;
         vel.enabled = true;
         vel.space = ParticleSystemSimulationSpace.World;
@@ -76,7 +76,7 @@ public class WreckOre : MonoBehaviour
         vel.y = new ParticleSystem.MinMaxCurve(0.8f, 1.6f);
         vel.z = new ParticleSystem.MinMaxCurve(-0.1f, 0.1f);
 
-        // Плавное появление и затухание
+        
         var alpha = motes.colorOverLifetime;
         alpha.enabled = true;
         Gradient g = new Gradient();
@@ -116,7 +116,7 @@ public class WreckOre : MonoBehaviour
         em.rateOverTime = Mathf.Lerp(idleRate, chargeRate, charge);
     }
 
-    // 0..1, вызывается из WreckOrePickup, пока игрок держит кнопку забора
+    
     public void SetCharge(float value)
     {
         charge = Mathf.Clamp01(value);

@@ -49,7 +49,7 @@ public class OreFlyer : MonoBehaviour
         Vector3 b = Vector3.Lerp(control, end, k);
         transform.position = Vector3.Lerp(a, b, k);
 
-        // Появляется в начале и сжимается перед попаданием в ровер
+        
         float grow = Mathf.Clamp01(k / 0.15f);
         float shrink = Mathf.Clamp01((1f - k) / 0.2f);
         transform.localScale = baseScale * Mathf.Min(grow, shrink);

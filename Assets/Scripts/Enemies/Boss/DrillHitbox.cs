@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class DrillHitbox : MonoBehaviour
 {
-    // Поле названо по-новому, чтобы старое значение из Inspector не подтянулось
+    
     [SerializeField] private float hitDamage = 5f;
 
     private readonly HashSet<IDamageable> alreadyHit = new HashSet<IDamageable>();
@@ -15,7 +15,7 @@ public class DrillHitbox : MonoBehaviour
     {
         if (other.GetComponentInParent<BossController>() != null) return;
 
-        // колонны буром босса не разрушаются
+        
         if (other.GetComponentInParent<DestructibleColumn>() != null) return;
 
         var target = other.GetComponentInParent<IDamageable>();

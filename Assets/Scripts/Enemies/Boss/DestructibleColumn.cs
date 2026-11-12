@@ -5,28 +5,24 @@ using UnityEngine.AI;
 
 public class DestructibleColumn : MonoBehaviour, IDamageable
 {
-    [Header("References")]
     [SerializeField] private Transform fallingPivot;
     [SerializeField] private Transform model;
     [SerializeField] private GameObject stump;
 
-    [Header("Health")]
     [SerializeField] private float maxHealth = 12f;
     [SerializeField] private float hitShakeAmount = 0.15f;
 
-    [Header("Hit Feedback (удар по колонне)")]
-    [SerializeField] private Material flashMaterial;            // M_HitFlash
+    [SerializeField] private Material flashMaterial;
     [SerializeField] private float flashTime = 0.08f;
-    [SerializeField] private AudioClip[] hitClips;              // 3-4 звука удара по камню
-    [SerializeField] private AudioClip crackClip;               // звук последнего удара (необязательно)
+    [SerializeField] private AudioClip[] hitClips;
+    [SerializeField] private AudioClip crackClip;
     [SerializeField] private Vector2 pitchRange = new Vector2(0.9f, 1.1f);
     [SerializeField] private float soundVolume = 1f;
-    [SerializeField] private ParticleSystem chipsPrefab;        // маленькие камни, разлетающиеся в стороны
+    [SerializeField] private ParticleSystem chipsPrefab;
     [SerializeField] private float chipsScale = 4f;
-    [SerializeField] private float chipsOffset = 0.5f;          // насколько вынести частицы наружу от поверхности
-    [SerializeField] private float lastHitChipsMultiplier = 2f; // во сколько раз крупнее эффект на последнем ударе
+    [SerializeField] private float chipsOffset = 0.5f;
+    [SerializeField] private float lastHitChipsMultiplier = 2f;
 
-    [Header("Fall")]
     [SerializeField] private float telegraphTime = 1f;
     [SerializeField] private float fallTime = 1.2f;
     [SerializeField] private float fallDamage = 15f;
@@ -39,7 +35,6 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
     [SerializeField] private float hitStopTime = 0.1f;
     [SerializeField] private ParticleSystem impactFx;
 
-    [Header("Fall Zone (обозначение зоны поражения)")]
     [SerializeField] private Material zoneMaterial;
     [SerializeField] private Color zoneColor = new Color(1f, 0.1f, 0.1f, 1f);
     [SerializeField] private float zoneBaseAlpha = 0.25f;
@@ -48,7 +43,6 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
     [SerializeField, Range(0f, 0.5f)] private float zoneCornerRadius = 0.25f;
     [SerializeField, Range(0.01f, 0.5f)] private float zoneEdgeSoftness = 0.15f;
 
-    [Header("Rocks (обломки)")]
     [SerializeField] private GameObject rockLargePrefab;
     [SerializeField] private GameObject rockSmallPrefab;
     [SerializeField] private int largeCount = 2;
@@ -134,12 +128,10 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
         }
     }
 
-    // ---------------- ФИДБЕК УДАРА ----------------
     private void PlayHitFeedback(bool lethal)
     {
         Flash();
 
-        // точка удара: на поверхности колонны со стороны ровера, на высоте ровера
         Vector3 center = modelCollider != null ? modelCollider.bounds.center : model.position;
         Vector3 normal = -transform.forward;
         float y = center.y;
@@ -219,7 +211,6 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
             modelRenderers[i].sharedMaterials = white;
         }
 
-        // unscaled: вспышка не зависает во время замирания игры
         while (Time.unscaledTime < flashUntil) yield return null;
 
         RestoreMaterials();
@@ -248,7 +239,6 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
         shakeRoutine = null;
     }
 
-    // ---------------- ПАДЕНИЕ ----------------
     private IEnumerator FallRoutine()
     {
         Vector3 basePos = fallingPivot.position;
@@ -263,7 +253,6 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
 
         CreateZone(basePos, dir);
 
-        // 1. Телеграф
         float t = 0f;
         while (t < telegraphTime)
         {
@@ -281,7 +270,6 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
         if (modelObstacle != null) modelObstacle.enabled = false;
         if (modelCollider != null) modelCollider.enabled = false;
 
-        // 2. Падение
         Quaternion startRot = fallingPivot.rotation;
         t = 0f;
         while (t < 1f)
@@ -294,7 +282,6 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
         }
         fallingPivot.rotation = Quaternion.AngleAxis(90f, axis) * startRot;
 
-        // 3. Удар об пол
         DestroyZone();
         bool hitSomething = DealImpactDamage(basePos, dir);
 
@@ -311,14 +298,12 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
             Destroy(fx.gameObject, 4f);
         }
 
-        // 4. Пенёк и обломки
         RestoreMaterials();
         fallingPivot.gameObject.SetActive(false);
         if (stump != null) stump.SetActive(true);
         SpawnRocks(basePos, dir);
     }
 
-    // ---------------- ЗОНА ПОРАЖЕНИЯ ----------------
     private void CreateZone(Vector3 basePos, Vector3 dir)
     {
         zoneWidth = radius * hitWidthMultiplier * 2f;
@@ -446,7 +431,6 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
 
     private void OnDestroy() => DestroyZone();
 
-    // ---------------- УРОН И ОБЛОМКИ ----------------
     private bool DealImpactDamage(Vector3 basePos, Vector3 dir)
     {
         float len = ZoneLen;

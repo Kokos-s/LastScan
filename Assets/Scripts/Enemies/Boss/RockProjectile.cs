@@ -7,15 +7,14 @@ public class RockProjectile : MonoBehaviour
 {
     public static readonly List<RockProjectile> All = new List<RockProjectile>();
 
-    [SerializeField] private float impactDamage = 2f;        // урон ровера от камня босса
-    [SerializeField] private float playerThrowDamage = 3f;   // урон боссу от камня ровера
-    [SerializeField] private float ignoreOwnerTime = 0.5f;   // сколько после вылета камень не задевает бросающего
+    [SerializeField] private float impactDamage = 2f;
+    [SerializeField] private float playerThrowDamage = 3f;
+    [SerializeField] private float ignoreOwnerTime = 0.5f;
 
-    [Header("Одноразовый камень")]
-    [SerializeField] private float breakDelay = 0.05f;       // пауза перед исчезновением после удара
-    [SerializeField] private ParticleSystem breakFx;         // обломки/пыль, необязательно
+    [SerializeField] private float breakDelay = 0.05f;
+    [SerializeField] private ParticleSystem breakFx;
     [SerializeField] private float breakFxScale = 4f;
-    [SerializeField] private float maxFlightTime = 8f;       // страховка: камень, который так и не во что не попал
+    [SerializeField] private float maxFlightTime = 8f;
 
     private Rigidbody rb;
     private Collider col;
@@ -26,7 +25,6 @@ public class RockProjectile : MonoBehaviour
     private float launchTime;
 
     public bool IsAvailable => !held && !armed && !consumed && !rb.isKinematic;
-    // true с момента броска (боссом или ровером) до удара
     public bool IsThrown => armed && !consumed;
 
     private void Awake()
@@ -40,7 +38,6 @@ public class RockProjectile : MonoBehaviour
 
     private void Update()
     {
-        // страховка на случай, если камень застрял в полёте и не сталкивается
         if (armed && !consumed && Time.time - launchTime > maxFlightTime)
             Consume();
     }
@@ -66,10 +63,8 @@ public class RockProjectile : MonoBehaviour
         col.enabled = false;
     }
 
-    // Бросок босса
     public void Release(Vector3 velocity) => ReleaseInternal(velocity, false);
 
-    // Бросок ровера
     public void ReleaseByPlayer(Vector3 velocity) => ReleaseInternal(velocity, true);
 
     private void ReleaseInternal(Vector3 velocity, bool byPlayer)
@@ -137,10 +132,8 @@ public class RockProjectile : MonoBehaviour
 
         bool hitBoss = collision.collider.GetComponentInParent<BossController>() != null;
 
-        // игнорируем контакт с бросающим в первые мгновения полёта
         if (!thrownByPlayer && hitBoss) return;
 
-        // колонны камнем не разрушаются, камень просто разбивается о них
         if (collision.collider.GetComponentInParent<DestructibleColumn>() != null)
         {
             Consume();
@@ -171,7 +164,6 @@ public class RockProjectile : MonoBehaviour
         Consume();
     }
 
-    // Камень разбился: убираем из списка снарядов и удаляем
     private void Consume()
     {
         if (consumed) return;

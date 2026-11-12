@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WorldPortal : MonoBehaviour
 {
-    [SerializeField] private bool enterCave = true;   // true: вход в пещеру, false: выход из неё
+    [SerializeField] private bool enterCave = true;
 
     private WorldSwitcher switcher;
 
@@ -13,11 +13,7 @@ public class WorldPortal : MonoBehaviour
         if (switcher == null)
             switcher = FindFirstObjectByType<WorldSwitcher>();
 
-        if (switcher == null)
-        {
-            Debug.LogError("WorldPortal: WorldSwitcher не найден в загруженных сценах.");
-            return;
-        }
+        if (switcher == null) return;
 
         if (enterCave) switcher.EnterCave();
         else switcher.ExitCave();

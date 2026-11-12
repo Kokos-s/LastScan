@@ -3,22 +3,22 @@ using UnityEngine;
 
 public class RoverHitFeedback : MonoBehaviour
 {
-    [Header("Flash")]
+    
     [SerializeField] private Material flashMaterial;
     [SerializeField] private float flashTime = 0.08f;
 
-    [Header("Sound")]
+    
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip[] hitClips;
     [SerializeField] private Vector2 pitchRange = new Vector2(0.9f, 1.1f);
 
-    [Header("Sparks")]
+    
     [SerializeField] private ParticleSystem sparksPrefab;
     [SerializeField] private float sparkScale = 4f;
     [SerializeField] private float sparkOffset = 1.5f;
 
-    [Header("Screen")]
-    [SerializeField] private float strongHitDamage = 2f;   // с этого урона включаются тряска и замирание
+    
+    [SerializeField] private float strongHitDamage = 2f;   
     [SerializeField] private float shakeAmplitude = 0.4f;
     [SerializeField] private float shakeDuration = 0.2f;
     [SerializeField] private float hitStopTime = 0.05f;

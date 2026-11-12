@@ -8,15 +8,15 @@ public class CaveBlockade : MonoBehaviour
     [SerializeField] private ParticleSystem dustEffect;
     [SerializeField] private Transform impactFlash;
 
-    [Header("Тайминг")]
+    
     [SerializeField] private float shakeDuration = 0.3f;
     [SerializeField] private float flyDuration = 1.8f;
 
-    [Header("Вспышка")]
+    
     [SerializeField] private float flashMaxScale = 12f;
     [SerializeField] private float flashDuration = 0.5f;
 
-    [Header("Разлёт")]
+    
     [SerializeField] private float flySpeed = 9f;
     [SerializeField] private float upwardSpeed = 6f;
     [SerializeField] private float spinSpeed = 360f;
@@ -40,11 +40,11 @@ public class CaveBlockade : MonoBehaviour
 
     private IEnumerator ClearRoutine()
     {
-        // Вспышка в точке удара
+        
         if (impactFlash != null)
             StartCoroutine(FlashRoutine());
 
-        // Фаза 1: короткая дрожь
+       
         Vector3[] startPositions = new Vector3[rocks.Length];
         for (int i = 0; i < rocks.Length; i++)
         {
@@ -66,7 +66,7 @@ public class CaveBlockade : MonoBehaviour
             yield return null;
         }
 
-        // Фаза 2: взрыв
+        
         if (dustEffect != null)
         {
             var main = dustEffect.main;

@@ -35,7 +35,7 @@ public class PickupHighlight : MonoBehaviour
         foreach (var r in GetComponentsInChildren<Renderer>(true))
         {
             if (!(r is MeshRenderer) && !(r is SkinnedMeshRenderer)) continue;
-            foreach (var m in r.materials) list.Add(m);   // копии материалов, оригиналы не портятся
+            foreach (var m in r.materials) list.Add(m);   
         }
 
         mats = list.ToArray();

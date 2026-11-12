@@ -4,13 +4,13 @@ public class DizzyStars : MonoBehaviour
 {
     [SerializeField] private int count = 5;
     [SerializeField] private float orbitRadius = 5f;
-    [SerializeField] private float heightAboveTop = 2f;     // выше верха коллайдера босса
-    [SerializeField] private float orbitSpeed = 160f;       // градусов в секунду
+    [SerializeField] private float heightAboveTop = 2f;     
+    [SerializeField] private float orbitSpeed = 160f;       
     [SerializeField] private float starSize = 1.8f;
     [SerializeField] private float bobAmount = 0.4f;
     [SerializeField] private float selfSpinSpeed = 240f;
     [SerializeField] private Color starColor = new Color(1f, 0.9f, 0.2f, 1f);
-    [SerializeField] private Material starMaterial;         // необязательно
+    [SerializeField] private Material starMaterial;         
     [SerializeField] private float fadeTime = 0.25f;
 
     private Transform root;

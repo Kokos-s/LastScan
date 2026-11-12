@@ -8,55 +8,51 @@ public class BossController : MonoBehaviour
 {
     public enum State { Chase, DrillAttack, RockAttack, DiscAttack, ChargeAttack, Stunned, Recover, Dead }
 
-    [Header("References")]
-    [SerializeField] private Transform player;       // можно оставить пустым: ищется по тегу Player
+    [SerializeField] private Transform player;
     [SerializeField] private Transform drillPivot;
     [SerializeField] private Transform drillModel;
     [SerializeField] private Renderer drillRenderer;
     [SerializeField] private DrillHitbox drillHitbox;
-    [SerializeField] private Transform holdPoint;    // точка между пальцами пинцета
-    [SerializeField] private Transform armJoint;     // плечо руки с буром
-    [SerializeField] private Transform elbowJoint;   // локоть руки с буром
+    [SerializeField] private Transform holdPoint;
+    [SerializeField] private Transform armJoint;
+    [SerializeField] private Transform elbowJoint;
 
-    [Header("Phases (фазы по здоровью)")]
     [SerializeField, Range(0.05f, 0.95f)] private float rangedPhaseThreshold = 0.5f;
     [SerializeField] private float phase1RangedChance = 0.2f;
     [SerializeField] private float phase1CooldownMultiplier = 2f;
     [SerializeField] private float phase2CooldownMultiplier = 0.6f;
     [SerializeField] private float phase2KeepDistance = 20f;
 
-    [Header("Charge Attack (разгон, фаза 3)")]
     [SerializeField, Range(0.01f, 0.9f)] private float chargePhaseThreshold = 0.2f;
     [SerializeField] private float chargeWindupTime = 0.9f;
-    [SerializeField, Range(0.1f, 1f)] private float chargeAimUntil = 0.85f;   // до какой доли замаха босс наводится на ровер
-    [SerializeField] private float chargeAimTurnSpeed = 14f;                  // скорость наведения в замахе
-    [SerializeField] private float chargeSteerRate = 0f;                      // градусов/с подруливания к роверу во время разгона (0 = строго по стрелке)
+    [SerializeField, Range(0.1f, 1f)] private float chargeAimUntil = 0.85f;
+    [SerializeField] private float chargeAimTurnSpeed = 14f;
+    [SerializeField] private float chargeSteerRate = 0f;
     [SerializeField] private float chargeTopSpeed = 70f;
     [SerializeField] private float chargeAcceleration = 250f;
-    [SerializeField] private float chargeRange = 1000f;                       // страховка: максимум дистанции
-    [SerializeField] private float chargeTimeLimit = 10f;                     // страховка: максимум времени
-    [SerializeField] private float chargeStartMaxDistance = 150f;             // с какого расстояния босс начинает разгон
-    [SerializeField] private LayerMask chargeObstacleMask;                    // что останавливает босса (пусто = Walls, Columns, Rocks)
-    [SerializeField] private float chargeIgnoreHeight = 3f;                   // препятствия ниже этой высоты над корнем босса игнорируются (пеньки)
+    [SerializeField] private float chargeRange = 1000f;
+    [SerializeField] private float chargeTimeLimit = 10f;
+    [SerializeField] private float chargeStartMaxDistance = 150f;
+    [SerializeField] private LayerMask chargeObstacleMask;
+    [SerializeField] private float chargeIgnoreHeight = 3f;
     [SerializeField] private float chargeSkin = 0.3f;
     [SerializeField] private float chargeDamage = 4f;
     [SerializeField] private float chargeKnockback = 15f;
-    [SerializeField] private float chargeWidthMultiplier = 1.7f;              // ширина зоны урона относительно корпуса
+    [SerializeField] private float chargeWidthMultiplier = 1.7f;
     [SerializeField] private float chargeHitForward = 2f;
     [SerializeField] private bool chargeStopsOnPlayer = true;
     [SerializeField] private float chargeStunTime = 3f;
-    [SerializeField] private float chargeSlideBackTime = 0.6f;                // возврат на NavMesh в конце оглушения
+    [SerializeField] private float chargeSlideBackTime = 0.6f;
     [SerializeField] private float chargeCooldownAfterStun = 1.5f;
     [SerializeField] private float chargeHitShake = 1.2f;
     [SerializeField] private float chargeCrashShake = 2f;
     [SerializeField] private bool showChargeArrow = true;
-    [SerializeField, Range(0.3f, 1f)] private float chargeArrowShaft = 0.75f; // ширина древка относительно наконечника
-    [SerializeField] private float chargeArrowHeight = 0.3f;                  // высота над полом
+    [SerializeField, Range(0.3f, 1f)] private float chargeArrowShaft = 0.75f;
+    [SerializeField] private float chargeArrowHeight = 0.3f;
     [SerializeField] private Color chargeArrowColor = new Color(1f, 0.1f, 0.1f, 1f);
     [SerializeField] private AudioClip chargeWindupClip;
     [SerializeField] private AudioClip crashClip;
 
-    [Header("Drill Attack")]
     [SerializeField] private float drillRange = 7f;
     [SerializeField] private float windupTime = 0.8f;
     [SerializeField] private float strikeTime = 0.35f;
@@ -64,24 +60,20 @@ public class BossController : MonoBehaviour
     [SerializeField] private float lungeDistance = 3f;
     [SerializeField] private float turnSpeed = 8f;
 
-    [Header("Arm (плечо бура)")]
     [SerializeField] private Vector3 armAxis = Vector3.up;
     [SerializeField] private float armWindupAngle = -35f;
     [SerializeField] private float armStrikeAngle = 60f;
 
-    [Header("Elbow (локоть бура)")]
     [SerializeField] private Vector3 elbowAxis = Vector3.up;
     [SerializeField] private float elbowWindupAngle = 15f;
     [SerializeField] private float elbowStrikeAngle = -40f;
 
-    [Header("Drill Visuals")]
     [SerializeField] private float idleSpin = 200f;
     [SerializeField] private float windupSpin = 700f;
     [SerializeField] private float strikeSpin = 1500f;
     [SerializeField] private float pullBackOffset = 0.6f;
     [SerializeField] private Color telegraphColor = Color.red;
 
-    [Header("Rock Attack")]
     [SerializeField] private float rockMinRange = 12f;
     [SerializeField] private float rockCooldown = 4f;
     [SerializeField] private float pickupDistance = 12f;
@@ -99,7 +91,6 @@ public class BossController : MonoBehaviour
     [SerializeField] private float stuckMinMove = 0.5f;
     [SerializeField] private float rockBlacklistTime = 15f;
 
-    [Header("Gripper (пальцы пинцета)")]
     [SerializeField] private Transform fingerA;
     [SerializeField] private Transform fingerB;
     [SerializeField] private Vector3 fingerAAxis = Vector3.up;
@@ -109,7 +100,6 @@ public class BossController : MonoBehaviour
     [SerializeField] private float fingerCloseTime = 0.25f;
     [SerializeField] private float fingerOpenTime = 0.12f;
 
-    [Header("Disc Attack (диски)")]
     [SerializeField] private BossDisc[] discs;
     [SerializeField] private Transform discStorage;
     [SerializeField] private Transform discHoldPoint;
@@ -122,7 +112,6 @@ public class BossController : MonoBehaviour
     [SerializeField] private float discRecover = 1.2f;
     [SerializeField] private float discCooldown = 5f;
 
-    [Header("Throw Arm (рука с пинцетом: диски и камни)")]
     [SerializeField] private Transform throwShoulder;
     [SerializeField] private Transform throwElbow;
     [SerializeField] private Vector3 throwShoulderAxis = Vector3.up;
@@ -196,11 +185,7 @@ public class BossController : MonoBehaviour
 
         if (player == null)
         {
-            if (!warnedNoPlayer)
-            {
-                Debug.LogWarning("BossController: объект с тегом Player не найден. Босс ждёт появления ровера.");
-                warnedNoPlayer = true;
-            }
+            warnedNoPlayer = true;
             return false;
         }
 
@@ -326,7 +311,6 @@ public class BossController : MonoBehaviour
         nextChargeTime = Time.time + 2f;
     }
 
-    // restoreAgent = true: вернуть навигацию, если разгон отключил её
     private void CleanupCharge(bool restoreAgent)
     {
         DestroyArrow();
@@ -370,7 +354,6 @@ public class BossController : MonoBehaviour
 
         float dist = Vector3.Distance(transform.position, player.position);
 
-        // фаза 3: разгон главная атака, бур запасная, дальние атаки не используются
         if (IsChargePhase)
         {
             agent.stoppingDistance = defaultStopDistance;
@@ -470,7 +453,6 @@ public class BossController : MonoBehaviour
         SetFingers(target);
     }
 
-    // ---------------- РАЗГОН ----------------
     private Vector3 FlatForward()
     {
         Vector3 f = transform.forward;
@@ -497,7 +479,6 @@ public class BossController : MonoBehaviour
         }
     }
 
-    // Препятствие ли это для разгона (низкие пеньки, камни-снаряды, диски и сам босс не считаются)
     private bool IsBlocking(Collider c)
     {
         if (c == null || c.isTrigger) return false;
@@ -508,13 +489,11 @@ public class BossController : MonoBehaviour
         return true;
     }
 
-    // Проходит ли корпус босса distance вперёд; если нет, hitDist = сколько можно проехать центром
     private bool CastObstacle(Vector3 dir, float distance, out float hitDist)
     {
         hitDist = distance;
         GetBodyBox(out Vector3 c, out Vector3 half, out Quaternion rot);
 
-        // уже внутри препятствия
         var inside = Physics.OverlapBox(c, half * 0.9f, rot, ObstacleMask, QueryTriggerInteraction.Ignore);
         foreach (var col in inside)
         {
@@ -548,7 +527,6 @@ public class BossController : MonoBehaviour
         PlayClip(chargeWindupClip);
         CreateArrow();
 
-        // 1. Замах: наведение, потом блокировка направления
         float t = 0f;
         while (t < chargeWindupTime)
         {
@@ -571,7 +549,6 @@ public class BossController : MonoBehaviour
         Vector3 dir = FlatForward();
         DestroyArrow();
 
-        // 2. Разгон по прямой до первого препятствия (навигация выключена)
         agent.enabled = false;
         currentSpin = strikeSpin;
         SetArm(armStrikeAngle, elbowStrikeAngle);
@@ -618,7 +595,6 @@ public class BossController : MonoBehaviour
             yield return null;
         }
 
-        // 3. Оглушение
         state = State.Stunned;
         currentSpin = 0f;
         drillRenderer.material.color = baseColor;
@@ -652,7 +628,6 @@ public class BossController : MonoBehaviour
         float slide = Mathf.Min(chargeSlideBackTime, Mathf.Max(0f, chargeStunTime - back));
         yield return new WaitForSeconds(Mathf.Max(0f, chargeStunTime - back - slide));
 
-        // плавно возвращаемся на ближайшую точку NavMesh
         if (NavMesh.SamplePosition(transform.position, out NavMeshHit nav, 300f, NavMesh.AllAreas))
         {
             Vector3 from = transform.position;
@@ -676,7 +651,6 @@ public class BossController : MonoBehaviour
         state = State.Chase;
     }
 
-    // Возвращает true, если задели ровер
     private bool CheckChargeHits(Vector3 dir)
     {
         GetBodyBox(out Vector3 center, out Vector3 half, out Quaternion rot);
@@ -708,7 +682,6 @@ public class BossController : MonoBehaviour
         return hitPlayer;
     }
 
-    // ---------------- СТРЕЛКА ----------------
     private void CreateArrow()
     {
         if (!showChargeArrow || arrowGo != null) return;
@@ -733,13 +706,12 @@ public class BossController : MonoBehaviour
 
         GetBodyBox(out Vector3 center, out Vector3 half, out Quaternion rot);
 
-        // длина: до ближайшей стены или колонны по ходу движения
         float maxLen = Mathf.Min(chargeRange, 2000f);
         bool found = CastObstacle(dir, maxLen, out float travel);
         float length = found ? travel + half.z : maxLen;
         length = Mathf.Max(1f, length);
 
-        float width = half.x * 2f * chargeWidthMultiplier;   // ширина зоны урона
+        float width = half.x * 2f * chargeWidthMultiplier;
         float shaft = width * chargeArrowShaft * 0.5f;
         float headLen = Mathf.Min(width * 0.9f, length * 0.4f);
         float bodyLen = length - headLen;
@@ -780,7 +752,6 @@ public class BossController : MonoBehaviour
         if (clip != null) AudioSource.PlayClipAtPoint(clip, transform.position, 1f);
     }
 
-    // ---------------- БУР ----------------
     private IEnumerator DrillAttackRoutine()
     {
         state = State.DrillAttack;
@@ -841,7 +812,6 @@ public class BossController : MonoBehaviour
         state = State.Chase;
     }
 
-    // ---------------- КАМНИ ----------------
     private RockProjectile FindReachableRock()
     {
         RockProjectile best = null;
@@ -910,7 +880,6 @@ public class BossController : MonoBehaviour
             {
                 if ((transform.position - lastPos).magnitude < stuckMinMove)
                 {
-                    Debug.Log("Босс не может доехать до камня " + rock.name + ", бросаю его");
                     AbandonRock(rock);
                     yield break;
                 }
@@ -1019,7 +988,6 @@ public class BossController : MonoBehaviour
         StartCoroutine(AnimateFingers(0f, fingerOpenTime));
     }
 
-    // ---------------- ДИСКИ ----------------
     private int StoredDiscCount()
     {
         int n = 0;
@@ -1209,7 +1177,6 @@ public class BossController : MonoBehaviour
         state = State.Chase;
     }
 
-    // ---------------- ОБЩЕЕ ----------------
     private void FaceTarget(float speed)
     {
         if (player != null) FacePoint(player.position, speed);

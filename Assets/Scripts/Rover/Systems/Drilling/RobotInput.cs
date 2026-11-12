@@ -6,9 +6,9 @@ public class RobotInput : MonoBehaviour
     [SerializeField] private RoverHealth roverHealth;
     [SerializeField] private WreckOrePickup wreckOrePickup;
 
-    [Header("Attack")]
-    [SerializeField] private float attackHitTime = 0.35f; // чуть позже кадра с событием DealDamage
-    [SerializeField] private float inputBuffer = 0.4f;    // сколько секунд клик помнится
+    
+    [SerializeField] private float attackHitTime = 0.35f; 
+    [SerializeField] private float inputBuffer = 0.4f;    
 
     private Animator animator;
     private RobotController controller;
@@ -39,11 +39,11 @@ public class RobotInput : MonoBehaviour
             animator.SetTrigger("Drill");
         }
 
-        // Запоминаем клик
+        
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
             bufferedUntil = Time.time + inputBuffer;
 
-        // Начинаем удар, как только прошло окно отмены предыдущего
+        
         if (Time.time < bufferedUntil && Time.time >= nextAttackTime)
         {
             bufferedUntil = 0f;

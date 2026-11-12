@@ -30,10 +30,6 @@ public class DamageVignette : MonoBehaviour
         {
             vignette.intensity.value = 0f;
         }
-        else
-        {
-            Debug.LogWarning("DamageVignette: не удалось найти Vignette override в профиле Volume!");
-        }
     }
 
     public void FlashDamage()

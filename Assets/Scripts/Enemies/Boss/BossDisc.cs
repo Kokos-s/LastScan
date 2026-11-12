@@ -194,7 +194,6 @@ public class BossDisc : MonoBehaviour
                     boss.TakeDamage(playerThrowDamage);
                     nextHitTime = Time.time + 0.5f;
 
-                    // фидбек попадания: вспышка, звук, искры
                     var fb = collision.collider.GetComponentInParent<BossHitFeedback>();
                     if (fb != null)
                     {

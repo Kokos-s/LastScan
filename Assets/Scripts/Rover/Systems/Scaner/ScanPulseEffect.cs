@@ -11,7 +11,7 @@ public class ScanPulseEffect : MonoBehaviour
     private Material material;
     private Color startColor;
     private Renderer[] renderers;
-    private int colorProperty = -1;   // -1: у шейдера нет цветового свойства
+    private int colorProperty = -1;   
 
     private static readonly string[] ColorNames = { "_Color", "_BaseColor", "_TintColor", "_MainColor" };
 
@@ -43,7 +43,7 @@ public class ScanPulseEffect : MonoBehaviour
         }
     }
 
-    // Прячет или показывает сферу, не останавливая сам скан
+    
     public void SetVisible(bool visible)
     {
         if (renderers == null)
@@ -64,7 +64,7 @@ public class ScanPulseEffect : MonoBehaviour
         float scale = Mathf.Lerp(0f, maxScale, progress);
         transform.localScale = new Vector3(scale, scale, scale);
 
-        // Затухание через цвет, если шейдер его поддерживает
+        
         if (material != null && colorProperty != -1)
         {
             float alpha = Mathf.Lerp(startColor.a, 0f, progress);

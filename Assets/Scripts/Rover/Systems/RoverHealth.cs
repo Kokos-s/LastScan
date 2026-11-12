@@ -36,10 +36,10 @@ public class RoverHealth : MonoBehaviour, IDamageable
         UpdateVisualState();
     }
 
-    // Обычный урон: молнии, аномалии. Без звука и искр
+    
     public void TakeDamage(float amount) => ApplyDamage(amount, false);
 
-    // Удар: бур, камни, диски босса. Со звуком, вспышкой, искрами
+    
     public void TakeImpactDamage(float amount) => ApplyDamage(amount, true);
 
     private void ApplyDamage(float amount, bool impact)

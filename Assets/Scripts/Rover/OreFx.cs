@@ -1,12 +1,12 @@
 using UnityEngine;
 
-// Общие материалы и фабрика эффектов для забора руды
+
 public static class OreFx
 {
     private static Material spriteMat;
     private static Texture2D softTexture;
 
-    // Мягкий круг для частиц
+    
     public static Texture2D SoftCircle()
     {
         if (softTexture != null) return softTexture;
@@ -30,7 +30,7 @@ public static class OreFx
         return softTexture;
     }
 
-    // Мягкий белый материал, не зависит от освещения (годится и для URP, и для Built-in)
+    
     public static Material Sprite()
     {
         if (spriteMat != null) return spriteMat;
@@ -41,7 +41,7 @@ public static class OreFx
         return spriteMat;
     }
 
-    // Плоский белый материал для сфер-минералов
+    
     private static Material solidMat;
     public static Material Solid()
     {
@@ -52,7 +52,7 @@ public static class OreFx
         return solidMat;
     }
 
-    // Белая светящаяся сфера со шлейфом и собственным светом
+    
     public static GameObject CreateSpark(Vector3 position, float scale, Material overrideMaterial)
     {
         GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);

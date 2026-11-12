@@ -3,14 +3,11 @@ using UnityEngine.Audio;
 
 public class Audio_Manager : MonoBehaviour
 {
-    //[SerializeField] AudioSource SFXSource;
+    
     [SerializeField] AudioSource musicSource;
     public AudioClip music;
 
-    //public void PlaySFX(AudioClip SFXClip)
-    //{
-    //    SFXSource.PlayOneShot(SFXClip);
-    //}
+    
 
     public static Audio_Manager Instance;
     private void Awake()

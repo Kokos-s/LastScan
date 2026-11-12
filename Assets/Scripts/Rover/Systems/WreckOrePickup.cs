@@ -10,8 +10,8 @@ public class WreckOrePickup : MonoBehaviour
     [SerializeField] private RoverInventory roverInventory;
     [SerializeField] private float pickupDuration = 2f;
 
-    [Header("Эффект забора")]
-    [SerializeField] private Material sparkMaterial;   // необязательно: свой материал для шариков
+    
+    [SerializeField] private Material sparkMaterial;   
     [SerializeField] private int maxPieces = 8;
     [SerializeField] private float sparkScale = 0.5f;
     [SerializeField] private float flightTime = 0.9f;
@@ -146,7 +146,7 @@ public class WreckOrePickup : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            // Небольшой разброс стартовых точек по остову
+            
             Vector3 offset = Random.insideUnitSphere * spreadRadius;
             offset.y = Mathf.Abs(offset.y);
 

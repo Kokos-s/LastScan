@@ -8,16 +8,16 @@ public class RoverDiscCarry : MonoBehaviour
     [SerializeField] private float pickupRadius = 8f;
     [SerializeField] private float pickupTime = 0.3f;
 
-    [Header("Бросок камня")]
+    
     [SerializeField] private float rockThrowSpeed = 25f;
     [SerializeField] private float rockMinFlightTime = 0.7f;
     [SerializeField] private float rockThrowDistance = 60f;
 
-    [Header("Прицеливание")]
+    
     [SerializeField] private float aimAssistAngle = 12f;
     [SerializeField] private float aimYawOffset = 0f;
 
-    [Header("Подсветка предметов, которые можно взять")]
+    
     [SerializeField] private bool highlightEnabled = true;
     [SerializeField] private Color highlightColor = new Color(1f, 0.6f, 0.15f);
     [SerializeField] private float highlightIntensity = 2.5f;
@@ -53,7 +53,7 @@ public class RoverDiscCarry : MonoBehaviour
         else TryPickup();
     }
 
-    // ---------------- ПОДСВЕТКА ----------------
+    
     private void UpdateHighlight()
     {
         if (!highlightEnabled || picking || heldDisc != null || heldRock != null)
@@ -106,7 +106,7 @@ public class RoverDiscCarry : MonoBehaviour
         }
     }
 
-    // ---------------- ПРИЦЕЛ ----------------
+    
     private Vector3 AimForward()
     {
         Vector3 f = Quaternion.Euler(0f, aimYawOffset, 0f) * transform.forward;
@@ -130,7 +130,7 @@ public class RoverDiscCarry : MonoBehaviour
         return Vector3.Angle(AimForward(), toBoss) <= aimAssistAngle;
     }
 
-    // ---------------- ПОДБОР ----------------
+    
     private void TryPickup()
     {
         FindNearestPickup(out BossDisc disc, out RockProjectile rock);
@@ -179,7 +179,7 @@ public class RoverDiscCarry : MonoBehaviour
         picking = false;
     }
 
-    // ---------------- БРОСОК ----------------
+   
     private void ThrowDisc()
     {
         Vector3 from = heldDisc.transform.position;

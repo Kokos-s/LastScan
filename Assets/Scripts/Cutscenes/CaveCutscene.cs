@@ -15,9 +15,9 @@ public class CaveCutscene : MonoBehaviour
     [SerializeField] private MonoBehaviour[] disableDuringCutscene;
     [SerializeField] private GameObject[] hideDuringCutscene;
 
-    [Header("Пауза")]
+    
     [SerializeField] private bool pauseGame = true;
-    [SerializeField] private bool pauseAudio = false;   // true: заглушить и звуки игры на время ролика
+    [SerializeField] private bool pauseAudio = false;   
 
     private bool isPlaying = false;
     private MonoBehaviour cameraScript;
@@ -29,7 +29,7 @@ public class CaveCutscene : MonoBehaviour
     {
         brain.enabled = false;
 
-        // Ролик и камера должны идти по реальному времени, иначе при timeScale = 0 они встанут
+        
         director.timeUpdateMode = DirectorUpdateMode.UnscaledGameTime;
         brain.IgnoreTimeScale = true;
 
@@ -52,7 +52,7 @@ public class CaveCutscene : MonoBehaviour
         missions.OnMissionCompleted -= Play;
         director.stopped -= OnStopped;
 
-        // Страховка: если объект выключили посреди ролика, игра не должна остаться на паузе
+        
         if (isPlaying)
         {
             Resume();
@@ -90,7 +90,7 @@ public class CaveCutscene : MonoBehaviour
         }
     }
 
-    // Прячет или показывает сферы сканера, не останавливая сам скан
+    
     private void SetScanPulsesVisible(bool visible)
     {
         foreach (ScanPulseEffect pulse in ScanPulseEffect.All)

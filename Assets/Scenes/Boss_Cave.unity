@@ -7325,7 +7325,7 @@ MonoBehaviour:
   chargeAimUntil: 0.85
   chargeAimTurnSpeed: 14
   chargeSteerRate: 0
-  chargeTopSpeed: 70
+  chargeTopSpeed: 280
   chargeAcceleration: 250
   chargeRange: 1000
   chargeTimeLimit: 10
@@ -9617,7 +9617,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1577519978
 Light:
   m_ObjectHideFlags: 0

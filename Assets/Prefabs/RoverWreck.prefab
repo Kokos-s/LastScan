@@ -16372,6 +16372,8 @@ GameObject:
   - component: {fileID: 7525508206197937585}
   - component: {fileID: 6087289043273836905}
   - component: {fileID: 1891520989001063477}
+  - component: {fileID: 6433647597671477461}
+  - component: {fileID: 3773398250040264179}
   m_Layer: 0
   m_Name: mano_16
   m_TagString: Untagged
@@ -16448,6 +16450,53 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &6433647597671477461
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797093926191590167}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &3773398250040264179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797093926191590167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebb412a080574104286255e328220cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactDamage: 2
+  playerThrowDamage: 3
+  ignoreOwnerTime: 0.5
+  bossCanTake: 1
+  breakDelay: 0.05
+  breakFx: {fileID: 0}
+  breakFxScale: 4
+  maxFlightTime: 8
 --- !u!1 &2832129380787004737
 GameObject:
   m_ObjectHideFlags: 0
@@ -39631,6 +39680,7 @@ GameObject:
   - component: {fileID: 6660796014452795990}
   - component: {fileID: 3036128432808954386}
   - component: {fileID: 1124611915315145202}
+  - component: {fileID: 5122552248668254528}
   m_Layer: 0
   m_Name: Cabin
   m_TagString: Untagged
@@ -39754,6 +39804,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5122552248668254528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6867707532563090963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebb412a080574104286255e328220cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactDamage: 2
+  playerThrowDamage: 4
+  ignoreOwnerTime: 0.5
+  bossCanTake: 1
+  breakDelay: 0.05
+  breakFx: {fileID: 0}
+  breakFxScale: 4
+  maxFlightTime: 8
 --- !u!1 &6890852788080354408
 GameObject:
   m_ObjectHideFlags: 0
@@ -47633,6 +47703,8 @@ GameObject:
   - component: {fileID: 1569288484623093343}
   - component: {fileID: 3943708411012361253}
   - component: {fileID: 1489534697828480982}
+  - component: {fileID: 2552424079003688135}
+  - component: {fileID: 1183745858869020159}
   m_Layer: 0
   m_Name: mano_29
   m_TagString: Untagged
@@ -47709,6 +47781,53 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &2552424079003688135
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076730517972717386}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1183745858869020159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076730517972717386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebb412a080574104286255e328220cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactDamage: 2
+  playerThrowDamage: 3
+  ignoreOwnerTime: 0.5
+  bossCanTake: 1
+  breakDelay: 0.05
+  breakFx: {fileID: 0}
+  breakFxScale: 4
+  maxFlightTime: 8
 --- !u!1 &8083878763096299932
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ public class RoverRespawn : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private float respawnDelay = 5f;
     [SerializeField] private GameObject wreckPrefab;
-    [SerializeField] private WorldSwitcher worldSwitcher;   
+    [SerializeField] private WorldSwitcher worldSwitcher;
 
     private Rigidbody roverBody;
     private float respawnTimer;
@@ -58,7 +58,6 @@ public class RoverRespawn : MonoBehaviour
         roverBody.angularVelocity = Vector3.zero;
         roverMovement.ResetAfterRespawn();
 
-        
         Transform point = spawnPoint;
         Transform worldRoot = null;
         if (worldSwitcher != null)
@@ -75,8 +74,12 @@ public class RoverRespawn : MonoBehaviour
         roverInventory.RemoveOre(roverInventory.CollectedOre);
         roverEnergy.AddEnergy(roverEnergy.MaxEnergy);
 
-        
         GameObject wreck = Instantiate(wreckPrefab, wreckPosition, wreckRotation, worldRoot);
+
+        // части остова: босс их не берёт, игрок берёт
+        foreach (var part in wreck.GetComponentsInChildren<RockProjectile>(true))
+            part.MarkPlayerOnly();
+
         WreckOre wreckOre = wreck.GetComponentInChildren<WreckOre>();
         wreckOre.SetOre(lostOre);
         Rigidbody[] pieces = wreck.GetComponentsInChildren<Rigidbody>();

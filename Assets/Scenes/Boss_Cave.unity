@@ -7204,6 +7204,8 @@ GameObject:
   - component: {fileID: 1150318957}
   - component: {fileID: 1150318959}
   - component: {fileID: 1150318960}
+  - component: {fileID: 1150318961}
+  - component: {fileID: 1150318962}
   m_Layer: 11
   m_Name: Boss
   m_TagString: Boss
@@ -7290,6 +7292,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  onRestored:
     m_PersistentCalls:
       m_Calls: []
   onDeath:
@@ -7653,6 +7658,42 @@ MonoBehaviour:
   starColor: {r: 1, g: 0.9, b: 0.2, a: 1}
   starMaterial: {fileID: 0}
   fadeTime: 0.25
+--- !u!114 &1150318961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150318948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56f75eb878b65dd439e77c2265a36f84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graceAfterRespawn: 0.5
+--- !u!114 &1150318962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150318948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a81171c588e1d84994c130085a33a9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSpeed: 15
+  fullSpeed: 70
+  trailTime: 0.3
+  lineWidth: 0.35
+  lineColor: {r: 1, g: 0.55, b: 0.35, a: 0.9}
+  lineMaterial: {fileID: 0}
+  useBodyBox: 1
+  heightLevels: 3
+  centerLines: 1
+  sideInset: 0.9
+  extraAnchors: []
 --- !u!4 &1166332987 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1154223074477058189, guid: 6ccb24f2b11e0be4eb3bd41c8c834d72, type: 3}

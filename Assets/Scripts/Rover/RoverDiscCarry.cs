@@ -7,17 +7,16 @@ public class RoverDiscCarry : MonoBehaviour
     [SerializeField] private Transform holdPoint;
     [SerializeField] private float pickupRadius = 8f;
     [SerializeField] private float pickupTime = 0.3f;
+    [SerializeField] private RoverGripper gripper;   
 
-    [Header("Бросок камня")]
+    
     [SerializeField] private float rockThrowSpeed = 25f;
     [SerializeField] private float rockMinFlightTime = 0.7f;
     [SerializeField] private float rockThrowDistance = 60f;
 
-    [Header("Прицеливание")]
     [SerializeField] private float aimAssistAngle = 12f;
     [SerializeField] private float aimYawOffset = 0f;
 
-    [Header("Подсветка предметов, которые можно взять")]
     [SerializeField] private bool highlightEnabled = true;
     [SerializeField] private Color highlightColor = new Color(1f, 0.6f, 0.15f);
     [SerializeField] private float highlightIntensity = 2.5f;
@@ -34,13 +33,27 @@ public class RoverDiscCarry : MonoBehaviour
     {
         health = GetComponent<RoverHealth>();
         controller = GetComponent<RobotController>();
+        if (gripper == null) gripper = GetComponentInChildren<RoverGripper>();
     }
 
-    private void OnDisable() => SetHighlight(null);
+    private void OnDisable()
+    {
+        SetHighlight(null);
+        if (gripper != null) gripper.Open();
+    }
 
     private void Update()
     {
-        if (health != null && health.IsDead) { SetHighlight(null); return; }
+        if (health != null && health.IsDead)
+        {
+            SetHighlight(null);
+            if (gripper != null) gripper.Open();
+            return;
+        }
+
+        
+        if (heldRock == null && heldDisc == null && !picking && gripper != null)
+            gripper.Open();
 
         UpdateHighlight();
 
@@ -141,6 +154,8 @@ public class RoverDiscCarry : MonoBehaviour
     private IEnumerator PickupDisc(BossDisc disc)
     {
         picking = true;
+        if (gripper != null) gripper.Open();
+
         disc.Hold();
         heldDisc = disc;
 
@@ -154,12 +169,16 @@ public class RoverDiscCarry : MonoBehaviour
         }
         disc.transform.SetParent(holdPoint);
         disc.transform.localPosition = Vector3.zero;
+
+        if (gripper != null) gripper.Close();
         picking = false;
     }
 
     private IEnumerator PickupRock(RockProjectile rock)
     {
         picking = true;
+        if (gripper != null) gripper.Open();
+
         rock.Grab();
         heldRock = rock;
 
@@ -173,6 +192,8 @@ public class RoverDiscCarry : MonoBehaviour
         }
         rock.transform.SetParent(holdPoint);
         rock.transform.localPosition = Vector3.zero;
+
+        if (gripper != null) gripper.Close();
         picking = false;
     }
 
@@ -185,6 +206,7 @@ public class RoverDiscCarry : MonoBehaviour
 
         heldDisc.LaunchByPlayer(dir);
         heldDisc = null;
+        if (gripper != null) gripper.Open();
     }
 
     private void ThrowRock()
@@ -200,6 +222,7 @@ public class RoverDiscCarry : MonoBehaviour
 
         heldRock.ReleaseByPlayer(velocity);
         heldRock = null;
+        if (gripper != null) gripper.Open();
     }
 
     private void OnDrawGizmosSelected()

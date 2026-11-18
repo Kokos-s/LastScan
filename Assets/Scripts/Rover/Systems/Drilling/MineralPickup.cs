@@ -15,6 +15,8 @@ public class MineralPickup : MonoBehaviour
 
     private GameObject mineralRoot;
 
+    public bool RiseFinished { get; private set; }
+
     private void Awake()
     {
         startLocalPosition = transform.localPosition;
@@ -34,6 +36,8 @@ public class MineralPickup : MonoBehaviour
     private IEnumerator RiseRoutine()
     {
         hasRisen = true;
+        RiseFinished = false;
+
         Vector3 startPos = startLocalPosition;
         Vector3 endPos = startPos + Vector3.up * riseHeight;
 
@@ -49,6 +53,7 @@ public class MineralPickup : MonoBehaviour
         }
 
         transform.localPosition = endPos;
+        RiseFinished = true;
     }
 
     public void AttachTo(Transform point)
@@ -76,5 +81,6 @@ public class MineralPickup : MonoBehaviour
         transform.SetParent(originalParent);
         transform.localPosition = startLocalPosition;
         hasRisen = false;
+        RiseFinished = false;
     }
 }

@@ -6,23 +6,23 @@ public class RobotAnimationEvents : MonoBehaviour
     [SerializeField] private RoverInventory roverInventory;
     [SerializeField] private GameMissions gameMissions;
 
-    
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRadius = 3f;
     [SerializeField] private float attackDamage = 4f;
     [SerializeField] private LayerMask attackMask;
 
-    
     [SerializeField] private float hitStopTime = 0.06f;
     [SerializeField] private float shakeAmplitude = 0.3f;
     [SerializeField] private float shakeDuration = 0.15f;
 
     private RobotController controller;
+    private RoverHealth ownHealth;
     private readonly HashSet<IDamageable> hitThisSwing = new HashSet<IDamageable>();
 
     private void Awake()
     {
         controller = GetComponent<RobotController>();
+        ownHealth = GetComponent<RoverHealth>();
     }
 
     public void SpawnMineral()
@@ -34,9 +34,6 @@ public class RobotAnimationEvents : MonoBehaviour
 
     public void AttachMineralToGrip()
     {
-        var mineral = controller.GetLockedMineral();
-        if (mineral != null)
-            mineral.AttachTo(controller.gripPoint);
     }
 
     public void PlaceMineralInContainer()
@@ -62,7 +59,7 @@ public class RobotAnimationEvents : MonoBehaviour
         foreach (var h in hits)
         {
             var target = h.GetComponentInParent<IDamageable>();
-            if (target == null || ReferenceEquals(target, GetComponent<RoverHealth>())) continue;
+            if (target == null || ReferenceEquals(target, ownHealth)) continue;
 
             if (hitThisSwing.Add(target))
             {

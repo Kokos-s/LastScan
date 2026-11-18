@@ -3,8 +3,8 @@ using UnityEngine;
 public class BossHealthBar : MonoBehaviour
 {
     [SerializeField] private Health boss;
-    [SerializeField] private RectTransform fill;
-    [SerializeField] private RectTransform trail;
+    [SerializeField] private RectTransform fill;    
+    [SerializeField] private RectTransform trail;   
     [SerializeField] private float trailDelay = 0.5f;
     [SerializeField] private float trailSpeed = 0.8f;
     [SerializeField] private float hideDelay = 1.5f;
@@ -15,22 +15,18 @@ public class BossHealthBar : MonoBehaviour
     private void Start()
     {
         boss.onDamaged.AddListener(OnDamaged);
+        boss.onRestored.AddListener(OnRestored);
         boss.onDeath.AddListener(OnDeath);
         trailValue = boss.Normalized;
         SetBar(fill, boss.Normalized);
         SetBar(trail, trailValue);
     }
 
-    private void OnEnable()
-    {
-        if (boss != null && boss.Current <= 0f)
-            gameObject.SetActive(false);
-    }
-
     private void OnDestroy()
     {
         if (boss == null) return;
         boss.onDamaged.RemoveListener(OnDamaged);
+        boss.onRestored.RemoveListener(OnRestored);
         boss.onDeath.RemoveListener(OnDeath);
     }
 
@@ -38,6 +34,14 @@ public class BossHealthBar : MonoBehaviour
     {
         SetBar(fill, boss.Normalized);
         lastDamageTime = Time.time;
+    }
+
+    
+    private void OnRestored()
+    {
+        trailValue = boss.Normalized;
+        SetBar(fill, boss.Normalized);
+        SetBar(trail, trailValue);
     }
 
     private void OnDeath()

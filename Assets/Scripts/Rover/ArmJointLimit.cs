@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class ArmJointLimit : MonoBehaviour
 {
-    [SerializeField] private Transform joint;   // mano_13
+    [SerializeField] private Transform joint;   
 
     private void LateUpdate()
     {
         Quaternion q = joint.localRotation;
 
-        // оставляем только поворот вокруг локальной оси Z
+        
         Quaternion twistZ = new Quaternion(0f, 0f, q.z, q.w);
         float magnitude = Mathf.Sqrt(twistZ.z * twistZ.z + twistZ.w * twistZ.w);
 

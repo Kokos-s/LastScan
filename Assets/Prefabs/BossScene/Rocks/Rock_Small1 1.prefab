@@ -9,6 +9,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 442517dbba9ec004e8e5bb11ca560f9b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.012
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 442517dbba9ec004e8e5bb11ca560f9b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.012
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 442517dbba9ec004e8e5bb11ca560f9b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.012
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 442517dbba9ec004e8e5bb11ca560f9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -63.5
       objectReference: {fileID: 0}
@@ -158,6 +170,7 @@ MonoBehaviour:
   impactDamage: 2
   playerThrowDamage: 3
   ignoreOwnerTime: 0.5
+  bossCanTake: 1
   breakDelay: 0.05
   breakFx: {fileID: 0}
   breakFxScale: 4
@@ -174,7 +187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd976d226932e6444ba4d092c2a3939e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpeed: 3
 --- !u!1001 &7804138476803825693
 PrefabInstance:
   m_ObjectHideFlags: 0

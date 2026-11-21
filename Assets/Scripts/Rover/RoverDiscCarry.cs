@@ -14,8 +14,12 @@ public class RoverDiscCarry : MonoBehaviour
     [SerializeField] private float rockMinFlightTime = 0.7f;
     [SerializeField] private float rockThrowDistance = 60f;
 
-    [SerializeField] private float aimAssistAngle = 12f;
-    [SerializeField] private float aimYawOffset = 0f;
+    
+    [SerializeField] private float rockAimAssistAngle = 35f;   
+    [SerializeField] private float aimAssistAngle = 12f;       
+    [SerializeField] private float aimYawOffset = 0f;          
+    [SerializeField] private float rockLeadFactor = 1f;        
+    [SerializeField] private float maxBossSpeedForLead = 40f;  
 
     [SerializeField] private bool highlightEnabled = true;
     [SerializeField] private Color highlightColor = new Color(1f, 0.6f, 0.15f);
@@ -28,6 +32,13 @@ public class RoverDiscCarry : MonoBehaviour
     private RockProjectile heldRock;
     private bool picking;
     private PickupHighlight currentHighlight;
+
+    
+    private Transform bossTr;
+    private Collider bossCol;
+    private Vector3 lastBossPos;
+    private Vector3 bossVelocity;
+    private bool hasLastBossPos;
 
     private void Awake()
     {
@@ -44,6 +55,8 @@ public class RoverDiscCarry : MonoBehaviour
 
     private void Update()
     {
+        TrackBoss();
+
         if (health != null && health.IsDead)
         {
             SetHighlight(null);
@@ -64,6 +77,36 @@ public class RoverDiscCarry : MonoBehaviour
         if (heldDisc != null) ThrowDisc();
         else if (heldRock != null) ThrowRock();
         else TryPickup();
+    }
+
+    
+    private void TrackBoss()
+    {
+        if (bossTr == null)
+        {
+            var b = GameObject.FindGameObjectWithTag("Boss");
+            if (b == null) { hasLastBossPos = false; return; }
+            bossTr = b.transform;
+            bossCol = b.GetComponent<Collider>();
+            hasLastBossPos = false;
+        }
+
+        if (!bossTr.gameObject.activeInHierarchy) { hasLastBossPos = false; return; }
+
+        Vector3 pos = bossTr.position;
+        if (hasLastBossPos && Time.deltaTime > 0.0001f)
+        {
+            Vector3 v = (pos - lastBossPos) / Time.deltaTime;
+            v.y = 0f;
+            bossVelocity = Vector3.Lerp(bossVelocity, v, 0.25f);
+        }
+        lastBossPos = pos;
+        hasLastBossPos = true;
+    }
+
+    private Vector3 BossCenter()
+    {
+        return bossCol != null ? bossCol.bounds.center : bossTr.position;
     }
 
     private void UpdateHighlight()
@@ -125,22 +168,22 @@ public class RoverDiscCarry : MonoBehaviour
         return f.sqrMagnitude < 0.001f ? Vector3.forward : f.normalized;
     }
 
-    private bool TryGetAssistedTarget(Vector3 from, out Vector3 point)
+    // Босс в конусе прицела?
+    private bool BossInCone(Vector3 from, float angle, out Vector3 center)
     {
-        point = Vector3.zero;
-        var boss = GameObject.FindGameObjectWithTag("Boss");
-        if (boss == null) return false;
+        center = Vector3.zero;
+        if (bossTr == null || !bossTr.gameObject.activeInHierarchy) return false;
 
-        var c = boss.GetComponent<Collider>();
-        point = c != null ? c.bounds.center : boss.transform.position;
+        center = BossCenter();
 
-        Vector3 toBoss = point - from;
+        Vector3 toBoss = center - from;
         toBoss.y = 0f;
         if (toBoss.sqrMagnitude < 0.01f) return true;
 
-        return Vector3.Angle(AimForward(), toBoss) <= aimAssistAngle;
+        return Vector3.Angle(AimForward(), toBoss) <= angle;
     }
 
+    
     private void TryPickup()
     {
         FindNearestPickup(out BossDisc disc, out RockProjectile rock);
@@ -197,11 +240,12 @@ public class RoverDiscCarry : MonoBehaviour
         picking = false;
     }
 
+    
     private void ThrowDisc()
     {
         Vector3 from = heldDisc.transform.position;
-        Vector3 dir = TryGetAssistedTarget(from, out Vector3 point)
-            ? point - from
+        Vector3 dir = BossInCone(from, aimAssistAngle, out Vector3 center)
+            ? center - from
             : AimForward();
 
         heldDisc.LaunchByPlayer(dir);
@@ -213,11 +257,31 @@ public class RoverDiscCarry : MonoBehaviour
     {
         Vector3 start = heldRock.transform.position;
 
-        Vector3 target = TryGetAssistedTarget(start, out Vector3 point)
-            ? point
-            : start + AimForward() * rockThrowDistance;
+        Vector3 target;
+        float flight;
 
-        float flight = Mathf.Max(rockMinFlightTime, Vector3.Distance(start, target) / rockThrowSpeed);
+        if (BossInCone(start, rockAimAssistAngle, out Vector3 center))
+        {
+            
+            Vector3 v = bossVelocity;
+            if (v.magnitude > maxBossSpeedForLead) v = Vector3.zero;
+
+            target = center;
+            flight = Mathf.Max(rockMinFlightTime, Vector3.Distance(start, target) / rockThrowSpeed);
+
+            for (int i = 0; i < 3; i++)
+            {
+                target = center + v * (flight * rockLeadFactor);
+                flight = Mathf.Max(rockMinFlightTime, Vector3.Distance(start, target) / rockThrowSpeed);
+            }
+        }
+        else
+        {
+            
+            target = start + AimForward() * rockThrowDistance;
+            flight = Mathf.Max(rockMinFlightTime, Vector3.Distance(start, target) / rockThrowSpeed);
+        }
+
         Vector3 velocity = (target - start - 0.5f * Physics.gravity * flight * flight) / flight;
 
         heldRock.ReleaseByPlayer(velocity);
@@ -232,6 +296,13 @@ public class RoverDiscCarry : MonoBehaviour
 
         Gizmos.color = Color.green;
         Gizmos.DrawLine(p, p + f * 40f);
+
+        
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(p, p + Quaternion.Euler(0f, rockAimAssistAngle, 0f) * f * 40f);
+        Gizmos.DrawLine(p, p + Quaternion.Euler(0f, -rockAimAssistAngle, 0f) * f * 40f);
+
+        
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(p, p + Quaternion.Euler(0f, aimAssistAngle, 0f) * f * 40f);
         Gizmos.DrawLine(p, p + Quaternion.Euler(0f, -aimAssistAngle, 0f) * f * 40f);

@@ -123,7 +123,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5770283618882064442}
-  m_Material: {fileID: 13400000, guid: 836823bc63c3d5f43899af1e9a192d55, type: 2}
+  m_Material: {fileID: 13400000, guid: 96d93efa40cd4e34e8b01884d9dcc47b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -149,10 +149,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e7a33a8c96577947ba7d601c2b9684f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxThrows: 2
   damage: 1.5
+  playerThrowDamage: 4
   speed: 18
   maxBounces: 6
   lifetime: 10
   spinSpeed: 1200
   spinDirection: 1
+  spinAxis: {x: 1, y: 0, z: 0}
   visual: {fileID: 592281524016301655}
+  heldEulerAngles: {x: 0, y: 90, z: 0}

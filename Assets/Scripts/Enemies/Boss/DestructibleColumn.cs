@@ -5,13 +5,20 @@ using UnityEngine.AI;
 
 public class DestructibleColumn : MonoBehaviour, IDamageable
 {
+    
     [SerializeField] private Transform fallingPivot;
     [SerializeField] private Transform model;
     [SerializeField] private GameObject stump;
 
-    [SerializeField] private float maxHealth = 12f;
+    
+    [SerializeField] private int hitsToBreak = 4;               
     [SerializeField] private float hitShakeAmount = 0.15f;
 
+    
+    [SerializeField] private Material[] crackMaterials;         
+    [SerializeField] private int crackMaterialSlot = 0;
+
+    
     [SerializeField] private Material flashMaterial;
     [SerializeField] private float flashTime = 0.08f;
     [SerializeField] private AudioClip[] hitClips;
@@ -23,6 +30,7 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
     [SerializeField] private float chipsOffset = 0.5f;
     [SerializeField] private float lastHitChipsMultiplier = 2f;
 
+    
     [SerializeField] private float telegraphTime = 1f;
     [SerializeField] private float fallTime = 1.2f;
     [SerializeField] private float fallDamage = 15f;
@@ -35,6 +43,7 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
     [SerializeField] private float hitStopTime = 0.1f;
     [SerializeField] private ParticleSystem impactFx;
 
+    
     [SerializeField] private Material zoneMaterial;
     [SerializeField] private Color zoneColor = new Color(1f, 0.1f, 0.1f, 1f);
     [SerializeField] private float zoneBaseAlpha = 0.25f;
@@ -43,6 +52,7 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
     [SerializeField, Range(0f, 0.5f)] private float zoneCornerRadius = 0.25f;
     [SerializeField, Range(0.01f, 0.5f)] private float zoneEdgeSoftness = 0.15f;
 
+    
     [SerializeField] private GameObject rockLargePrefab;
     [SerializeField] private GameObject rockSmallPrefab;
     [SerializeField] private int largeCount = 2;
@@ -54,7 +64,7 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
     [SerializeField] private float largeLift = 0f;
     [SerializeField] private float smallDropHeight = 1.5f;
 
-    private float health;
+    private int hitsTaken;
     private bool falling;
     private float height;
     private float radius;
@@ -63,7 +73,9 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
     private NavMeshObstacle modelObstacle;
 
     private Renderer[] modelRenderers;
-    private Material[][] originalMaterials;
+    private Material[][] baseMaterials;
+    private Material[][] currentMaterials;
+    private int currentStage = -1;
     private Coroutine shakeRoutine;
     private Coroutine flashRoutine;
     private float flashUntil;
@@ -82,7 +94,8 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
 
     private void Awake()
     {
-        health = maxHealth;
+        hitsTaken = 0;
+        hitsToBreak = Mathf.Max(1, hitsToBreak);
         modelRestPos = model.localPosition;
         modelCollider = model.GetComponentInChildren<Collider>();
         modelObstacle = model.GetComponentInChildren<NavMeshObstacle>();
@@ -99,15 +112,26 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
             if (r is MeshRenderer || r is SkinnedMeshRenderer) list.Add(r);
         modelRenderers = list.ToArray();
 
+        baseMaterials = new Material[modelRenderers.Length][];
+        currentMaterials = new Material[modelRenderers.Length][];
+        for (int i = 0; i < modelRenderers.Length; i++)
+        {
+            baseMaterials[i] = modelRenderers[i].sharedMaterials;
+            currentMaterials[i] = (Material[])baseMaterials[i].Clone();
+        }
+
         if (stump != null) stump.SetActive(false);
     }
 
+    
     public void TakeDamage(float amount)
     {
         if (falling) return;
 
-        health -= amount;
-        bool lethal = health <= 0f;
+        hitsTaken++;
+        bool lethal = hitsTaken >= hitsToBreak;
+
+        if (!lethal) UpdateCrackStage();
 
         PlayHitFeedback(lethal);
 
@@ -128,6 +152,36 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
         }
     }
 
+    
+    private void UpdateCrackStage()
+    {
+        if (crackMaterials == null || crackMaterials.Length == 0) return;
+
+        
+        float progress = (float)hitsTaken / hitsToBreak;
+        int stage = Mathf.Clamp(Mathf.FloorToInt(progress * crackMaterials.Length), 0, crackMaterials.Length - 1);
+
+        if (stage == currentStage) return;
+        currentStage = stage;
+
+        Material mat = crackMaterials[stage];
+        if (mat == null) return;
+
+        for (int i = 0; i < modelRenderers.Length; i++)
+        {
+            if (modelRenderers[i] == null) continue;
+
+            var arr = (Material[])baseMaterials[i].Clone();
+            int slot = Mathf.Clamp(crackMaterialSlot, 0, arr.Length - 1);
+            arr[slot] = mat;
+            currentMaterials[i] = arr;
+
+            if (flashRoutine == null)
+                modelRenderers[i].sharedMaterials = arr;
+        }
+    }
+
+    
     private void PlayHitFeedback(bool lethal)
     {
         Flash();
@@ -200,13 +254,11 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
 
     private IEnumerator FlashRoutine()
     {
-        originalMaterials = new Material[modelRenderers.Length][];
         for (int i = 0; i < modelRenderers.Length; i++)
         {
             if (modelRenderers[i] == null) continue;
-            originalMaterials[i] = modelRenderers[i].sharedMaterials;
 
-            var white = new Material[originalMaterials[i].Length];
+            var white = new Material[currentMaterials[i].Length];
             for (int m = 0; m < white.Length; m++) white[m] = flashMaterial;
             modelRenderers[i].sharedMaterials = white;
         }
@@ -219,10 +271,9 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
 
     private void RestoreMaterials()
     {
-        if (originalMaterials == null) return;
         for (int i = 0; i < modelRenderers.Length; i++)
-            if (modelRenderers[i] != null && originalMaterials[i] != null)
-                modelRenderers[i].sharedMaterials = originalMaterials[i];
+            if (modelRenderers[i] != null && currentMaterials[i] != null)
+                modelRenderers[i].sharedMaterials = currentMaterials[i];
     }
 
     private IEnumerator ShakeModel(float time, float amount)
@@ -239,6 +290,7 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
         shakeRoutine = null;
     }
 
+    
     private IEnumerator FallRoutine()
     {
         Vector3 basePos = fallingPivot.position;
@@ -253,6 +305,7 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
 
         CreateZone(basePos, dir);
 
+        
         float t = 0f;
         while (t < telegraphTime)
         {
@@ -270,6 +323,7 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
         if (modelObstacle != null) modelObstacle.enabled = false;
         if (modelCollider != null) modelCollider.enabled = false;
 
+        
         Quaternion startRot = fallingPivot.rotation;
         t = 0f;
         while (t < 1f)
@@ -282,6 +336,7 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
         }
         fallingPivot.rotation = Quaternion.AngleAxis(90f, axis) * startRot;
 
+        
         DestroyZone();
         bool hitSomething = DealImpactDamage(basePos, dir);
 
@@ -298,12 +353,14 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
             Destroy(fx.gameObject, 4f);
         }
 
+        
         RestoreMaterials();
         fallingPivot.gameObject.SetActive(false);
         if (stump != null) stump.SetActive(true);
         SpawnRocks(basePos, dir);
     }
 
+    
     private void CreateZone(Vector3 basePos, Vector3 dir)
     {
         zoneWidth = radius * hitWidthMultiplier * 2f;
@@ -431,6 +488,7 @@ public class DestructibleColumn : MonoBehaviour, IDamageable
 
     private void OnDestroy() => DestroyZone();
 
+    
     private bool DealImpactDamage(Vector3 basePos, Vector3 dir)
     {
         float len = ZoneLen;

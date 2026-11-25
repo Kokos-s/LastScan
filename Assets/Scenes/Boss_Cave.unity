@@ -7980,7 +7980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a40a31e880ce94da4b85e1327e15af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 5
   onDamaged:
     m_PersistentCalls:
       m_Calls: []
@@ -15652,10 +15652,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1355714897}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8258581375209625315, guid: 2bea12d54d81ebc459f8344ca58b7d75, type: 3}
       propertyPath: m_Name
       value: Rock_Large4
@@ -16608,10 +16604,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16678,10 +16670,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1355714897}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5976064735427105110, guid: a31f37ec43409c643b6e58a11dae3117, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.7
@@ -17248,10 +17236,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_Small3
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8655668083249793721, guid: aad20d61d68dfc544a965d5bc2bdca6e, type: 3}
       propertyPath: damage
       value: 2
@@ -17808,10 +17792,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1355714897}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2868318478676075580, guid: 3aac64f70cb597a4583cead9893488ed, type: 3}
       propertyPath: m_Name
       value: Rock_Large1
@@ -17941,10 +17921,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2243655001377909934, guid: 7e3c91f1a3669f448a4364d176cda913, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -18173,10 +18149,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18377,10 +18349,6 @@ PrefabInstance:
     - target: {fileID: 2592911657721213195, guid: e86b4b36578dcea4b927bf98bf06ed98, type: 3}
       propertyPath: damage
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7245851554081093452, guid: e86b4b36578dcea4b927bf98bf06ed98, type: 3}
       propertyPath: m_Name

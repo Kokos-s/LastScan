@@ -1390,8 +1390,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a839a30beb1b04ca2be5d579e67c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  victoryScreen: {fileID: 563018114}
-  victoryMusic: {fileID: 8300000, guid: e3f0016d548850a459de258083dcb63e, type: 3}
+  slides: []
+  menuSceneName: MainMenu
+  descriptionText: {fileID: 0}
+  descriptionBackground: {fileID: 0}
+  skipText: {fileID: 0}
+  narrationSource: {fileID: 0}
+  musicSource: {fileID: 0}
+  victoryElementsRoot: {fileID: 0}
+  transitionOverlay: {fileID: 0}
+  transitionGroup: {fileID: 0}
+  fadeDuration: 0.8
+  victoryDelay: 2
+  enableTestShortcut: 1
 --- !u!1001 &109013531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28069,6 +28080,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1818877024981726092, guid: 852c87c1508518346b394db399964fac, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1975732069033573387, guid: 852c87c1508518346b394db399964fac, type: 3}
       propertyPath: m_Name
       value: GameController

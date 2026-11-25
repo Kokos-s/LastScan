@@ -90,6 +90,8 @@ public class IntroductionManager : MonoBehaviour
     {
         int controlsIndex = slides.Length - 1;
 
+        FindFirstObjectByType<SceneManager>().SetCinematicPlaying(true);
+
         for (int i = 0; i < controlsIndex; i++)
         {
             if (skipRequested)
@@ -126,6 +128,8 @@ public class IntroductionManager : MonoBehaviour
 
         if (narrationSource != null)
             narrationSource.Stop();
+
+        FindFirstObjectByType<SceneManager>().SetCinematicPlaying(false);
 
         ShowControlsScreen();
     }

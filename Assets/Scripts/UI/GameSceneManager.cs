@@ -10,16 +10,22 @@ public class SceneManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject pauseBackground;
 
+    private bool cinematicPlaying = false;
+
     private bool isPaused = false;
     
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (pauseMenu == null || isPaused) return;
+            if (pauseMenu == null || isPaused || cinematicPlaying) return;
 
             PauseGame();
         }
+    }
+    public void SetCinematicPlaying(bool playing)
+    {
+        cinematicPlaying = playing;
     }
     public void OpenMainMenu()
     {

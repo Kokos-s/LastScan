@@ -99,6 +99,8 @@ public class VictoryManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(0.2f);
 
+        FindFirstObjectByType<SceneManager>().SetCinematicPlaying(true);
+
         AudioListener.pause = true;
         Time.timeScale = 0f;
 
@@ -162,6 +164,8 @@ public class VictoryManager : MonoBehaviour
         ShowFinalScreen();
 
         int lastSlide = slides.Length - 1;
+
+        FindFirstObjectByType<SceneManager>().SetCinematicPlaying(false);
 
         yield return StartCoroutine(FadeImage(imageGroups[lastSlide], 0f, 1f));
     }

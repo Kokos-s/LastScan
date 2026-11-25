@@ -39,6 +39,7 @@ public class BossDeathSequence : MonoBehaviour
 
     private Health health;
     private bool playing;
+    [SerializeField] private GameObject bossHealthBar;
 
     private void OnEnable()
     {
@@ -229,6 +230,7 @@ public class BossDeathSequence : MonoBehaviour
         foreach (var m in mats) if (m != null) Destroy(m);
 
         VictoryManager.Instance.ShowVictoryScreen();
+        bossHealthBar.SetActive(false);
 
         gameObject.SetActive(false);
     }

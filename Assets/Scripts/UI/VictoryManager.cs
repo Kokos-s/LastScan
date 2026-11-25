@@ -85,6 +85,13 @@ public class VictoryManager : MonoBehaviour
     {
         if (isShowing) return;
 
+        BossHealthBar bossBar = FindFirstObjectByType<BossHealthBar>();
+
+        if (bossBar != null)
+        {
+            bossBar.gameObject.SetActive(false);
+        }
+
         isShowing = true;
         StartCoroutine(StartVictoryAfterDelay());
     }

@@ -61,6 +61,7 @@ public class SceneManager : MonoBehaviour
     }
     public void PlayScene(string name)
     {
+        AudioListener.pause = false;
         Time.timeScale = 1f;
         UnityEngine.SceneManagement.SceneManager.LoadScene(name);
     }

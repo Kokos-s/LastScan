@@ -1,24 +1,33 @@
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class Audio_Manager : MonoBehaviour
 {
-    
-    [SerializeField] AudioSource musicSource;
-    public AudioClip music;
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioClip music;
 
-    
+    private static Audio_Manager instance;
+    public static Audio_Manager Instance => instance;
 
-    public static Audio_Manager Instance;
     private void Awake()
     {
-        Instance = this;
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
+
     private void Start()
     {
-        if (music != null)
+        AudioListener.pause = false;
+
+        if (music != null && !musicSource.isPlaying)
             PlayMusic(music);
     }
+
     public void PlayMusic(AudioClip musicClip)
     {
         if (musicClip == null) return;
@@ -26,12 +35,13 @@ public class Audio_Manager : MonoBehaviour
         musicSource.ignoreListenerPause = true;
         musicSource.clip = musicClip;
         musicSource.loop = true;
-        musicSource.Play(); ;
+        musicSource.Play();
     }
+
     public void StopMusic()
     {
         musicSource.Stop();
     }
-
 }
+
 
